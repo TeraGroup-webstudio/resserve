@@ -1,0 +1,87 @@
+/*
+##=================================================##
+## @author    : OCdevWizard                        ##
+## @contact   : ocdevwizard@gmail.com              ##
+## @support   : http://help.ocdevwizard.com        ##
+## @copyright : (c) OCdevWizard. Price Alert, 2018 ##
+##=================================================##
+*/
+div[id^="ocdw_price_alert-block"]{vertical-align:baseline;font-weight:inherit;font-family:inherit;font-style:inherit;font-size:100%;border:0 none;outline:0;padding:0;margin:0;box-sizing:content-box;line-height:1.2;background:#fff;max-width:360px;width:100%;margin:0 auto!important;min-height:100px;position:relative}
+div[id^="ocdw_price_alert-block"] .inner-header{background:#ededed;font-family:'Open Sans',sans-serif;font-size:20px;color:#333;font-weight:400;border-bottom:1px solid #ddd;padding:15px 20px;position:relative;min-height:50px;display:flex;align-items:center;justify-content:space-between}
+div[id^="ocdw_price_alert-block"] .inner-header .modal-close{opacity:1;cursor:pointer!important;color:#333;padding-left:20px}
+div[id^="ocdw_price_alert-block"] .inner-header .modal-close i{font-size:20px;line-height:20px}
+div[id^="ocdw_price_alert-block"] .inner-header .modal-close i:hover::before{transform:rotate(180deg)}
+div[id^="ocdw_price_alert-block"] .inner-header .modal-close i:before{display:inline-block;transition:1s all}
+div[id^="ocdw_price_alert-block"] .inner-center{background:#fff;padding:20px}
+div[id^="ocdw_price_alert-block"] .inner-footer{padding:15px 20px;background:#ededed;position:relative;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;border-top:1px solid #ddd;width:100%;height:100%}
+div[id^="ocdw_price_alert-sidebar"] div[id^="ocdw_price_alert-block"]{height:100vh;display:flex;flex-direction:column}
+div[id^="ocdw_price_alert-sidebar"] .inner-footer{max-height:65px;margin-top:auto}
+div[id^="ocdw_price_alert-block"] .inner-center .additional-information{font-size:12px;color:#333;font-family:'Open Sans',sans-serif;word-break:break-word}
+div[id^="ocdw_price_alert-block"] .inner-center .additional-information.top{margin:0 0 10px!important;padding-bottom:10px!important}
+div[id^="ocdw_price_alert-block"] .inner-center .additional-information.bottom{margin:10px 0!important;padding-top:10px!important}
+div[id^="ocdw_price_alert-block"] .inner-center .inner-fields{position:relative;display:block;margin:5px 0 0}
+div[id^="ocdw_price_alert-block"] .inner-center .inner-fields > div + div{margin-top:15px}
+div[id^="ocdw_price_alert-block"] .inner-center .block-title{font-weight:700;border-bottom:1px solid #d9d9d9;padding-bottom:5px;font-size:14px}
+div[id^="ocdw_price_alert-block"] .inner-center .inner-fields .inner-field{position:relative}
+div[id^="ocdw_price_alert-block"] .inner-center .inner-fields .inner-field img{position:absolute;top:4px;left:5px;z-index:1}
+div[id^="ocdw_price_alert-block"] .inner-center .inner-fields .inner-field input[type=checkbox]{display:none}
+div[id^="ocdw_price_alert-block"] .inner-center .inner-fields .inner-field .field-checkbox label{position:relative;cursor:pointer;display:inline-flex;align-items:center;margin:0}
+div[id^="ocdw_price_alert-block"] .inner-center .inner-fields .inner-field .field-checkbox label:before{content:'';-webkit-appearance:none;-moz-appearance:none;appearance:none;background:transparent;border:1px solid #d9d9d9;padding:7px;display:inline-block;position:relative;vertical-align:middle;cursor:pointer;margin-right:10px}
+div[id^="ocdw_price_alert-block"] .inner-center .inner-fields .inner-field .field-checkbox input:checked + label:after{content:'';display:block;position:absolute;left:3px;width:10px;height:10px;background:#3498db;top:50%;transform:translateY(-50%)}
+div[id^="ocdw_price_alert-block"] .inner-center input[type=text],div[id^="ocdw_price_alert-block"] .inner-center input[type=email],div[id^="ocdw_price_alert-block"] .inner-center input[type=tel]{background:#fff;border:1px solid #d9d9d9;box-sizing:border-box;display:block;margin:0 0 5px;padding:9px 10px;position:relative;width:100%;font-size:12px;color:#333;font-family:'Open Sans',sans-serif;-webkit-transition:border-color .75s;-moz-transition:border-color .75s;-o-transition:border-color .75s;transition:border-color .75s;outline:none;min-height:34px}
+div[id^="ocdw_price_alert-block"] .inner-center .with-icon input[type=text],div[id^="ocdw_price_alert-block"] .inner-center .with-icon input[type=email],div[id^="ocdw_price_alert-block"] .inner-center .with-icon input[type=tel]{padding-left:33px}
+div[id^="ocdw_price_alert-block"] .inner-center input[type=text]:focus,div[id^="ocdw_price_alert-block"] .inner-center input[type=email]:focus,div[id^="ocdw_price_alert-block"] .inner-center input[type=tel]:focus{border:1px solid #5a5f63}
+div[id^="ocdw_price_alert-block"] .inner-center .error-style input[type=text],div[id^="ocdw_price_alert-block"] .inner-center .error-style input[type=email],div[id^="ocdw_price_alert-block"] .inner-center .error-style input[type=tel],div[id^="ocdw_price_alert-block"] .inner-center .error-style textarea,div[id^="ocdw_price_alert-block"] .inner-center .error-style select{border:1px solid #df2e2e!important}
+div[id^="ocdw_price_alert-block"] .inner-center .field-heading{font-size:12px;color:#666;font-weight:700;font-family:'Open Sans',sans-serif;display:block;position:relative;width:100%;margin-bottom:4px;word-break:break-word;cursor:default}
+div[id^="ocdw_price_alert-block"] .inner-center .field-description{font-size:12px;color:#fff;font-family:'Open Sans',sans-serif;display:block;position:relative;width:100%;margin:-5px 0 4px;background:#d9d9d9;padding:7px 10px;word-break:break-word}
+div[id^="ocdw_price_alert-block"] .inner-center .inner-fields .error-text,div[id^="ocdw_price_alert-block"] .inner-center .inner-fields .success-text{font-size:12px;display:block;color:#df2e2e;font-family:'Open Sans',sans-serif;margin-bottom:7px}
+div[id^="ocdw_price_alert-block"] .inner-center .inner-fields .success-text{color:#47c843}
+div[id^="ocdw_price_alert-block"] .inner-center .inner-fields .required-indicator{color:#df2e2e}
+div[id^="ocdw_price_alert-block"] .inner-center .inner-fields .require-information{font-size:13px;line-height:13px;color:#333;font-family:'Open Sans',sans-serif}
+div[id^="ocdw_price_alert-block"] .inner-center .inner-fields .require-information a{color:#23a1d1;padding:0;border:0;background:none}
+div[id^="ocdw_price_alert-block"] .inner-center .inner-fields .require-information a:hover{color:#2a6496;padding:0;border:0;background:none}
+div[id^="ocdw_price_alert-block"] .inner-footer button{-webkit-appearance:none;-moz-appearance:none;appearance:none;height:34px;overflow:hidden;margin:0;padding:0 15px;outline:0;border:0;min-width:100px;font-size:12px;font-family:'Open Sans',sans-serif;text-decoration:none;color:#fff;background:#47c843;text-align:center;-webkit-transition:all .15s ease-in-out;-moz-transition:all .15s ease-in-out;-ms-transition:all .15s ease-in-out;-o-transition:all .15s ease-in-out;transition:all .15s ease-in-out;cursor:pointer;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px}
+div[id^="ocdw_price_alert-block"] .inner-footer .close-modal{background:#e94e4e}
+div[id^="ocdw_price_alert-block"] .inner-footer .close-modal:hover{background:#e81717;box-shadow:0 3px 8px 0 rgba(0,0,0,.20)}
+div[id^="ocdw_price_alert-block"] .inner-footer .close-modal:active{background:#aa3a3a}
+div[id^="ocdw_price_alert-block"] .inner-footer .save-form{background:#47c843}
+div[id^="ocdw_price_alert-block"] .inner-footer .save-form:hover{background:#3cb736;box-shadow:0 3px 8px 0 rgba(0,0,0,.20)}
+div[id^="ocdw_price_alert-block"] .inner-footer .save-form:active{background:#33933a}
+div[id^="ocdw_price_alert-sidebar"].ocdw_price_alert-sidebar{top:0;position:fixed;height:100vh;width:100%;z-index:99999}
+div[id^="ocdw_price_alert-sidebar"].ocdw_price_alert-sidebar.sidebar-active{visibility:visible!important}
+div[id^="ocdw_price_alert-sidebar"].ocdw_price_alert-sidebar.no-active{visibility:hidden}
+div[id^="ocdw_price_alert-sidebar"].ocdw_price_alert-sidebar .ocdw_price_alert-sidebar-bg{position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;transition:.5s;z-index:1}
+div[id^="ocdw_price_alert-sidebar"].ocdw_price_alert-sidebar.no-active .ocdw_price_alert-sidebar-bg{animation:fade-out .3s forwards;-webkit-animation:fade-out .3s forwards}
+div[id^="ocdw_price_alert-sidebar"].ocdw_price_alert-sidebar.sidebar-active .ocdw_price_alert-sidebar-bg{animation:fade-in .3s forwards;-webkit-animation:fade-in .3s forwards}
+div[id^="ocdw_price_alert-sidebar"].ocdw_price_alert-sidebar .ocdw_price_alert-sidebar-body{padding:0;width:100%;height:100%;max-width:320px;overflow:auto;position:absolute;top:0;background:#ececec;transition:.5s;z-index:2}
+div[id^="ocdw_price_alert-sidebar"].ocdw_price_alert-sidebar.sidebar-left .ocdw_price_alert-sidebar-body{left:0;transform:translateX(-100%);-webkit-transform:translateX(-100%)}
+div[id^="ocdw_price_alert-sidebar"].ocdw_price_alert-sidebar.sidebar-left.no-active .ocdw_price_alert-sidebar-body{animation:slide-out-left .3s forwards;-webkit-animation:slide-out-left .3s forwards}
+div[id^="ocdw_price_alert-sidebar"].ocdw_price_alert-sidebar.sidebar-left.sidebar-active .ocdw_price_alert-sidebar-body{animation:slide-in-left .3s forwards;-webkit-animation:slide-in-left .3s forwards}
+div[id^="ocdw_price_alert-sidebar"].ocdw_price_alert-sidebar.sidebar-right .ocdw_price_alert-sidebar-body{right:0;transform:translateX(100%);-webkit-transform:translateX(100%)}
+div[id^="ocdw_price_alert-sidebar"].ocdw_price_alert-sidebar.sidebar-right.no-active .ocdw_price_alert-sidebar-body{animation:slide-out-right .3s forwards;-webkit-animation:slide-out-right .3s forwards}
+div[id^="ocdw_price_alert-sidebar"].ocdw_price_alert-sidebar.sidebar-right.sidebar-active .ocdw_price_alert-sidebar-body{animation:slide-in-right .3s forwards;-webkit-animation:slide-in-right .3s forwards}
+@keyframes slide-in-right {
+100%{transform:translateX(0%)}
+}
+@keyframes slide-out-right {
+0%{transform:translateX(0%)}
+100%{transform:translateX(100%)}
+}
+@keyframes slide-in-left {
+100%{transform:translateX(0%)}
+}
+@keyframes slide-out-left {
+0%{transform:translateX(0%)}
+100%{transform:translateX(-100%)}
+}
+@keyframes fade-in {
+100%{opacity:.6}
+}
+@keyframes fade-out {
+0%{opacity:.6}
+100%{opacity:0}
+}
+.ocdw_price_alert-call-static-before .ocdw_price_alert-call-static-button{width:100%!important;border-bottom:1px solid #ddd!important}
+.ocdw_price_alert-call-static-after .ocdw_price_alert-call-static-button{width:100%!important}
+.ocdw_price_alert-call-static-after{overflow:unset!important}
+.stock-option{display:block;margin-top:5px}

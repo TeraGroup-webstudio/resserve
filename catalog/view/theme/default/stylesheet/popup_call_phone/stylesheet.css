@@ -1,0 +1,413 @@
+#uptocall-mini {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  cursor: pointer;
+  z-index: 999;
+  border: 10px solid rgba(0, 248, 0, 0.15);
+  border-radius: 100%;
+}
+#uptocall-mini .uptocall-mini-phone {
+  -moz-border-radius: 50% !important;
+  -webkit-border-radius: 50% !important;
+  border-radius: 50% !important;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  background-color: rgba(55, 200, 55, 0.8);
+  width: 70px;
+  height: 70px;
+}
+#uptocall-mini .uptocall-mini-phone:hover {
+  background-color: rgba(55, 200, 55, 1);
+}
+#uptocall-mini .uptocall-mini-phone:before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-image: url('callback.png');
+  background-repeat: no-repeat;
+  background-position: center center;
+  -webkit-animation: uptocallphone 1.5s linear infinite;
+  -moz-animation: uptocallphone 1.5s linear infinite;
+  animation: uptocallphone 1.5s linear infinite;
+}
+@-webkit-keyframes uptocallphone {
+  0%,
+  100%,
+  50% {
+    -ms-transform: rotate(0);
+    -webkit-transform: rotate(0);
+    transform: rotate(0);
+  }
+  25% {
+    -ms-transform: rotate(30deg);
+    -webkit-transform: rotate(30deg);
+    transform: rotate(30deg);
+  }
+  75% {
+    -ms-transform: rotate(-30deg);
+    -webkit-transform: rotate(-30deg);
+    transform: rotate(-30deg);
+  }
+}
+@-moz-keyframes uptocallphone {
+  0%,
+  100%,
+  50% {
+    -ms-transform: rotate(0);
+    -webkit-transform: rotate(0);
+    transform: rotate(0);
+  }
+  25% {
+    -ms-transform: rotate(30deg);
+    -webkit-transform: rotate(30deg);
+    transform: rotate(30deg);
+  }
+  75% {
+    -ms-transform: rotate(-30deg);
+    -webkit-transform: rotate(-30deg);
+    transform: rotate(-30deg);
+  }
+}
+@keyframes uptocallphone {
+  0%,
+  100%,
+  50% {
+    -ms-transform: rotate(0);
+    -webkit-transform: rotate(0);
+    transform: rotate(0);
+  }
+  25% {
+    -ms-transform: rotate(30deg);
+    -webkit-transform: rotate(30deg);
+    transform: rotate(30deg);
+  }
+  75% {
+    -ms-transform: rotate(-30deg);
+    -webkit-transform: rotate(-30deg);
+    transform: rotate(-30deg);
+  }
+}
+.popup_call_phone_btn {
+  position: fixed;
+  bottom: 15px;
+  left: 15px;
+  z-index: 9997;
+  width: 90px;
+  height: 90px;
+  background: url('call.png') no-repeat;
+  border: 0 !important;
+}
+#popup-call-phone-wrapper {
+  margin: 0 auto;
+  padding: 45px;
+  background: #fff;
+  max-width: 380px;
+  width: 100%;
+  min-height: 100px;
+  position: relative;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0px 6px 12px 0px rgba(0, 0, 0, 0.1),
+    0px 23px 23px 0px rgba(0, 0, 0, 0.09), 0px 51px 31px 0px rgba(0, 0, 0, 0.05),
+    0px 90px 36px 0px rgba(0, 0, 0, 0.01), 0px 141px 40px 0px rgba(0, 0, 0, 0);
+  overflow: hidden;
+}
+#popup-call-phone-wrapper::before {
+  position: absolute;
+  content: '';
+  top: 0;
+  right: 0;
+  width: 645px;
+  height: 687px;
+  background: url('popup-call-phone-image-bg.png') no-repeat;
+  background-size: 30%;
+  background-position-x: right;
+  user-select: none;
+  pointer-events: none;
+}
+.popup-body {
+  position: relative;
+  z-index: 1;
+}
+#popup-call-phone-wrapper .text-danger {
+  margin-top: 2px;
+  font-size: 12px;
+  line-height: 1.2;
+  color: #ff0000;
+}
+#popup-call-phone-wrapper textarea#commentValue + div {
+  margin-top: -4px;
+}
+#popup-call-phone-wrapper .popup-heading {
+  margin-top: 0;
+  margin-bottom: 75px;
+  color: #1e1e1e;
+  font-family: 'Manrope', sans-serif;
+  font-weight: 800;
+  font-size: 36px;
+  line-height: normal;
+}
+#popup-call-phone-wrapper .popup-text-extra {
+  margin-bottom: 18px;
+  max-width: 422px;
+  color: #000;
+  font-family: 'Manrope';
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 2;
+}
+/* #popup-call-phone-wrapper .popup-col {
+  display: flex;
+} */
+#popup-call-phone-wrapper .popup-center form {
+  margin-bottom: 28px;
+}
+#popup-call-phone-wrapper .popup-center {
+  width: 100%;
+}
+#popup-call-phone-wrapper .popup-footer {
+  margin-top: auto;
+}
+#popup-call-phone-wrapper .mfp-close {
+  left: 25px;
+  width: 60px;
+  height: 52px;
+  font-family: none;
+  font-size: 40px;
+  color: #8991A3;
+  -webkit-transition: all 0.2s ease 0s;
+  -o-transition: all 0.2s ease 0s;
+  transition: all 0.2s ease 0s;
+}
+#popup-call-phone-wrapper .mfp-close:hover {
+  color: #F57C27;
+}
+#popup-call-phone-wrapper .popup-footer button {
+  height: 32px;
+  line-height: 30px;
+  color: #fff;
+  padding: 0 25px;
+  cursor: pointer;
+  font-size: 12px;
+  display: inline-block;
+  border: 1px solid #f57c27;
+  background: #f57c27;
+  border-radius: 2px;
+  outline: 0;
+  text-align: center;
+}
+#popup-call-phone-wrapper .popup-footer button:hover {
+  color: #f57c27;
+  background: #fff;
+  border: 1px solid #f57c27;
+}
+#popup-call-phone-wrapper .popup-footer a {
+  width: 100%;
+  height: 55px;
+  color: #fff;
+  background: #f57c27;
+  font-family: 'Manrope', sans-serif;
+  font-weight: 800;
+  font-size: 16px;
+  line-height: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  user-select: none;
+  cursor: pointer;
+}
+#popup-call-phone-wrapper .popup-footer a svg {
+  margin-top: 2px;
+  margin-left: 4px;
+}
+.masked,
+.masked_loading {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+#popup-call-phone-wrapper .popup-footer a:hover {
+  color: #f57c27;
+  background: #fff;
+  border: 1px solid #f57c27;
+}
+#popup-call-phone-wrapper .popup-footer a:hover svg {
+  margin-left: 8px;
+}
+#popup-call-phone-wrapper .popup-footer a svg,
+#popup-call-phone-wrapper .popup-footer a svg path {
+  -webkit-transition: all 0.2s ease 0s;
+  -o-transition: all 0.2s ease 0s;
+  transition: all 0.2s ease 0s;
+}
+#popup-call-phone-wrapper .popup-footer a:hover svg path {
+  stroke: #f57c27;
+}
+#popup-call-phone-wrapper .payment-info {
+  max-width: 558px;
+  clear: both;
+}
+/* #popup-call-phone-wrapper .payment-info-row {
+  display: flex;
+  justify-content: space-between;
+} */
+#popup-call-phone-wrapper .payment-info-row > div:not(.text-danger) {
+  margin-top: 22px;
+  width: 100%;
+}
+#popup-call-phone-wrapper .payment-info > div + div {
+  margin-top: 22px;
+}
+#popup-call-phone-wrapper .payment-info > div.text-danger {
+  margin-top: 2px;
+}
+#popup-call-phone-wrapper .payment-info > div label {
+  font-size: 12px;
+  line-height: 12px;
+  color: #838383;
+  font-weight: 700;
+}
+#popup-call-phone-wrapper .payment-info > div label span {
+  color: red;
+  display: none;
+}
+#popup-call-phone-wrapper .payment-info > div input,
+#popup-call-phone-wrapper .payment-info > div textarea {
+  width: 100%;
+  border-bottom: 1px solid #d7d7d7;
+  padding-bottom: 6px;
+  background: transparent;
+  outline: 0;
+  width: 100%;
+  color: #838383;
+  font-family: 'Manrope';
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1;
+}
+#popup-call-phone-wrapper .payment-info > div input.error_style,
+#popup-call-phone-wrapper .payment-info > div textarea.error_style {
+  border-bottom: 1px solid #a94442;
+}
+#popup-call-phone-wrapper .payment-info > div textarea {
+  padding: 0;
+  min-height: 76px;
+  border-top: 0;
+  border-right: 0;
+  border-left: 0;
+  resize: vertical;
+}
+.masked {
+  z-index: 10000;
+  background: #eee;
+  opacity: 0.4;
+}
+.masked_loading {
+  background: url('ring-alt.svg') center center no-repeat;
+  z-index: 10001;
+}
+.popup-call-phone-button {
+  text-align: center;
+}
+.popup-call-phone-button button {
+  width: 100% !important;
+}
+.popup-logo {
+  margin-bottom: 69px;
+  max-width: 168px;
+}
+#popup-call-phone-wrapper .payment-info .popup-checkbox {
+  margin-top: 15px;
+  min-height: 28px;
+  display: flex;
+  align-items: center;
+}
+#popup-call-phone-wrapper .payment-info .popup-checkbox input {
+  margin-top: 0;
+}
+#popup-call-phone-wrapper .payment-info .popup-checkbox label {
+  margin-top: 2px;
+  margin-bottom: 0;
+  margin-left: 11px;
+  color: #000;
+  font-family: 'Manrope';
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1;
+  user-select: none;
+  cursor: pointer;
+}
+#popup-call-phone-wrapper .payment-info .popup-checkbox label .agree-form {
+  color: #f57c27;
+}
+#popup-call-phone-wrapper .payment-info .popup-checkbox label .agree-form:hover {
+  text-decoration: underline;
+}
+@media (max-width: 1024px) {
+  #popup-call-phone-wrapper {
+    padding: 48px 32px 39px;
+    max-width: 560px;
+  }
+  /* #popup-call-phone-wrapper::before {
+    top: 0;
+    right: 0;
+    background-size: 60%;
+    background-position-x: right;
+  } */
+  .popup-logo {
+    display: none;
+  }
+  #popup-call-phone-wrapper .popup-text-extra {
+    max-width: 346px;
+    font-size: 12px;
+  }
+  #popup-call-phone-wrapper .payment-info > div + div {
+    margin-top: 25px;
+  }
+  #popup-call-phone-wrapper .payment-info > div input,
+  #popup-call-phone-wrapper .payment-info > div textarea {
+    font-size: 12px;
+  }
+  #popup-call-phone-wrapper .payment-info .popup-checkbox label {
+    font-size: 12px;
+  }
+  #popup-call-phone-wrapper .popup-footer {
+    margin-left: 20px;
+  }
+}
+@media (max-width: 650px) {
+  #popup-call-phone-wrapper .popup-col,
+  #popup-call-phone-wrapper .payment-info-row {
+    flex-direction: column;
+  }
+  /* #popup-call-phone-wrapper .payment-info-row > div {
+    width: 100%;
+  }
+  #popup-call-phone-wrapper .payment-info-row > div:not(:first-child) {
+    margin-top: 25px;
+  } */
+  #popup-call-phone-wrapper .payment-info > div textarea {
+    resize: none;
+  }
+  #popup-call-phone-wrapper .popup-footer {
+    margin-top: 24px;
+    margin-left: 0;
+  }
+  #popup-call-phone-wrapper .popup-footer a {
+    padding: 6px 14px;
+    width: 100%;
+    height: 44px;
+    border-radius: 22px;
+  }
+  #popup-call-phone-wrapper .popup-footer a svg {
+    display: none;
+  }
+}

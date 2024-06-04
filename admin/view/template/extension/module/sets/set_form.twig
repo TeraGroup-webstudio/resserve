@@ -1,0 +1,91 @@
+<div class='set' key='{{ key }}'>
+    <table class='table table-bordered'>
+        <tr >
+            <td >
+                {{ entry_set_name }}
+            </td>
+                   <td >
+            {{ entry_customer_group }}
+        </td>
+               <td>
+            DATE
+        </td>
+
+            <td>
+                {{ entry_sort }}
+            </td>
+        </tr>
+        <tr>
+           <td >
+            {% for language in languages %} 
+            <div class='input-group pull-left'>
+                <input type='text' value="{{ name[language['language_id']] }}" name="set[{{ key }}][name][{{ language['language_id'] }}]" placeholder="{{ language['name'] }}" class="form-control"/>
+            </div>
+            {% endfor %} 
+        </td>
+
+                <td >
+            <select class='form-control'  name='set[{{ key }}][customer_group_id]'>>
+                 <option value='0'>ALL</option>
+                  {% for gr in customer_groups  %} 
+             <option value='{{ gr['customer_group_id'] }}'>{{ gr['name'] }}</option>
+            {% endfor %}
+        </select>
+        </td>
+              <td >
+            <input type='datetime-local' value='{% if (enddate) %}{{ enddate|date("Y-m-d\\TH:i:s") }}{% endif %}' class='form-control' name='set[{{ key }}][enddate]'>
+         </td>
+        
+        <td>
+            <input type='number' min='0' value='{{ sort }}' class='form-control' name='set[{{ key }}][sort]'>
+            status: <input type='checkbox' {% if (status) %} checked="checked" {% endif %} name='set[{{ key }}][status]'>
+        </td>
+    </tr>
+    <tr>
+        <td >
+            {{ entry_name }}
+        </td>
+        <td>
+            {{ entry_quantity }}
+        </td>
+        <td>
+            {{ entry_discount }}
+        </td>
+        <td>
+            <button class='btn btn-danger del_set' class=''><i class='fa fa-close'></i></button>
+        </td>
+    </tr>
+    
+ {% set i=1 %}
+
+ {% for product in products %} 
+ 
+    <tr class='product_row'>
+        <td class='product_name' >
+            <input type='text' class='form-control' readonly name='set[{{ key }}][products][{{ i }}][product_name]' value='{{ product["product_name"] }}'>
+            <input type='hidden' name='set[{{ key }}][products][{{ i }}][product_id]' value='{{ product["product_id"] }}'>
+        </td>
+
+        <td class='quantity'>
+            <input type='number' name='set[{{ key }}][products][{{ i }}][quantity]' min='1' value='{{ product["quantity"] }}' class='form-control'>
+        </td>
+
+        
+        <td>
+            <input type='text' value='{{ product["discount"] }}' class='form-control' name='set[{{ key }}][products][{{ i }}][discount]'>
+        </td>
+        <td class='delete'>
+            <button class='btn btn-warning del_product'><i class='fa fa-minus'></i></button>
+        </td>
+    </tr>
+    
+ {% set i = i + 1 %}
+{% endfor %} 
+
+<tr class='search_row'>
+    <td class='search_product_name' colspan='6'>
+        <input type='text' name='product_name' class='form-control'>
+    </td>
+</tr>
+</table>
+</div>

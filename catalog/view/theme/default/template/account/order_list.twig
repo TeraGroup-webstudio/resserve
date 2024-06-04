@@ -1,0 +1,89 @@
+{{ header }}
+<div id="account-order" class="container">
+  <ul class="breadcrumb">
+    {% for breadcrumb in breadcrumbs %}
+    <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+    {% endfor %}
+  </ul>
+  <div class="page__title">
+    <h1>{{ text_account }}</h1>
+  </div>
+  <div class="row">{{ column_left }}
+    {% if column_left and column_right %}
+    {% set class = 'col-sm-6' %}
+    {% elseif column_left or column_right %}
+    {% set class = 'col-sm-9' %}
+    {% else %}
+    {% set class = 'col-sm-12' %}
+    {% endif %}
+    <div id="content" class="{{ class }}">{{ content_top }}
+      <div class="page__subtitle"><h2>{{ heading_title }}</h2></div>
+      {% if orders %}
+      <ul class="nav nav-tabs orders-tab">
+        <li class="active"><a href="#tab-current-orders" data-toggle="tab">{{ tab_current }}</a></li>
+        <li ><a href="#tab-done-orders" data-toggle="tab">{{ tab_done }}</a></li>
+      </ul>
+      <div class="tab-content">
+        <div class="tab-pane active" id="tab-current-orders">
+          <div class="orders__list">
+            <div class="orders__list--row orders__list--heading">
+              <div class="order__block"><span>{{ column_order_id }}</span></div>
+              <div class="order__block">{{ column_product }}</div>
+              <div class="order__block">{{ column_status }}</div>
+              <div class="order__block">{{ column_total }}</div>
+              <div class="order__block">{{ column_date_added }}</div>
+              <div class="order__block"></div>
+            </div>
+            {% for order in orders %}
+            {% if (order.status_id != 15) and (order.status_id != 7) %}
+            <div class="orders__list--row orders__list--item">
+              <div class="order__block--item order__block--item-id">{{ order.order_id }}</div>
+              <div class="order__block--item">{{ order.products }}</div>
+              <div class="order__block--item">
+                <span style="{% if order.order_status_text_color %}color:{{order.order_status_text_color}};{% endif %}{% if order.order_status_background_color %}background-color:{{order.order_status_background_color}};{% endif %}">{{ order.status }}</span>
+              </div>
+              <div class="order__block--item">{{ order.total }}</div>
+              <div class="order__block--item">{{ order.date_added }}</div>
+              <div class="order__block--item"><a href="{{ order.view }}" data-toggle="tooltip" title="{{ button_view }}" class="btn__info">{{button_view_text}}</a></div>
+            </div>
+            {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+        <div class="tab-pane" id="tab-done-orders">
+          <div class="orders__list">
+            <div class="orders__list--row orders__list--heading">
+              <div class="order__block">{{ column_order_id }}</div>
+              <div class="order__block">{{ column_product }}</div>
+              <div class="order__block">{{ column_status }}</div>
+              <div class="order__block">{{ column_total }}</div>
+              <div class="order__block">{{ column_date_added }}</div>
+              <div class="order__block"></div>
+            </div>
+            {% for order in orders %}
+            {% if (order.status_id == 15) or (order.status_id == 7) %}
+            <div class="orders__list--row orders__list--item">
+              <div class="order__block--item order__block--item-id">{{ order.order_id }}</div>
+              <div class="order__block--item">{{ order.products }}</div>
+              <div class="order__block--item">
+                <span style="{% if order.order_status_text_color %}color:{{order.order_status_text_color}};{% endif %}{% if order.order_status_background_color %}background-color:{{order.order_status_background_color}};{% endif %}">{{ order.status }}</span>
+              </div>
+              <div class="order__block--item">{{ order.total }}</div>
+              <div class="order__block--item">{{ order.date_added }}</div>
+              <div class="order__block--item"><a href="{{ order.view }}" data-toggle="tooltip" title="{{ button_view }}" class="btn__info">{{button_view_text}}</a></div>
+            </div>
+            {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      {% else %}
+      <p>{{ text_empty }}</p>
+      <div class="buttons clearfix">
+        <div class="pull-right"><a href="{{ continue }}" class="btn btn-primary">{{ button_continue }}</a></div>
+      </div>
+      {% endif %}
+      {{ content_bottom }}</div>
+    {{ column_right }}</div>
+</div>
+{{ footer }}

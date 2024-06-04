@@ -1,0 +1,17 @@
+<section class="blog__latest">
+  <div class="container">
+    <div class="block__title blog__latest--heading">
+      <h3>{{ heading_title }}</h3>
+      <a href="{{latest}}">{{text_all}}</a>
+    </div>
+    <div class="blog__latest--items">
+    {% for article in articles %}
+      <div class="blog__latest--item">
+        <div class="blog__latest--image"><a href="{{ article.href }}"><img src="{{ article.thumb }}" alt="{{ article.name }}" title="{{ article.name }}" class="img-responsive" /></a></div>
+        <div class="blog__latest--added">{{ article.date_added }}</div>
+        <div class="blog__latest--title"><h4><a href="{{ article.href }}">{{ article.name }}</a></h4></div>
+      </div>
+    {% endfor %}
+    </div>
+  </div>
+</section>

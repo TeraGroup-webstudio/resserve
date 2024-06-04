@@ -1,0 +1,120 @@
+    <div class="review-container">
+      <div class="review-title-container">
+        {% if (review['purchased']) %}
+        <span class='allready-buy' data-toggle="tooltip" title="{{ text_already_buy }}"><svg class="ex-cart-svg">
+            <use xlink:href="#ex-cart"></use>
+          </svg></span>
+        {% endif %}
+        <div class="review-author">
+          <span class="review-author-name">{{ review['author'] }}</span>
+        </div>
+              <div class="rating-container">
+        {% if (review['rating'] != 0) %}
+        {% set i = 1 %}
+        {% for _key,i in range(i, 5) %}
+        {% if (review['rating'] < i) %}
+        <svg class="ex-star ex-star-grey">
+          <use xlink:href="#ex-star"></use>
+        </svg>
+        {% else %}
+        <svg class="ex-star">
+          <use xlink:href="#ex-star"></use>
+        </svg>
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+      </div>
+        <div class="review-date">{{ review['date_added'] }}</div>
+      </div>
+      <div class="review-text-container">
+        <div class="ex-comment-text">
+          {{ review['text'] }}
+          {% if (settings['limitations'] is defined) %}
+          {% if (review['plus']) %}
+          <div class='ex-plus'>{{ text_plus }} </div>{{ review['plus'] }}
+          {% endif %}
+          {% if (review['minus']) %}
+          <div class='ex-minus'>{{ text_minus }} </div>{{ review['minus'] }}
+          {% endif %}
+          {% endif %}
+        </div>
+      </div>
+      <div class="review-container-footer">
+            <div class="review-rating-change-buttons">
+              <button class="review-vote review-vote-positive" onclick="like(this, {{ review['review_id'] }}, 0)">
+                <svg class="ex-like">
+                  <use xlink:href="#ex-thumb"></use>
+                </svg>
+                <span class="review-vote-count vote-count-positive" data-value="{{ review['likes'] }}">{{ review['likes'] > 0 ? review['likes'] : 0 }}</span>
+              </button>
+              <button class="review-vote review-vote-negative" onclick="dislike(this, {{ review['review_id'] }}, 0)">
+                <svg class="ex-like ex-dislike">
+                  <use xlink:href="#ex-thumb"></use>
+                </svg>
+                <span class="review-vote-count vote-count-negative" data-value="{{ review['dislikes'] }}">{{ review['dislikes'] > 0 ? review['dislikes'] : 0 }}</span>
+              </button>
+            </div>
+        {% if (settings['answer'] is defined) %}
+        <button type="button" class="ex-btn ex-light review-answer-button" data-value="{{ review['review_id'] }}"><svg
+            class="ex-reply-svg">
+            <use xlink:href="#ex-reply"></use>
+          </svg> {{ text_reply }}</button>
+        {% endif %}
+        <div class="review_note" id="review-note-{{ review['review_id'] }}"></div>
+      </div>
+      <div class="review-answer-container" id="review_answer_container{{ review['review_id'] }}"></div>
+    </div>
+    {% if (review['admin_reply'] or comments) %}
+    <div class="children-reviews-box">
+      <div class="review-childrens-container">
+        {% if (review['admin_reply']) %}
+        <div class="children-review-container">
+          <div class="review-answer-title-container">
+            <div class="review-author">
+              <span class="review-author-name review-admin-name">{{ review['admin_name'] }}</span>
+              <svg data-toggle="tooltip" data-original-title="{{ text_admin_answer }}" class="ex-check-svg">
+                <use xlink:href="#ex-check"></use>
+              </svg>
+            </div>
+          </div>
+          <div class="review-text-container">
+            <div class="ex-comment-text">
+              {{ review['admin_reply'] }}
+            </div>
+          </div>
+        </div>
+        {% endif %}
+        {% if (comments) %}
+        {% for children_review in comments %}
+        <div class="children-review-container">
+          <div class="review-answer-title-container">
+            <div class="review-author"><span class="review-author-name">{{ children_review['author'] }}</span>
+            </div>
+            <div class="review-date">{{ children_review['date_added'] }}</div>
+          </div>
+          <div class="review-text-container">
+            <div class="ex-comment-text">
+              {{ children_review['text'] }}
+            </div>
+          </div>
+          <div class="review-rating-change-buttons">
+          <button class="review-vote review-vote-positive" onclick="like(this, {{ children_review['review_id'] }}, 1)">
+            <svg class="ex-like">
+              <use xlink:href="#ex-thumb"></use>
+            </svg>
+            <span class="review-vote-count vote-count-positive" data-value="{{ children_review['likes'] }}">{{ children_review['likes'] > 0 ? children_review['likes'] : 0 }}</span>
+          </button>
+          <button class="review-vote review-vote-negative" onclick="dislike(this, {{ children_review['review_id'] }}, 1)">
+            <svg class="ex-like ex-dislike">
+              <use xlink:href="#ex-thumb"></use>
+            </svg>
+            <span class="review-vote-count vote-count-negative" data-value="{{ children_review['dislikes'] }}">{{ children_review['dislikes'] > 0 ? children_review['dislikes'] : 0 }}</span>
+          </button>
+        </div>
+        <div class="review_note" id="comment-note-{{ children_review['review_id'] }}"></div>
+        </div>
+    {% endfor %}
+          </div>
+    </div>
+    {% endif %}
+    {% endif %}

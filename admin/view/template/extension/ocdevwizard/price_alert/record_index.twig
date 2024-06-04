@@ -1,0 +1,92 @@
+{#
+##=================================================##
+## @author    : OCdevWizard                        ##
+## @contact   : ocdevwizard@gmail.com              ##
+## @support   : http://help.ocdevwizard.com        ##
+## @copyright : (c) OCdevWizard. Price Alert, 2018 ##
+##=================================================##
+#}
+<div id="service-modal-body" class="mw500 service-modal-body">
+	<div class="modal-heading">
+		{{ text_modal_heading }} <span class="modal-close" onclick="$.magnificPopup.close();"><i class="fa fa-times" aria-hidden="true"></i></span>
+	</div>
+	<div class="modal-body">
+		<div id="service-modal-data">
+			<div id="modal-record-content">
+				<div id="content" class="row pb-0">
+					<div class="panel-body pt-0 pb-0">
+						<form method="post" enctype="multipart/form-data" id="modal-form" class="form-horizontal">
+							<input type="hidden" style="display:none;" name="record_id" value="{{ record_id }}"/>
+							<input type="hidden" style="display:none;" name="email" value="{{ email }}"/>
+							{% if (fields) %}
+								<div class="row">
+									<div class="col-sm-6">
+										<div class="row">
+											{% for field in fields %}
+												<label class="col-sm-12 control-label mb-0">{{ field['name'] }}</label>
+												{% if (field['type'] == 'telephone') %}
+													<div class="col-sm-12 mb-10 wbr-all"><a href="tel:{{ field['value'] }}">{{ field['value'] }}</a></div>
+												{% elseif (field['type'] == 'email') %}
+													<div class="col-sm-12 mb-10 wbr-all"><a href="mailto:{{ field['value'] }}">{{ field['value'] }}</a></div>
+												{% else %}
+													<div class="col-sm-12 mb-10 wbr-all">{{ field['value'] }}</div>
+												{% endif %}
+											{% endfor %}
+											{% if (product_edit and product_name) %}
+												<label class="col-sm-12 control-label mb-0">{{ column_product_name }}</label>
+												<div class="col-sm-12 mb-10 wbr-all"><a href="{{ product_edit }}" target="_blank">{{ product_name }}</a></div>
+											{% endif %}
+											{% if (option_name) %}
+												<label class="col-sm-12 control-label mb-0">{{ text_option_name }}</label>
+												<div class="col-sm-12 mb-10 wbr-all">{{ option_name }}</div>
+											{% endif %}
+											{% if (option_value) %}
+												<label class="col-sm-12 control-label mb-0">{{ text_option_value }}</label>
+												<div class="col-sm-12 mb-10 wbr-all">{{ option_value }}</div>
+											{% endif %}
+											{% if (old_product_price) %}
+												<label class="col-sm-12 control-label mb-0">{{ text_old_product_price }}</label>
+												<div class="col-sm-12 mb-10 wbr-all">{{ old_product_price }}</div>
+											{% endif %}
+										</div>
+									</div>
+									<div class="col-sm-6">
+										<div class="row">
+											{% if (record_id) %}
+												<label class="col-sm-12 control-label mb-0">ID</label>
+												<div class="col-sm-12 mb-10 wbr-all">{{ record_id }}</div>
+											{% endif %}
+											{% if (store_url and store_name) %}
+												<label class="col-sm-12 control-label mb-0">{{ text_store }}</label>
+												<div class="col-sm-12 mb-10 wbr-all"><a href="{{ store_url }}" target="_blank">{{ store_name }}</a></div>
+											{% endif %}
+											{% if (ip) %}
+												<label class="col-sm-12 control-label mb-0">{{ column_ip }}</label>
+												<div class="col-sm-12 mb-10 wbr-all">{{ ip }}</div>
+											{% endif %}
+											{% if (referer) %}
+												<label class="col-sm-12 control-label mb-0">{{ text_referer }}</label>
+												<div class="col-sm-12 mb-10 wbr-all"><a href="{{ referer }}" target="_blank">{{ referer }}</a></div>
+											{% endif %}
+											{% if (user_agent) %}
+												<label class="col-sm-12 control-label mb-0">{{ text_user_agent }}</label>
+												<div class="col-sm-12 mb-10 wbr-all">{{ user_agent }}</div>
+											{% endif %}
+											{% if (accept_language) %}
+												<label class="col-sm-12 control-label mb-0">{{ text_accept_language }}</label>
+												<div class="col-sm-12 mb-10 wbr-all">{{ accept_language }}</div>
+											{% endif %}
+										</div>
+									</div>
+								</div>
+							{% endif %}
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal-footer" id="service-modal-footer">
+		<button class="btn btn-default" onclick="$.magnificPopup.close();"><span class="hidden-lg hidden-md hidden-sm"><i class="fa fa-times" aria-hidden="true"></i> </span><span class="hidden-xs">{{ button_close }}</span></button>
+	</div>
+</div>

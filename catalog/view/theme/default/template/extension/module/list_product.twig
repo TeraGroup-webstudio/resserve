@@ -1,0 +1,42 @@
+<section class="product__carousel">
+    <div class="container">
+        <div class="product__carousel-heading">
+            <h2 class="block__title">{{ heading_title }}</h2>
+            {% if page_status == 1 %}
+                {% if page_title != '' %}
+                    <a href="{{ page_url }}" class="page-title-link">{{ page_title }}
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="5" height="9" viewBox="0 0 5 9" fill="none">
+                            <path d="M1 1L4 4.5L1 8" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </span>
+                    </a>
+                {% endif %}
+            {% endif %}
+            <div class="product__carousel--buttons">
+                <div class="product__carousel--prev">
+                    <svg width="26" height="27" viewBox="0 0 26 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M18 13.5H8M8 13.5L12.375 9.125M8 13.5L12.375 17.875" stroke="black" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M13 26C6.0965 26 0.5 20.4035 0.5 13.5C0.5 6.59644 6.0965 1 13 1C19.9036 1 25.5 6.59644 25.5 13.5C25.5 20.4035 19.9036 26 13 26Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </div>
+                <div class="product__carousel--next">
+                    <svg width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M8.5 13.5H18.5M18.5 13.5L14.125 9.125M18.5 13.5L14.125 17.875" stroke="black" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M13.5 26C20.4035 26 26 20.4035 26 13.5C26 6.59644 20.4035 1 13.5 1C6.59644 1 1 6.59644 1 13.5C1 20.4035 6.59644 26 13.5 26Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </div>
+            </div>
+        </div>
+        <div class="product__carousel--body swiper-container">
+            <div class="swiper-wrapper">
+                {% for product in products %}
+                    {% if not (product.quantity <= 0 and hide_out_of_stock_products) %}
+                        {{ product }}
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+

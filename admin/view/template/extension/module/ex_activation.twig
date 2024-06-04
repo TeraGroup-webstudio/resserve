@@ -1,0 +1,34 @@
+{{ header ~ column_left }} 
+<div id="content">
+  <div class="page-header">
+    <div class="container-fluid">
+      <div class="pull-right">
+        <a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default"><i
+            class="fa fa-reply"></i></a>
+      </div>
+      <h1>{{ heading_title }}</h1>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <form action="{{ action }}" method="post" enctype="multipart/form-data" id="extended_reviews_key"
+      class="form-horizontal">
+      {% if (error_license) %} 
+      <div class="alert"><i class="fa fa-exclamation-circle"></i> {{ error_license }} 
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+      </div>
+      {% endif %} 
+      <div class="col-md-offset-3 col-md-5 col-sm-12">
+        <label for="input-text-plus">{{ text_entry_key }}</label>
+        <div class="input-group">
+          <input type="text" name="ex_reviews_key" value="" placeholder="{{ text_entry_key }}" id="key"
+            class="form-control">
+          <span class="input-group-btn"> <button id="save-settings" type="submit" form="extended_reviews_key"
+              data-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i
+                class="fa fa-save"></i>{{ text_license_key_save }}</button></span>
+        </div>
+      </div>
+    </form>
+
+  </div>
+</div>
+{{ footer }}

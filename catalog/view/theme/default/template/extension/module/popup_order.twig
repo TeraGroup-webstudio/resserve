@@ -1,0 +1,233 @@
+<div id="popup-call-phone-wrapper">
+ <div class="popup-body">
+  {% if logo %}
+   <div class="popup-logo hidden">
+    <img src="{{ logo }}" alt="{{ store }}" />
+   </div>
+  {% endif %}
+  <div class="popup-heading">{{ heading_title }}</div>
+  <div class="popup-text-extra hidden">{{ text_extra }}</div>
+  <div class="popup-col">
+   <div class="popup-center">
+    <div class="oct-mobile-popup-icons">
+     {% if storeset_whatsapp_id != '' %}
+      <a href="https://api.whatsapp.com/send?phone={{ storeset_whatsapp_id }}" target="_blank">
+       <i class="fa fa-whatsapp" aria-hidden="true"></i> WhatsApp
+      </a>
+     {% endif %}
+     {% if storeset_telegram_id != '' %}
+      <a href="http://t.me/{{ storeset_telegram_id }}" target="_blank">
+       <i class="fa fa-telegram" aria-hidden="true"></i> Telegram
+      </a>
+     {% endif %}
+     {% if storeset_viber_id != '' %}
+      <a href="viber://add?number={{ storeset_viber_id }}" target="_blank">
+       <i class="fa fa-viber" aria-hidden="true"></i> Viber
+      </a>
+     {% endif %}
+    </div>
+    <form method="post" enctype="multipart/form-data" id="call-phone-form">
+     <div class="payment-info">
+         <input type="hidden" name="product_id" value="{{ product_id }}"/>
+      <div class="payment-info-row">
+       {% if popup_order_data.first_name %}
+        <div>
+         {# <label>{{ enter_first_name }}{% if popup_order_data.first_name == 2 %}<span class="required">*</span>{% endif %}</label> #}
+         <input name="first_name" value="{{ first_name }}" placeholder="{{ enter_first_name }}" />
+        </div>
+       {% endif %}
+       {% if popup_order_data.last_name %}
+        <div>
+         {# <label>{{ enter_last_name }}{% if popup_order_data.last_name == 2 %}<span class="required">*</span>{% endif %}</label> #}
+         <input name="last_name" value="{{ last_name }}" placeholder="{{ enter_last_name }}" />
+        </div>
+       {% endif %}
+      </div>
+      <div class="payment-info-row">
+       {% if popup_order_data.telephone %}
+        <div>
+         {# <label>{% if popup_order_data.telephone == 2 %}<span class="required">*</span>{% endif %}</label> #}
+         <input name="telephone" value="{{ telephone }}" placeholder="{{ enter_telephone }}" inputmode="numeric" />
+            {% if mask %}
+            <script src="catalog/view/javascript/input-mask.js"></script>
+            <script>
+                var isMobile = {
+                    Android: function() {
+                        return navigator.userAgent.match(/Android/i);
+                    },
+                    BlackBerry: function() {
+                        return navigator.userAgent.match(/BlackBerry/i);
+                    },
+                    iOS: function() {
+                        return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+                    },
+                    Opera: function() {
+                        return navigator.userAgent.match(/Opera Mini/i);
+                    },
+                    Windows: function() {
+                        return navigator.userAgent.match(/IEMobile/i);
+                    },
+                    Chrome: function() {
+                        return navigator.userAgent.match(/Chrome/i);
+                    }
+                };
+
+                if (!isMobile.Android()) {
+                    $("#popup-call-phone-wrapper [name='telephone']").inputmask('{{ mask }}');
+                }
+            </script>
+            {% endif %}
+        </div>
+       {% endif %}
+       {% if popup_order_data.email %}
+       <div>
+        {# <label>{{ enter_email }}{% if popup_order_data.email == 2 %}<span class="required">*</span>{% endif %}</label> #}
+        <input name="email" value="{{ email }}" placeholder="{{ enter_email }}" />
+       </div>
+      {% endif %}
+      </div>
+      {% if popup_order_data.time %}
+       <div>
+        {# <label>{{ enter_time }}{% if popup_order_data.time == 2 %}<span class="required">*</span>{% endif %}</label> #}
+        <input name="time" value="{{ time }}" placeholder="{{ enter_time }}" class="datetime" />
+       </div>
+      {% endif %}
+      {% if popup_order_data.comment %}
+       <div>
+        {# <label>{{ enter_comment }}{% if popup_order_data.comment == 2 %}<span class="required">*</span>{% endif %}</label> #}
+        <textarea name="comment" id="commentValue" placeholder="{{ enter_comment }}">{{ comment }}</textarea>
+       </div>
+      {% endif %}
+      {% if popup_order_data.agree %}
+       <div class="popup-checkbox">
+        <input type="checkbox" id="checkbox" name="agree" value="1" style="width: auto;" />
+        <label for="checkbox">{{ text_agree }}</label>
+       </div>
+      {% endif %}
+     </div>
+    </form>
+   </div>
+   <div class="popup-footer">
+    <a id="popup-send-button">{{ button_send }}</a>
+   </div>
+  </div>
+  {% if popup_order_data.time %}
+   <script src="catalog/view/javascript/jquery/datetimepicker/moment.js"></script>
+   <script src="catalog/view/javascript/jquery/locale/ru.js"></script>
+   <script src="catalog/view/javascript/jquery/datetimepicker/bootstrap-datetimepicker.min.js"></script>
+   <link href="catalog/view/javascript/jquery/datetimepicker/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+   <script>
+    <!--
+    $('#popup-call-phone-wrapper .date').datetimepicker({
+     pickTime: false,
+    });
+    var nowDate = new Date();
+    var today = new Date(nowDate.getFullYear(), nowDate.getMonth(), nowDate.getDate(), 0, 0, 0, 0);
+    $('#popup-call-phone-wrapper .datetime').datetimepicker({
+     pickDate: true,
+     pickTime: true,
+     minDate: today
+    });
+    $('#popup-call-phone-wrapper .time').datetimepicker({
+     pickDate: false,
+    });
+    //
+    -->
+   </script>
+  {% endif %}
+
+  <script>
+   <!--
+   $('#popup-call-phone-wrapper .image-additional').delay(240).css({
+    'opacity': '1'
+   });
+
+   function masked(element, status) {
+    if (status == true) {
+     $('<div/>')
+      .attr({
+       'class': 'masked'
+      })
+      .prependTo(element);
+     $('<div class="masked_loading" />').insertAfter($('.masked'));
+    } else {
+     $('.masked').remove();
+     $('.masked_loading').remove();
+    }
+   }
+
+   $('#popup-send-button').on('click', function() {
+    $.ajax({
+     type: 'post',
+     url: 'index.php?route=extension/module/popup_order/send',
+     dataType: 'json',
+     data: $('#call-phone-form').serialize(),
+     success: function(json) {
+        console.log(json);
+      if (json['error']) {
+       if (json['error']['field']) {
+        $('#popup-call-phone-wrapper .text-danger').remove();
+        $('#popup-call-phone-wrapper input').removeClass('error_style')
+        $.each(json['error']['field'], function(i, val) {
+          $('#popup-call-phone-wrapper [name="' + i + '"]').parent().addClass('error_style').after('<div class="text-danger">' + val + '</div>');
+        });
+       }
+      } else {
+       if (json['output']) {
+        $('#popup-call-phone-wrapper .popup-footer').remove();
+        $('#popup-call-phone-wrapper .popup-center').addClass('send').html(json['output']);
+       }
+      }
+     },
+     error: function(json) {console.log(json);}
+    });
+   });
+   //
+   -->
+  </script>
+ </div>
+
+ <style>
+  {% if popup_order_data.color_send_button %}#popup-call-phone-wrapper .popup-footer a {
+   color: {{ popup_order_data.color_send_button }};
+  }
+
+  {% endif %}{% if popup_order_data.color_close_button %}#popup-call-phone-wrapper .popup-footer button {
+   color: {{ popup_order_data.color_close_button }};
+  }
+
+  {% endif %}{% if popup_order_data.background_send_button %}#popup-call-phone-wrapper .popup-footer a {
+   background: {{ popup_order_data.background_send_button }};
+  }
+
+  {% endif %}{% if popup_order_data.background_close_button %}#popup-call-phone-wrapper .popup-footer button {
+   background: {{ popup_order_data.background_close_button }};
+  }
+
+  {% endif %}{% if popup_order_data.background_send_button_hover %}#popup-call-phone-wrapper .popup-footer a:hover {
+   background: {{ popup_order_data.background_send_button_hover }};
+  }
+
+  {% endif %}{% if popup_order_data.background_close_button_hover %}#popup-call-phone-wrapper .popup-footer button:hover {
+   background: {{ popup_order_data.background_close_button_hover }};
+  }
+
+  {% endif %}{% if popup_order_data.border_send_button %}#popup-call-phone-wrapper .popup-footer a {
+   border-color: {{ popup_order_data.border_send_button }};
+  }
+
+  {% endif %}{% if popup_order_data.border_close_button %}#popup-call-phone-wrapper .popup-footer button {
+   border-color: {{ popup_order_data.border_close_button }};
+  }
+
+  {% endif %}{% if popup_order_data.border_send_button_hover %}#popup-call-phone-wrapper .popup-footer a:hover {
+   border-color: {{ popup_order_data.border_send_button_hover }};
+  }
+
+  {% endif %}{% if popup_order_data.border_close_button_hover %}#popup-call-phone-wrapper .popup-footer button:hover {
+   border-color: {{ popup_order_data.border_close_button_hover }};
+  }
+
+  {% endif %}
+ </style>
+</div>

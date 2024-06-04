@@ -1,0 +1,91 @@
+2023-11-17 15:40:26 - PHP Warning:  mysqli::__construct(): (HY000/1045): Access denied for user 'sochinen_tgcart'@'91.206.200.70' (using password: YES) in /home/sochinen/start-site.com.ua/tgcart/system/library/db/mysqli.php on line 7
+2023-11-17 15:40:26 - PHP Warning:  DB\MySQLi::__construct(): Couldn't fetch mysqli in /home/sochinen/start-site.com.ua/tgcart/system/library/db/mysqli.php on line 10
+2023-11-17 15:40:26 - PHP Warning:  DB\MySQLi::__construct(): Couldn't fetch mysqli in /home/sochinen/start-site.com.ua/tgcart/system/library/db/mysqli.php on line 10
+2023-11-17 15:40:26 - PHP Notice:  Undefined variable: mysql in /home/sochinen/start-site.com.ua/tgcart/install/controller/install/step_3.php on line 280
+2023-11-17 15:40:26 - PHP Notice:  Trying to get property 'connect_error' of non-object in /home/sochinen/start-site.com.ua/tgcart/install/controller/install/step_3.php on line 280
+2023-11-17 15:40:43 - PHP Warning:  mysqli::__construct(): (HY000/1045): Access denied for user 'sochinen_tgcart'@'91.206.200.70' (using password: YES) in /home/sochinen/start-site.com.ua/tgcart/system/library/db/mysqli.php on line 7
+2023-11-17 15:40:43 - PHP Warning:  DB\MySQLi::__construct(): Couldn't fetch mysqli in /home/sochinen/start-site.com.ua/tgcart/system/library/db/mysqli.php on line 10
+2023-11-17 15:40:43 - PHP Warning:  DB\MySQLi::__construct(): Couldn't fetch mysqli in /home/sochinen/start-site.com.ua/tgcart/system/library/db/mysqli.php on line 10
+2023-11-17 15:40:43 - PHP Notice:  Undefined variable: mysql in /home/sochinen/start-site.com.ua/tgcart/install/controller/install/step_3.php on line 280
+2023-11-17 15:40:43 - PHP Notice:  Trying to get property 'connect_error' of non-object in /home/sochinen/start-site.com.ua/tgcart/install/controller/install/step_3.php on line 280
+2023-11-17 15:40:56 - PHP Warning:  mysqli::__construct(): (HY000/1045): Access denied for user 'sochinen_tgcart'@'91.206.200.70' (using password: YES) in /home/sochinen/start-site.com.ua/tgcart/system/library/db/mysqli.php on line 7
+2023-11-17 15:40:56 - PHP Warning:  DB\MySQLi::__construct(): Couldn't fetch mysqli in /home/sochinen/start-site.com.ua/tgcart/system/library/db/mysqli.php on line 10
+2023-11-17 15:40:56 - PHP Warning:  DB\MySQLi::__construct(): Couldn't fetch mysqli in /home/sochinen/start-site.com.ua/tgcart/system/library/db/mysqli.php on line 10
+2023-11-17 15:40:56 - PHP Notice:  Undefined variable: mysql in /home/sochinen/start-site.com.ua/tgcart/install/controller/install/step_3.php on line 280
+2023-11-17 15:40:56 - PHP Notice:  Trying to get property 'connect_error' of non-object in /home/sochinen/start-site.com.ua/tgcart/install/controller/install/step_3.php on line 280
+2023-11-17 15:41:06 - PHP Warning:  mysqli::__construct(): (HY000/1045): Access denied for user 'sochinen_tgcart'@'91.206.200.70' (using password: YES) in /home/sochinen/start-site.com.ua/tgcart/system/library/db/mysqli.php on line 7
+2023-11-17 15:41:06 - PHP Warning:  DB\MySQLi::__construct(): Couldn't fetch mysqli in /home/sochinen/start-site.com.ua/tgcart/system/library/db/mysqli.php on line 10
+2023-11-17 15:41:06 - PHP Warning:  DB\MySQLi::__construct(): Couldn't fetch mysqli in /home/sochinen/start-site.com.ua/tgcart/system/library/db/mysqli.php on line 10
+2023-11-17 15:41:06 - PHP Notice:  Undefined variable: mysql in /home/sochinen/start-site.com.ua/tgcart/install/controller/install/step_3.php on line 280
+2023-11-17 15:41:06 - PHP Notice:  Trying to get property 'connect_error' of non-object in /home/sochinen/start-site.com.ua/tgcart/install/controller/install/step_3.php on line 280
+2024-01-12 14:15:41 - PHP Notice:  Undefined index: type_slide in /home/sochinen/start-site.com.ua/tgcart/catalog/controller/extension/module/list_product.php on line 21
+2024-01-12 14:15:41 - PHP Notice:  Undefined index: type_slide in /home/sochinen/start-site.com.ua/tgcart/catalog/controller/extension/module/list_product.php on line 23
+2024-01-12 14:15:41 - PHP Notice:  Undefined index: page_status in /home/sochinen/start-site.com.ua/tgcart/catalog/controller/extension/module/list_product.php on line 47
+2024-01-12 14:15:41 - PHP Notice:  Undefined index: page_status in /home/sochinen/start-site.com.ua/tgcart/catalog/controller/extension/module/list_product.php on line 48
+2024-01-12 14:15:41 - PHP Notice:  Undefined index: type_category in /home/sochinen/start-site.com.ua/tgcart/catalog/controller/extension/module/list_category.php on line 82
+2024-01-12 14:19:04 - PHP Warning:  Invalid argument supplied for foreach() in /home/sochinen/start-site.com.ua/tgcart/system/storage/modification/system/engine/loader.php on line 83
+2024-01-12 14:19:06 - PHP Warning:  Invalid argument supplied for foreach() in /home/sochinen/start-site.com.ua/tgcart/system/storage/modification/system/engine/loader.php on line 83
+2024-01-12 14:28:23 - PHP Notice:  Undefined index: type_slide in /home/sochinen/start-site.com.ua/tgcart/catalog/controller/extension/module/list_product.php on line 21
+2024-01-12 14:28:23 - PHP Notice:  Undefined index: type_slide in /home/sochinen/start-site.com.ua/tgcart/catalog/controller/extension/module/list_product.php on line 23
+2024-01-12 14:28:23 - PHP Notice:  Undefined index: page_status in /home/sochinen/start-site.com.ua/tgcart/catalog/controller/extension/module/list_product.php on line 47
+2024-01-12 14:28:23 - PHP Notice:  Undefined index: page_status in /home/sochinen/start-site.com.ua/tgcart/catalog/controller/extension/module/list_product.php on line 48
+2024-01-12 14:28:23 - PHP Notice:  Undefined index: type_category in /home/sochinen/start-site.com.ua/tgcart/catalog/controller/extension/module/list_category.php on line 82
+2024-01-12 14:34:18 - PHP Notice:  Undefined index: type_slide in /home/sochinen/start-site.com.ua/tgcart/catalog/controller/extension/module/list_product.php on line 21
+2024-01-12 14:34:18 - PHP Notice:  Undefined index: type_slide in /home/sochinen/start-site.com.ua/tgcart/catalog/controller/extension/module/list_product.php on line 23
+2024-01-12 14:34:18 - PHP Notice:  Undefined index: page_status in /home/sochinen/start-site.com.ua/tgcart/catalog/controller/extension/module/list_product.php on line 47
+2024-01-12 14:34:18 - PHP Notice:  Undefined index: page_status in /home/sochinen/start-site.com.ua/tgcart/catalog/controller/extension/module/list_product.php on line 48
+2024-01-12 14:34:18 - PHP Notice:  Undefined index: type_category in /home/sochinen/start-site.com.ua/tgcart/catalog/controller/extension/module/list_category.php on line 82
+2024-01-12 14:51:11 - PHP Notice:  Undefined index: type_slide in /home/sochinen/start-site.com.ua/tgcart/catalog/controller/extension/module/list_product.php on line 21
+2024-01-12 14:51:11 - PHP Notice:  Undefined index: type_slide in /home/sochinen/start-site.com.ua/tgcart/catalog/controller/extension/module/list_product.php on line 23
+2024-01-12 14:51:11 - PHP Notice:  Undefined index: page_status in /home/sochinen/start-site.com.ua/tgcart/catalog/controller/extension/module/list_product.php on line 47
+2024-01-12 14:51:11 - PHP Notice:  Undefined index: page_status in /home/sochinen/start-site.com.ua/tgcart/catalog/controller/extension/module/list_product.php on line 48
+2024-01-12 14:51:11 - PHP Notice:  Undefined index: type_category in /home/sochinen/start-site.com.ua/tgcart/catalog/controller/extension/module/list_category.php on line 82
+2024-01-16 8:19:18 - PHP Notice:  Undefined index: type_slide in /home/sochinen/start-site.com.ua/tgcart/catalog/controller/extension/module/list_product.php on line 21
+2024-01-16 8:19:18 - PHP Notice:  Undefined index: type_slide in /home/sochinen/start-site.com.ua/tgcart/catalog/controller/extension/module/list_product.php on line 23
+2024-01-16 8:19:18 - PHP Notice:  Undefined index: page_status in /home/sochinen/start-site.com.ua/tgcart/catalog/controller/extension/module/list_product.php on line 47
+2024-01-16 8:19:18 - PHP Notice:  Undefined index: page_status in /home/sochinen/start-site.com.ua/tgcart/catalog/controller/extension/module/list_product.php on line 48
+2024-01-16 8:19:18 - PHP Notice:  Undefined index: type_category in /home/sochinen/start-site.com.ua/tgcart/catalog/controller/extension/module/list_category.php on line 82
+2024-01-18 10:23:23 - PHP Notice:  Undefined index: type_slide in /home/sochinen/start-site.com.ua/tgcart/catalog/controller/extension/module/list_product.php on line 21
+2024-01-18 10:23:23 - PHP Notice:  Undefined index: type_slide in /home/sochinen/start-site.com.ua/tgcart/catalog/controller/extension/module/list_product.php on line 23
+2024-01-18 10:23:23 - PHP Notice:  Undefined index: page_status in /home/sochinen/start-site.com.ua/tgcart/catalog/controller/extension/module/list_product.php on line 47
+2024-01-18 10:23:23 - PHP Notice:  Undefined index: page_status in /home/sochinen/start-site.com.ua/tgcart/catalog/controller/extension/module/list_product.php on line 48
+2024-01-18 10:23:23 - PHP Notice:  Undefined index: type_category in /home/sochinen/start-site.com.ua/tgcart/catalog/controller/extension/module/list_category.php on line 82
+2024-01-18 10:23:25 - PHP Notice:  Undefined index: type_slide in /home/sochinen/start-site.com.ua/tgcart/catalog/controller/extension/module/list_product.php on line 21
+2024-01-18 10:23:25 - PHP Notice:  Undefined index: type_slide in /home/sochinen/start-site.com.ua/tgcart/catalog/controller/extension/module/list_product.php on line 23
+2024-01-18 10:23:25 - PHP Notice:  Undefined index: page_status in /home/sochinen/start-site.com.ua/tgcart/catalog/controller/extension/module/list_product.php on line 47
+2024-01-18 10:23:25 - PHP Notice:  Undefined index: page_status in /home/sochinen/start-site.com.ua/tgcart/catalog/controller/extension/module/list_product.php on line 48
+2024-01-18 10:23:25 - PHP Notice:  Undefined index: type_category in /home/sochinen/start-site.com.ua/tgcart/catalog/controller/extension/module/list_category.php on line 82
+2024-01-18 10:23:44 - PHP Warning:  imagecreatetruecolor(): Invalid image dimensions in /home/sochinen/start-site.com.ua/tgcart/system/library/image.php on line 169
+2024-01-18 10:23:44 - PHP Warning:  imagecolorallocate() expects parameter 1 to be resource, bool given in /home/sochinen/start-site.com.ua/tgcart/system/library/image.php on line 177
+2024-01-18 10:23:44 - PHP Warning:  imagefilledrectangle() expects parameter 1 to be resource, bool given in /home/sochinen/start-site.com.ua/tgcart/system/library/image.php on line 180
+2024-01-18 10:23:44 - PHP Warning:  imagecopyresampled() expects parameter 1 to be resource, bool given in /home/sochinen/start-site.com.ua/tgcart/system/library/image.php on line 182
+2024-01-18 10:24:18 - PHP Notice:  Undefined index: type_slide in /home/sochinen/start-site.com.ua/tgcart/catalog/controller/extension/module/list_product.php on line 21
+2024-01-18 10:24:18 - PHP Notice:  Undefined index: type_slide in /home/sochinen/start-site.com.ua/tgcart/catalog/controller/extension/module/list_product.php on line 23
+2024-01-18 10:24:18 - PHP Notice:  Undefined index: page_status in /home/sochinen/start-site.com.ua/tgcart/catalog/controller/extension/module/list_product.php on line 47
+2024-01-18 10:24:18 - PHP Notice:  Undefined index: page_status in /home/sochinen/start-site.com.ua/tgcart/catalog/controller/extension/module/list_product.php on line 48
+2024-01-18 10:24:18 - PHP Notice:  Undefined index: type_category in /home/sochinen/start-site.com.ua/tgcart/catalog/controller/extension/module/list_category.php on line 82
+2024-01-18 10:24:53 - PHP Notice:  Undefined index: type_category in /home/sochinen/start-site.com.ua/tgcart/catalog/controller/extension/module/list_category.php on line 82
+2024-01-18 11:47:14 - PHP Warning:  array_multisort(): Argument #1 is expected to be an array or a sort flag in /home/sochinen/start-site.com.ua/tgcart/catalog/controller/common/footer.php on line 132
+2024-01-18 11:47:14 - PHP Warning:  array_multisort(): Argument #1 is expected to be an array or a sort flag in /home/sochinen/start-site.com.ua/tgcart/catalog/controller/common/footer.php on line 159
+2024-01-18 11:47:19 - PHP Warning:  array_multisort(): Argument #1 is expected to be an array or a sort flag in /home/sochinen/start-site.com.ua/tgcart/catalog/controller/common/footer.php on line 132
+2024-01-18 11:47:19 - PHP Warning:  array_multisort(): Argument #1 is expected to be an array or a sort flag in /home/sochinen/start-site.com.ua/tgcart/catalog/controller/common/footer.php on line 159
+2024-01-18 11:49:05 - PHP Warning:  array_multisort(): Argument #1 is expected to be an array or a sort flag in /home/sochinen/start-site.com.ua/tgcart/catalog/controller/common/footer.php on line 132
+2024-01-18 11:49:05 - PHP Warning:  array_multisort(): Argument #1 is expected to be an array or a sort flag in /home/sochinen/start-site.com.ua/tgcart/catalog/controller/common/footer.php on line 159
+2024-01-21 19:31:44 - PHP Notice:  Undefined index: image in /home/sochinen/start-site.com.ua/tgcart/catalog/controller/extension/module/box_category.php on line 30
+2024-01-21 19:31:54 - PHP Notice:  Undefined index: image in /home/sochinen/start-site.com.ua/tgcart/catalog/controller/extension/module/box_category.php on line 30
+2024-01-21 19:32:00 - PHP Notice:  Undefined index: image in /home/sochinen/start-site.com.ua/tgcart/catalog/controller/extension/module/box_category.php on line 30
+2024-01-21 19:32:05 - PHP Notice:  Undefined index: image in /home/sochinen/start-site.com.ua/tgcart/catalog/controller/extension/module/box_category.php on line 30
+2024-01-21 19:32:12 - PHP Notice:  Undefined index: image in /home/sochinen/start-site.com.ua/tgcart/catalog/controller/extension/module/box_category.php on line 30
+2024-01-21 19:32:21 - PHP Notice:  Undefined index: image in /home/sochinen/start-site.com.ua/tgcart/catalog/controller/extension/module/box_category.php on line 30
+2024-01-21 19:37:23 - PHP Notice:  Undefined index: image in /home/sochinen/start-site.com.ua/tgcart/catalog/controller/extension/module/box_category.php on line 30
+2024-01-21 19:37:38 - PHP Notice:  Undefined index: image in /home/sochinen/start-site.com.ua/tgcart/catalog/controller/extension/module/box_category.php on line 30
+2024-01-21 19:39:13 - PHP Notice:  Undefined index: image in /home/sochinen/start-site.com.ua/tgcart/catalog/controller/extension/module/box_category.php on line 24
+2024-01-21 19:39:13 - PHP Notice:  Undefined index: image in /home/sochinen/start-site.com.ua/tgcart/catalog/controller/extension/module/box_category.php on line 30
+2024-01-21 19:39:18 - PHP Notice:  Undefined index: image in /home/sochinen/start-site.com.ua/tgcart/catalog/controller/extension/module/box_category.php on line 24
+2024-01-21 19:39:18 - PHP Notice:  Undefined index: image in /home/sochinen/start-site.com.ua/tgcart/catalog/controller/extension/module/box_category.php on line 30
+2024-01-21 19:39:33 - PHP Notice:  Undefined index: image in /home/sochinen/start-site.com.ua/tgcart/catalog/controller/extension/module/box_category.php on line 30
+2024-01-21 19:39:57 - PHP Notice:  Undefined index: image in /home/sochinen/start-site.com.ua/tgcart/catalog/controller/extension/module/box_category.php on line 30
+2024-02-12 19:08:36 - PHP Notice:  Trying to get property 'shop' of non-object in /home/sochinen/start-site.com.ua/tgcart/catalog/controller/extension/import/import_xml.php on line 25
+2024-02-12 19:08:36 - PHP Notice:  Trying to get property 'offers' of non-object in /home/sochinen/start-site.com.ua/tgcart/catalog/controller/extension/import/import_xml.php on line 25
+2024-02-12 19:08:36 - PHP Notice:  Trying to get property 'offer' of non-object in /home/sochinen/start-site.com.ua/tgcart/catalog/controller/extension/import/import_xml.php on line 25
+2024-02-12 19:08:36 - PHP Warning:  Invalid argument supplied for foreach() in /home/sochinen/start-site.com.ua/tgcart/catalog/controller/extension/import/import_xml.php on line 25

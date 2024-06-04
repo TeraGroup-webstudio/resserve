@@ -1,0 +1,1126 @@
+{{ header }}
+
+
+<div id="product-product" class="container">
+  <ul class="breadcrumb">
+    {% for breadcrumb in breadcrumbs %}
+    <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+    {% endfor %}
+  </ul>
+  <div class="row">{{ column_left }}
+    {% if column_left and column_right %}
+    {% set class = 'col-sm-6' %}
+    {% elseif column_left or column_right %}
+    {% set class = 'col-sm-9' %}
+    {% else %}
+    {% set class = 'col-sm-12' %}
+    {% endif %}
+    <div id="content" class="{{ class }}">{{ content_top }}
+      <div class="row"> {% if column_left or column_right %}
+        {% set class = 'col-sm-6' %}
+        {% else %}
+        {% set class = 'main-slide' %}
+        {% endif %}
+        <div class="product__page">
+            <div class="product__page-content">
+                <ul class="product__navigation">
+                    <li><a href="#about_product">{{about_product}}</a></li>
+                    {% if description != '' %}<li><a href="#description_product">{{description_product}}</a></li>{% endif %}
+                    {% if attribute_groups %}<li><a href="#attributes_product">{{attributes_product}}</a></li>{% endif %}
+                    <li><a href="#reviews_product">{{reviews_product}}</a></li>
+                </ul>
+                <div id="about_product">
+                    <div class="ptoduct__images">
+                        <div class="productpage__carousel">
+                            {% if images %}
+                            <div class="product__carousel--thumbs swiper-container">
+                                <div class="swiper-wrapper">
+                                    <div class="swiper-slide product__carousel--thumb">
+                                        <img src="{{ main_thumb }}" title="{{ heading_title }}" class="img-responsive" alt="{{ heading_title }}" />
+                                    </div>
+                                    {% for image in images %}
+                                    <div class="swiper-slide product__carousel--thumb">
+                                        <img src="{{ image.thumb }}" title="{{ heading_title }}" class="img-responsive" alt="{{ heading_title }}" />
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            {% endif %}
+                            {% if images %}
+                            <div class="product__carousel--slides swiper-container">
+                                <div class="product__carousel--button swiper-button-prev">
+                                    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M19.2 14H8.79995M8.79995 14L13.35 9.44995M8.79995 14L13.35 18.55" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M14 27C6.82036 27 1 21.1796 1 14C1 6.82029 6.82036 1 14 1C21.1797 1 27 6.82029 27 14C27 21.1796 21.1797 27 14 27Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </div>
+                                <div class="product__carousel--button swiper-button-next">
+                                    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M8.80005 14H19.2M19.2 14L14.65 9.44995M19.2 14L14.65 18.55" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M14 27C21.1796 27 27 21.1796 27 14C27 6.82029 21.1796 1 14 1C6.82029 1 1 6.82029 1 14C1 21.1796 6.82029 27 14 27Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </div>
+                                <div class="swiper-wrapper">
+                                    <div class="product__carousel--slide swiper-slide thumbnails">
+                                        <a data-fancybox="gallery" href="{{ popup }}">
+                                            <img src="{{ main_thumb }}" title="{{ heading_title }}" class="img-responsive" alt="{{ heading_title }}" />
+                                        </a>
+                                    </div>
+                                    {% for image in images %}
+                                   <div class="product__carousel--slide swiper-slide thumbnails">
+                                        <a data-fancybox="gallery" href="{{ image.popup }}">
+                                            <img src="{{ image.main_thumb }}" class="img-responsive" title="{{ heading_title }}" alt="{{ heading_title }}" />
+                                        </a>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            {% endif %}
+                        </div>
+                        {% if stickers %}
+                            <ul class="stickers_image stickers_image_product" style="position: absolute;top: 10px;right: 10px;z-index: 2;left: unset;">
+                                {% for sticker in stickers %}
+                                    <li><img src="{{ sticker.image }}" title="{{ heading_title }}" alt="{{ heading_title }}" /></li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </div>
+                </div>
+                <div id="description_product">
+                    <div class="product__page--title">{{description_product}}</div>
+                    {% if product_shot_description_status == 1 and description != '' %}
+                        <div class="read__more">
+                            <div class="read__more--content">
+                                <div class="readmore__block">
+                                    <div class="read__more--text">{{ description }}</div>
+                                    <div class="read__more--button">
+                                      <button>
+                                        <svg width="40" height="27" viewBox="0 0 40 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                          <rect width="38.8889" height="27" rx="4" transform="matrix(-1 0 0 1 39.4445 0)" fill="#40AB35" />
+                                          <mask id="path-2-inside-1_10_4918" fill="white">
+                                            <path d="M19.4445 3L10.9591 11.4853L19.4445 19.9707L27.9298 11.4853L19.4445 3Z" />
+                                          </mask>
+                                          <path d="M19.4445 19.9707L20.8587 21.3849L19.4445 22.7991L18.0302 21.3849L19.4445 19.9707ZM12.3733 10.0711L20.8587 18.5564L18.0302 21.3849L9.54492 12.8995L12.3733 10.0711ZM18.0302 18.5564L26.5156 10.0711L29.344 12.8995L20.8587 21.3849L18.0302 18.5564Z" fill="white" mask="url(#path-2-inside-1_10_4918)" />
+                                        </svg>
+                                      </button>
+                                    </div>
+                                  </div>
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="product__page--description">description</div>
+                    {% endif %}
+                </div>
+                {% if attribute_groups %}
+                <div id="attributes_product">
+                    <div class="product__page--title">{{attributes_product}}</div>
+                    <div class="product__page--attributes attributemore__block {% if attribute_count >= 8 %} attributemore__block--large {% endif %}">
+                        {% for attribute_group in attribute_groups %}
+                            <div class="product__page--attribute--name">{{ attribute_group.name }}</div>
+                            {% for attribute in attribute_group.attribute %}
+                            <div class="product__page--attribute">
+                                <div class="product__page--attribute-title">{{ attribute.name }}</div>
+                                <div class="product__page--attribute--text">{{ attribute.text }}</div>
+                            </div>
+                            {% endfor %}
+                        {% endfor %}
+                    </div>
+                    {% if attribute_count >= 8 %}
+                    <div class="attribute__more--button">
+                        <button>
+                          <svg width="40" height="27" viewBox="0 0 40 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="38.8889" height="27" rx="4" transform="matrix(-1 0 0 1 39.4445 0)" fill="#40AB35" />
+                            <mask id="path-2-inside-1_10_4918" fill="white">
+                              <path d="M19.4445 3L10.9591 11.4853L19.4445 19.9707L27.9298 11.4853L19.4445 3Z" />
+                            </mask>
+                            <path d="M19.4445 19.9707L20.8587 21.3849L19.4445 22.7991L18.0302 21.3849L19.4445 19.9707ZM12.3733 10.0711L20.8587 18.5564L18.0302 21.3849L9.54492 12.8995L12.3733 10.0711ZM18.0302 18.5564L26.5156 10.0711L29.344 12.8995L20.8587 21.3849L18.0302 18.5564Z" fill="white" mask="url(#path-2-inside-1_10_4918)" />
+                          </svg>
+                        </button>
+                      </div>
+                      {% endif %}
+                </div>
+                {% endif %}
+                <div id="reviews_product">
+                    
+                </div>
+            </div>
+            <div class="product__page--info" id="product__page--info">
+                <h1 data-da=".product__page-content,1023,0">{{ heading_title }}</h1>
+                <div class="rating__block" data-da=".product__page-content,1023,1">
+                    {% if review_status %}
+                        {% if review_guest %}
+                            {% if rating %}
+                            <div class="single__product--rating-wrapper">
+                                <div class="rating">
+                                    {% for i in 1..5 %}
+                                        {% if rating < i %}
+                                            <svg width="11" height="11" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M16.7258 24.0713L25.3396 29.2702L23.0537 19.4717L30.664 12.8789L20.6424 12.0287L16.7258 2.78766L12.8092 12.0287L2.78763 12.8789L10.3979 19.4717L8.11201 29.2702L16.7258 24.0713Z" fill="#8E9192" />
+                                            </svg>
+                                        {% else %}
+                                            <svg width="11" height="11" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M16.7258 24.0713L25.3396 29.2702L23.0537 19.4717L30.664 12.8789L20.6424 12.0287L16.7258 2.78766L12.8092 12.0287L2.78763 12.8789L10.3979 19.4717L8.11201 29.2702L16.7258 24.0713Z" fill="#FFAB03" />
+                                            </svg>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                                <div class="reviews__count">
+                                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M5.92991 1C3.8457 1 1.87728 2.38 1.24044 4.48C0.198332 7.96 2.6878 11.2 5.92991 11.2C6.62465 11.2 7.37728 11.02 8.01412 10.72L10.851 11.2L10.3878 8.26C10.6773 7.6 10.851 6.82 10.851 6.1C10.851 3.28 8.65096 1 5.92991 1Z" stroke="#8E9192" />
+                                    </svg>
+                                    <div class="reviews__count--numbers">{{reviews}}</div>
+                                </div>
+                            </div>
+                        {% endif %}
+                        {% else %}
+                        {{ text_login }}
+                        {% endif %}
+                    {% endif %}
+                    {% if product_model_status == 1 %}
+                        <div class="model">{{ text_model }} {{ model }}</div>
+                    {% endif %}
+                </div>
+                {% if manufacturer and product_manufacturer_status %}
+                    <div class="manufacturer" data-da=".product__page-content,1023,2">{{ text_manufacturer }} <a href="{{ manufacturers }}">{{ manufacturer }}</a></div>
+                {% endif %}
+                {% if reward %}
+                    <div class="reward">
+                        {{ text_reward }} <span class="red">{{ reward }}</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none">
+                            <path d="M14.8611 8.70068V15.9393C14.8611 16.1945 14.6543 16.4014 14.3991 16.4014H3.00208C2.7469 16.4014 2.54004 16.1945 2.54004 15.9393V8.70068" stroke="#15A74C" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M15.9393 4.85034H1.46204C1.20686 4.85034 1 5.05721 1 5.31238V8.23864C1 8.49384 1.20686 8.70068 1.46204 8.70068H15.9393C16.1945 8.70068 16.4014 8.49384 16.4014 8.23864V5.31238C16.4014 5.05721 16.1945 4.85034 15.9393 4.85034Z" stroke="#15A74C" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M8.70117 16.4014V4.85034" stroke="#15A74C" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M8.70102 4.85034H5.23572C4.72513 4.85034 4.23545 4.64751 3.87441 4.28647C3.51338 3.92544 3.31055 3.43576 3.31055 2.92517C3.31055 2.41458 3.51338 1.92491 3.87441 1.56387C4.23545 1.20283 4.72513 1 5.23572 1C7.93096 1 8.70102 4.85034 8.70102 4.85034Z" stroke="#15A74C" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M8.70117 4.85034H12.1665C12.677 4.85034 13.1667 4.64751 13.5278 4.28647C13.8888 3.92544 14.0916 3.43576 14.0916 2.92517C14.0916 2.41458 13.8888 1.92491 13.5278 1.56387C13.1667 1.20283 12.677 1 12.1665 1C9.47124 1 8.70117 4.85034 8.70117 4.85034Z" stroke="#15A74C" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                {% endif %}
+                {% if product_stock_status == 1 %}
+                    <div class="stock {{ class_stock }}"> {{ stock }}</div>
+                {% endif %}
+                <div id="product">
+                    <div class="product__buy">
+                        {% if price %}
+                        <div class="list-price">
+                            {% if not special %}
+                            <div class="new-price">
+                                {{ price }}
+                            </div>
+                            {% else %}
+                                <div class="old-price">{{ price }}</div>
+                                <div class="new-price">
+                                    {{ special }}
+                                </div>
+                            {% endif %}
+                            {% if tax %}
+                                <div class="tax">{{ text_tax }} {{ tax }}</div>
+                            {% endif %}
+                            {% if points %}
+                                <div class="points">
+                                    {{ text_points }} {{ points }}
+                                </div>
+                            {% endif %}
+                            {% if discounts %}
+                                <li>
+                                    <hr>
+                                </li>
+                                {% for discount in discounts %}
+                                    <li>{{ discount.quantity }}{{ text_discount }}{{ discount.price }}</li>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                        {% endif %}
+                        <button type="button" id="button-cart" data-loading-text="{{ text_loading }}" class="btn-buy button__green">
+                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <g clip-path="url(#clip0_27_24869)">
+                                  <mask id="mask0_27_24869" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="14" height="10">
+                                    <path d="M0 0.509033H13.9309V9.3333H0V0.509033Z" fill="white" />
+                                  </mask>
+                                  <g mask="url(#mask0_27_24869)">
+                                    <path d="M13.5035 2.03004C13.4087 2.02707 13.3135 2.02943 13.2187 2.02943C9.97894 2.02943 6.73881 2.02943 3.49901 2.02943C3.37512 2.02943 3.25117 2.02943 3.11971 2.02943C3.01 1.61489 2.90461 1.22917 2.80644 0.841429C2.76087 0.661433 2.67425 0.51776 2.47433 0.516072C1.75671 0.509186 1.03902 0.509186 0.32167 0.515735C0.126078 0.51776 0.00414513 0.636317 0.00151202 0.835825C-0.00118859 1.03365 0.11217 1.14822 0.310463 1.16672C0.404579 1.17563 0.500114 1.17198 0.595243 1.17198C1.12193 1.17232 1.64828 1.17232 2.1932 1.17232C2.22723 1.28068 2.252 1.35002 2.2705 1.42139C2.90623 3.88914 3.54162 6.35697 4.17572 8.82513C4.29664 9.29639 4.32608 9.32312 4.82333 9.32312C7.02892 9.32346 9.23479 9.3238 11.4404 9.32346C11.8254 9.32346 11.981 9.23069 11.9896 8.99945C11.9985 8.75673 11.8343 8.65236 11.4325 8.65202C9.554 8.65134 7.67552 8.65168 5.79677 8.65168C5.54331 8.65168 5.28959 8.66262 5.03742 8.64479C4.95154 8.63885 4.81739 8.57775 4.79659 8.51267C4.70106 8.21411 4.638 7.9053 4.55009 7.54693C4.83622 7.54693 5.08671 7.54693 5.33746 7.54693C7.47891 7.54693 9.6201 7.54726 11.7616 7.54659C12.17 7.54659 12.2155 7.51256 12.3484 7.11955C12.5308 6.58058 12.7115 6.04093 12.8932 5.50155C13.223 4.52264 13.5558 3.54468 13.8822 2.56476C13.9979 2.21537 13.8703 2.04192 13.5035 2.03004ZM12.6663 4.08703C12.3804 4.93516 12.0887 5.7816 11.8111 6.63243C11.752 6.81344 11.6644 6.87879 11.4734 6.8765C10.1881 6.86097 8.90241 6.85206 7.61705 6.84942C7.00941 6.84807 6.40177 6.86759 5.79413 6.87285C5.37385 6.8765 4.95289 6.87913 4.53288 6.86495C4.46286 6.86259 4.35153 6.78204 4.33465 6.71763C3.98371 5.39622 3.64404 4.0715 3.29417 2.71768C6.57292 2.71768 9.82332 2.71768 13.1242 2.71768C12.9653 3.19292 12.8166 3.64048 12.6663 4.08703Z" fill="white" />
+                                  </g>
+                                  <path d="M10.3577 10.0313C9.40806 10.0329 8.62859 10.8243 8.64277 11.7721C8.65668 12.7161 9.4275 13.4661 10.3739 13.4569C11.3229 13.4476 12.0762 12.6847 12.0689 11.7401C12.0617 10.7972 11.2931 10.0296 10.3577 10.0313ZM10.3435 12.7937C9.77021 12.7854 9.30793 12.3085 9.31617 11.7342C9.32447 11.1546 9.79033 10.703 10.3729 10.7096C10.9521 10.7166 11.4084 11.1846 11.4008 11.7636C11.3932 12.3362 10.9147 12.802 10.3435 12.7937Z" fill="white" />
+                                  <path d="M5.46206 10.0322C4.53528 10.0022 3.73927 10.7632 3.71449 11.7031C3.68937 12.651 4.42651 13.4314 5.37091 13.4562C6.33443 13.4816 7.11983 12.7362 7.13867 11.7784C7.15683 10.8431 6.40741 10.0626 5.46206 10.0322ZM5.40724 12.7933C4.83396 12.7827 4.37169 12.3052 4.38026 11.7325C4.38917 11.1568 4.8584 10.7047 5.44126 10.7103C6.01852 10.7159 6.47351 11.1846 6.46622 11.7665C6.4596 12.3386 5.9795 12.8039 5.40724 12.7933Z" fill="white" />
+                                </g>
+                                <defs>
+                                  <clipPath id="clip0_27_24869">
+                                    <rect width="14" height="14" fill="white" />
+                                  </clipPath>
+                                </defs>
+                              </svg>
+                            {{ button_cart }}
+                        </button>
+                    </div>
+                    {% if status_one_click == 1 %}
+                    <button href="javascript: void(0);" onclick="get_popup_one_click({{ product_id }}); return false" class="btn-buy-one">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="31" height="29" viewBox="0 0 31 29" fill="none">
+                            <path d="M27.2951 12.2883C27.2951 5.77385 22.0141 0.492828 15.4996 0.492828C8.98513 0.492828 3.7041 5.77385 3.7041 12.2883" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M0.755371 18.8325V16.0653C0.755371 14.7121 1.67629 13.5327 2.98904 13.2044L5.5539 12.5632C6.11226 12.4236 6.65313 12.8459 6.65313 13.4215V21.4763C6.65313 22.052 6.11226 22.4742 5.5539 22.3346L2.98904 21.6934C1.67629 21.3652 0.755371 20.1858 0.755371 18.8325Z" stroke="black"/>
+                            <path d="M30.2439 18.8325V16.0653C30.2439 14.7121 29.323 13.5327 28.0103 13.2044L25.4454 12.5632C24.887 12.4236 24.3462 12.8459 24.3462 13.4215V21.4763C24.3462 22.052 24.887 22.4742 25.4454 22.3346L28.0103 21.6934C29.323 21.3652 30.2439 20.1858 30.2439 18.8325Z" stroke="black"/>
+                            <path d="M27.2954 22.6094V23.3466C27.2954 24.9753 25.9752 26.2955 24.3466 26.2955H19.186" stroke="black"/>
+                            <path d="M17.7111 28.5072H13.2878C12.0664 28.5072 11.0762 27.5169 11.0762 26.2955C11.0762 25.0741 12.0664 24.0838 13.2878 24.0838H17.7111C18.9326 24.0838 19.9228 25.0741 19.9228 26.2955C19.9228 27.5169 18.9326 28.5072 17.7111 28.5072Z" stroke="black"/>
+                        </svg>
+                        {{ text_one_click_buy }}
+                    </button>
+                 {% endif %}
+                 <div class="product__buttons">
+                    {% if product_compare_status == 1 %}
+                        <button type="button" data-toggle="tooltip" title="{{ button_compare }}" onclick="compare.add('{{ product_id }}');">
+                            <svg width="15" height="16" viewBox="0 0 15 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <g clip-path="url(#clip0_27_24885)">
+                                  <mask id="mask0_27_24885" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="15" height="16">
+                                    <path d="M0 0.663574H15V15.4969H0V0.663574Z" fill="white" />
+                                  </mask>
+                                  <g mask="url(#mask0_27_24885)">
+                                    <path d="M15.0147 9.46134C15.0145 9.46026 15.0144 9.45917 15.0142 9.45816C15.0139 9.457 15.0135 9.45585 15.0132 9.45462C15.0099 9.4395 15.0052 9.42481 14.9992 9.41085L12.3338 3.22668C12.3217 3.19868 12.3044 3.17423 12.2838 3.15326C12.2392 3.0935 12.1681 3.05459 12.0878 3.05459H8.25005C8.00873 3.05379 8.24485 3.05459 8.25005 3.05459V1.49989C8.25005 1.03888 8.2114 0.749878 7.75024 0.749878C7.28909 0.749878 7.27002 1.03888 7.27002 1.49989L7.30807 3.05459H2.97264C2.96497 3.05459 2.95738 3.05509 2.94992 3.05574C2.94718 3.05553 2.94457 3.05488 2.94175 3.0548C2.84004 3.05104 2.74738 3.10942 2.7073 3.20245L0.0419379 9.38655C0.0359339 9.40051 0.0311596 9.41526 0.027832 9.43038C0.027615 9.43161 0.027181 9.43277 0.026964 9.43393C0.0266746 9.43494 0.0266746 9.43602 0.0264576 9.43711C0.0234917 9.45245 0.0219727 9.46785 0.0219727 9.48319C0.0219727 10.1753 0.297219 10.8131 0.797002 11.2791C1.2855 11.7346 1.94247 11.9854 2.64712 11.9854C3.35176 11.9854 4.00874 11.7346 4.49723 11.2791C4.99702 10.8132 5.27234 10.1755 5.27234 9.48333L5.27219 9.48124C5.27219 9.47588 5.27176 9.47046 5.27139 9.46503C5.27118 9.46207 5.27103 9.4591 5.27074 9.45614C5.27024 9.45187 5.26944 9.4476 5.26872 9.44333C5.26807 9.43928 5.26742 9.43516 5.26662 9.43118C5.2659 9.42807 5.26503 9.42503 5.26423 9.42199C5.26293 9.41693 5.26163 9.41186 5.25997 9.40695L5.25939 9.40478L3.25024 3.74988H7.30807V13.9495H3.14198C2.8943 13.9495 2.69284 14.1596 2.69284 14.4178V15.0296C2.69284 15.2877 2.8943 15.4978 3.14198 15.4978H12.1682C12.4158 15.4978 12.6173 15.2877 12.6173 15.0296V14.4178C12.6173 14.1596 12.4158 13.9495 12.1682 13.9495H8.25005V3.74988H11.7502L9.78181 9.42908L9.78123 9.43111C9.77957 9.43617 9.77819 9.44131 9.77682 9.44651C9.7761 9.44948 9.77523 9.45245 9.77458 9.45541C9.77371 9.45946 9.77306 9.46366 9.77241 9.46778C9.77168 9.47205 9.77096 9.47617 9.77045 9.48037C9.77017 9.48333 9.77002 9.48637 9.7698 9.48934C9.76937 9.49476 9.76901 9.50019 9.76894 9.50554L9.76886 9.50757C9.76886 10.1997 10.0441 10.8374 10.5439 11.3034C11.0324 11.7589 11.6894 12.0097 12.3941 12.0097C13.0987 12.0097 13.7557 11.7589 14.2442 11.3034C14.744 10.8375 15.0192 10.1997 15.0192 9.50757C15.0192 9.49223 15.0176 9.47675 15.0147 9.46134ZM2.90457 3.9808L4.6864 9.23869H0.638437L2.90457 3.9808ZM4.16354 10.9213C3.76597 11.292 3.22741 11.4961 2.64712 11.4961C2.06682 11.4961 1.52827 11.292 1.1307 10.9213C0.790708 10.6044 0.580783 10.1873 0.525807 9.72791H4.7685C4.71345 10.1873 4.50353 10.6044 4.16354 10.9213ZM12.1279 15.0087H3.1822V14.4388H12.1279V15.0087ZM7.30807 13.9495V1.49968C7.30807 1.30842 7.46374 1.15275 7.65508 1.15275C7.84641 1.15275 8.00208 1.30842 8.00208 1.49968V13.9495H7.30807ZM14.4027 9.26299H10.3547L12.1366 4.00511L14.4027 9.26299ZM13.9104 10.9456C13.5129 11.3162 12.9743 11.5204 12.394 11.5204C11.8137 11.5204 11.2752 11.3162 10.8776 10.9456C10.5376 10.6286 10.3277 10.2115 10.2726 9.75221H14.5154C14.4603 10.2116 14.2504 10.6287 13.9104 10.9456Z" fill="#8E9192" />
+                                    <path d="M7.30807 13.9495V1.49968C7.30807 1.30842 7.46374 1.15275 7.65508 1.15275C7.84641 1.15275 8.00208 1.30842 8.00208 1.49968V13.9495H7.30807Z" fill="#8E9192" />
+                                  </g>
+                                </g>
+                                <defs>
+                                  <clipPath id="clip0_27_24885">
+                                    <rect width="15" height="15" fill="white" transform="translate(0 0.5)" />
+                                  </clipPath>
+                                </defs>
+                              </svg>
+                              {{ text_comparep }}
+                        </button>
+                    {% endif %}
+                    {% if product_wishlist_status == 1 %}
+                        <button type="button" data-toggle="tooltip" title="{{ button_wishlist }}" onclick="wishlist.add('{{ product_id }}');">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M11.5999 0.950574C10.2079 0.950574 8.87194 1.57293 7.99994 2.55639C7.12794 1.57293 5.79194 0.950574 4.39994 0.950574C1.93594 0.950574 -6.24812e-05 2.80994 -6.24812e-05 5.17641C-6.24812e-05 8.08072 2.71994 10.4472 6.83994 14.043L7.99994 15.0495L9.15994 14.0353C13.2799 10.4472 15.9999 8.08072 15.9999 5.17641C15.9999 2.80994 14.0639 0.950574 11.5999 0.950574ZM8.10083 13.9776L8.02083 14.0362L7.94083 13.9776C1.18294 8.46267 0.820833 7.13639 0.820833 4.9159C0.820833 3.37923 2.39994 1.62248 3.99994 1.62248C6.05116 1.62248 7.04261 2.34324 7.46661 3.39586L8.02083 4.15588L8.53327 3.39586C8.94927 2.34324 10.3679 1.74154 11.5999 1.74154C13.1999 1.74154 15.2208 3.37923 15.2208 4.9159C15.2208 7.13639 14.6875 8.64209 8.10083 13.9776Z" fill="#8E9192" />
+                              </svg>
+                              {{ text_wishlistp }}
+                        </button>
+                    {% endif %}
+                    <div class="product_buttons hidden">
+                        <label class="control-label" for="input-quantity">{{ entry_qty }}</label>
+                        <div class="number-spinner">
+                            <button data-dir="dwn"><svg xmlns="http://www.w3.org/2000/svg" width="10" height="3" viewBox="0 0 10 3" fill="none"> <path d="M8.55556 0H0.777778C0.348223 0 0 0.596954 0 1.33333C0 2.06971 0.348223 2.66667 0.777778 2.66667H8.55556C8.98511 2.66667 9.33333 2.06971 9.33333 1.33333C9.33333 0.596954 8.98511 0 8.55556 0Z" fill="#15A74C"/> </svg></button>
+                            <input type="text" name="quantity" value="{{ minimum }}" size="2" id="input-quantity" class="form-control" />
+                            <button data-dir="up"><svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 11 11" fill="none"> <path d="M9.77778 4.44444H6.22222V0.888889C6.22222 0.653141 6.12857 0.427049 5.96187 0.26035C5.79517 0.0936507 5.56908 0 5.33333 0C5.09759 0 4.87149 0.0936507 4.70479 0.26035C4.5381 0.427049 4.44444 0.653141 4.44444 0.888889V4.44444H0.888889C0.653141 4.44444 0.427049 4.5381 0.26035 4.70479C0.0936507 4.87149 0 5.09759 0 5.33333C0 5.56908 0.0936507 5.79517 0.26035 5.96187C0.427049 6.12857 0.653141 6.22222 0.888889 6.22222H4.44444V9.77778C4.44444 10.0135 4.5381 10.2396 4.70479 10.4063C4.87149 10.573 5.09759 10.6667 5.33333 10.6667C5.56908 10.6667 5.79517 10.573 5.96187 10.4063C6.12857 10.2396 6.22222 10.0135 6.22222 9.77778V6.22222H9.77778C10.0135 6.22222 10.2396 6.12857 10.4063 5.96187C10.573 5.79517 10.6667 5.56908 10.6667 5.33333C10.6667 5.09759 10.573 4.87149 10.4063 4.70479C10.2396 4.5381 10.0135 4.44444 9.77778 4.44444Z" fill="#15A74C"/> </svg></button>
+                        </div>
+                        <input type="hidden" name="product_id" value="{{ product_id }}" />
+                    </div>
+                    {% if options %}
+                    <hr>
+                    <h3>{{ text_option }}</h3>
+                    {% for option in options %}
+                    {% if option.type == 'select' %}
+                    <div class="form-group{% if option.required %} required {% endif %}">
+                      <label class="control-label" for="input-option{{ option.product_option_id }}">{{ option.name }}</label>
+                      <select name="option[{{ option.product_option_id }}]" id="input-option{{ option.product_option_id }}" class="form-control">
+                        <option value="">{{ text_select }}</option>
+                        {% for option_value in option.product_option_value %}
+                        <option value="{{ option_value.product_option_value_id }}" data-points="{{ option_value.apo_points_value }}" data-prefix="{{ option_value.price_prefix }}" data-price="{{ option_value.apo_price_value }}">{{ option_value.name }}
+                        {% if option_value.price %}
+                        ({% if option_value.price_prefix == '+' or option_value.price_prefix == '-' %}{{ option_value.price_prefix }}{% endif %}{{ option_value.price }})
+                        {% endif %} </option>
+                        {% endfor %}
+                      </select>
+                    </div>
+                    {% endif %}
+                    {% if option.type == 'radio' %}
+                    <div class="form-group{% if option.required %} required {% endif %}">
+                      <label class="control-label">{{ option.name }}</label>
+                      <div id="input-option{{ option.product_option_id }}"> {% for option_value in option.product_option_value %}
+                        <div class="radio">
+                          <label>
+                            <input type="radio" name="option[{{ option.product_option_id }}]" value="{{ option_value.product_option_value_id }}" data-points="{{ option_value.apo_points_value }}" data-prefix="{{ option_value.price_prefix }}" data-price="{{ option_value.apo_price_value }}" />
+                            {% if option_value.image %} <img src="{{ option_value.image }}" alt="{{ option_value.name }} {% if option_value.price %} {{ option_value.price_prefix }} {{ option_value.price }} {% endif %}" class="img-thumbnail" /> {% endif %}                  
+                            {{ option_value.name }}
+                            {% if option_value.price %}
+                            ({% if option_value.price_prefix == '+' or option_value.price_prefix == '-' %}{{ option_value.price_prefix }}{% endif %}{{ option_value.price }})
+                            {% endif %} </label>
+                        </div>
+                        {% endfor %} </div>
+                    </div>
+                    {% endif %}
+                    {% if option.type == 'checkbox' %}
+                    <div class="form-group{% if option.required %} required {% endif %}">
+                      <label class="control-label">{{ option.name }}</label>
+                      <div id="input-option{{ option.product_option_id }}"> {% for option_value in option.product_option_value %}
+                        <div class="checkbox">
+                          <label>
+                            <input type="checkbox" name="option[{{ option.product_option_id }}][]" value="{{ option_value.product_option_value_id }}" data-points="{{ option_value.apo_points_value }}" data-prefix="{{ option_value.price_prefix }}" data-price="{{ option_value.apo_price_value }}" />
+                            {% if option_value.image %} <img src="{{ option_value.image }}" alt="{{ option_value.name }} {% if option_value.price %} {{ option_value.price_prefix }} {{ option_value.price }} {% endif %}" class="img-thumbnail" /> {% endif %}
+                            {{ option_value.name }}
+                            {% if option_value.price %}
+                            ({% if option_value.price_prefix == '+' or option_value.price_prefix == '-' %}{{ option_value.price_prefix }}{% endif %}{{ option_value.price }})
+                            {% endif %} </label>
+                        </div>
+                        {% endfor %} </div>
+                    </div>
+                    {% endif %}
+                    {% if option.type == 'text' %}
+                    <div class="form-group{% if option.required %} required {% endif %}">
+                      <label class="control-label" for="input-option{{ option.product_option_id }}">{{ option.name }}</label>
+                      <input type="text" name="option[{{ option.product_option_id }}]" value="{{ option.value }}" placeholder="{{ option.name }}" id="input-option{{ option.product_option_id }}" class="form-control" />
+                    </div>
+                    {% endif %}
+                    {% if option.type == 'textarea' %}
+                    <div class="form-group{% if option.required %} required {% endif %}">
+                      <label class="control-label" for="input-option{{ option.product_option_id }}">{{ option.name }}</label>
+                      <textarea name="option[{{ option.product_option_id }}]" rows="5" placeholder="{{ option.name }}" id="input-option{{ option.product_option_id }}" class="form-control">{{ option.value }}</textarea>
+                    </div>
+                    {% endif %}
+                    {% if option.type == 'file' %}
+                    <div class="form-group{% if option.required %} required {% endif %}">
+                      <label class="control-label">{{ option.name }}</label>
+                      <button type="button" id="button-upload{{ option.product_option_id }}" data-loading-text="{{ text_loading }}" class="btn btn-default btn-block"><i class="fa fa-upload"></i> {{ button_upload }}</button>
+                      <input type="hidden" name="option[{{ option.product_option_id }}]" value="" id="input-option{{ option.product_option_id }}" />
+                    </div>
+                    {% endif %}
+                    {% if option.type == 'date' %}
+                    <div class="form-group{% if option.required %} required {% endif %}">
+                      <label class="control-label" for="input-option{{ option.product_option_id }}">{{ option.name }}</label>
+                      <div class="input-group date">
+                        <input type="text" name="option[{{ option.product_option_id }}]" value="{{ option.value }}" data-date-format="YYYY-MM-DD" id="input-option{{ option.product_option_id }}" class="form-control" />
+                        <span class="input-group-btn">
+                        <button class="btn btn-default" type="button"><i class="fa fa-calendar"></i></button>
+                        </span></div>
+                    </div>
+                    {% endif %}
+                    {% if option.type == 'datetime' %}
+                    <div class="form-group{% if option.required %} required {% endif %}">
+                      <label class="control-label" for="input-option{{ option.product_option_id }}">{{ option.name }}</label>
+                      <div class="input-group datetime">
+                        <input type="text" name="option[{{ option.product_option_id }}]" value="{{ option.value }}" data-date-format="YYYY-MM-DD HH:mm" id="input-option{{ option.product_option_id }}" class="form-control" />
+                        <span class="input-group-btn">
+                        <button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button>
+                        </span></div>
+                    </div>
+                    {% endif %}
+                    {% if option.type == 'time' %}
+                    <div class="form-group{% if option.required %} required {% endif %}">
+                      <label class="control-label" for="input-option{{ option.product_option_id }}">{{ option.name }}</label>
+                      <div class="input-group time">
+                        <input type="text" name="option[{{ option.product_option_id }}]" value="{{ option.value }}" data-date-format="HH:mm" id="input-option{{ option.product_option_id }}" class="form-control" />
+                        <span class="input-group-btn">
+                        <button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button>
+                        </span></div>
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                    {% endif %}
+                    {% if recurrings %}
+                    <hr>
+                    <h3>{{ text_payment_recurring }}</h3>
+                    <div class="form-group required">
+                      <select name="recurring_id" class="form-control">
+                        <option value="">{{ text_select }}</option>
+                        {% for recurring in recurrings %}
+                        <option value="{{ recurring.recurring_id }}">{{ recurring.name }}</option>
+                        {% endfor %}
+                      </select>
+                      <div class="help-block" id="recurring-description"></div>
+                    </div>
+                    {% endif %}
+                    {% if minimum > 1 %}
+                    <div class="alert alert-info"><i class="fa fa-info-circle"></i> {{ text_minimum }}</div>
+                    {% endif %}
+                </div>
+                <div class="product__files">
+                    <div class="product__files--title">{{text_specification}}</div>
+                    <a href="/">
+                        <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M10.4426 10.0652C10.4282 10.0385 10.4139 10.0262 10.3975 10.0242C10.338 10.0918 10.3523 10.6702 10.4528 11.0783C10.5349 10.7994 10.5492 10.2477 10.4426 10.0652ZM10.4098 12.5364C10.2519 12.9465 10.0242 13.5064 9.75146 14.0006C9.8335 13.9678 9.91758 13.933 10.0037 13.8981C10.3646 13.7504 10.7687 13.5843 11.2116 13.4838C10.9061 13.2418 10.6292 12.9158 10.4098 12.5364Z" fill="black" fill-opacity="0.15" />
+                            <path d="M10.9512 7.21875V2.78906H4.75781V18.2109H16.2422V8.08008H11.8125C11.5841 8.08008 11.365 7.98933 11.2034 7.8278C11.0419 7.66627 10.9512 7.44719 10.9512 7.21875ZM12.0791 13.1168C12.4093 13.0778 12.7066 13.0594 12.9876 13.0696C13.2501 13.0778 13.4716 13.1106 13.6438 13.1742C13.6479 13.1763 13.65 13.1763 13.6541 13.1783C13.6623 13.1824 13.6705 13.1845 13.6787 13.1886C13.689 13.1927 13.7013 13.1968 13.7115 13.2029C13.7136 13.205 13.7177 13.205 13.7197 13.207C13.8038 13.2439 13.8735 13.2891 13.9269 13.3424C14.1135 13.529 14.1688 13.8776 14.054 14.1545C13.9884 14.3124 13.8141 14.5749 13.3711 14.5749C12.924 14.5749 12.2657 14.376 11.6874 14.0663C11.1645 14.1545 10.5861 14.3514 10.0283 14.54C9.90938 14.5811 9.78633 14.6221 9.66738 14.661C8.88809 15.9981 8.30361 16.2894 7.94268 16.2894C7.85654 16.2894 7.78271 16.2709 7.72119 16.2483C7.57969 16.195 7.45869 16.0843 7.38281 15.9407C7.36436 15.9059 7.35 15.871 7.3377 15.8341C7.30488 15.7356 7.29463 15.6372 7.31104 15.5552L7.32334 15.4998C7.32539 15.4957 7.32539 15.4916 7.32744 15.4875C7.33154 15.4731 7.33564 15.4588 7.3418 15.4444C7.3418 15.4424 7.34385 15.4403 7.34385 15.4383C7.42793 15.1942 7.62275 14.9584 7.91191 14.7287C8.16416 14.5277 8.46768 14.3452 8.85322 14.1463C9.1793 13.5721 9.62432 12.6062 9.90322 11.9438C9.68174 11.0865 9.56074 10.4139 9.69609 9.92168C9.71455 9.854 9.74736 9.79043 9.79043 9.73506C9.79453 9.73096 9.79658 9.72686 9.80068 9.72275C9.80273 9.7207 9.80273 9.71865 9.80479 9.71865C9.93398 9.56484 10.1514 9.47461 10.3811 9.48281C10.7215 9.49717 10.9901 9.71865 11.0578 10.1001C11.0927 10.2642 11.1029 10.4385 11.0968 10.6271V10.6415C11.0968 10.6518 11.0968 10.662 11.0947 10.6723C11.0804 10.945 11.0332 11.2178 10.945 11.589C10.9368 11.6218 10.9286 11.6546 10.9204 11.6956L10.8999 11.7797L10.8979 11.7858C10.8999 11.7899 10.8999 11.792 10.902 11.7961L10.9389 11.8884C10.9409 11.8945 10.945 11.9027 10.9471 11.9089C10.9614 11.9417 10.9758 11.9766 10.9901 12.0073V12.0094C11.1686 12.3949 11.3941 12.6943 11.6854 12.9343C11.7735 13.0061 11.8679 13.0717 11.9704 13.1353C12.0073 13.125 12.0422 13.1209 12.0791 13.1168Z" fill="#40AB35" fill-opacity="0.15" />
+                            <path d="M8.02881 15.6065C8.1457 15.5162 8.36104 15.3091 8.64609 14.8948C8.43486 15.0876 8.16621 15.3542 8.02881 15.6065ZM13.5844 13.9043L13.5885 13.8982H13.5926C13.6049 13.89 13.6028 13.8838 13.6008 13.8797C13.5987 13.8777 13.5085 13.689 12.6759 13.728C13.3998 14.013 13.568 13.9146 13.5844 13.9043Z" fill="black" fill-opacity="0.15" />
+                            <path d="M17.526 5.91855L13.1127 1.50527C12.9896 1.38223 12.8235 1.3125 12.6492 1.3125H3.9375C3.57451 1.3125 3.28125 1.60576 3.28125 1.96875V19.0312C3.28125 19.3942 3.57451 19.6875 3.9375 19.6875H17.0625C17.4255 19.6875 17.7188 19.3942 17.7188 19.0312V6.38408C17.7188 6.20977 17.649 6.0416 17.526 5.91855ZM12.3457 2.82598L16.2053 6.68555H12.3457V2.82598ZM16.2422 18.2109H4.75781V2.78906H10.9512V7.21875C10.9512 7.44719 11.0419 7.66627 11.2034 7.8278C11.365 7.98933 11.5841 8.08008 11.8125 8.08008H16.2422V18.2109Z" fill="#40AB35" />
+                            <path d="M10.99 12.0032C10.9736 11.9683 10.9592 11.9355 10.9449 11.9027C10.9428 11.8965 10.9387 11.8883 10.9367 11.8822L10.8998 11.7899C10.8977 11.7858 10.8977 11.7837 10.8957 11.7796L10.8977 11.7735L10.9018 11.7509C10.9838 11.4166 11.0782 11.027 11.0946 10.6353V10.6209C11.1007 10.4446 11.0905 10.2682 11.0536 10.0959C10.9756 9.65912 10.6537 9.48891 10.3789 9.4766C10.1471 9.46635 9.93179 9.55864 9.80259 9.71039C9.80054 9.71244 9.80054 9.7145 9.79849 9.7145C9.79439 9.7186 9.79029 9.7227 9.78824 9.7268C9.74517 9.78217 9.71236 9.84574 9.6939 9.91342C9.55855 10.4056 9.67955 11.0783 9.90103 11.9355C9.62213 12.5999 9.17711 13.5638 8.85103 14.138V14.1401C8.28297 14.4333 7.53648 14.8743 7.34166 15.43C7.34166 15.4321 7.33961 15.4341 7.33961 15.4362C7.3355 15.4505 7.32935 15.4649 7.32525 15.4792C7.3232 15.4833 7.3232 15.4874 7.32115 15.4915C7.31705 15.51 7.3109 15.5285 7.30884 15.5469C7.29039 15.6289 7.30064 15.7274 7.33551 15.8258C7.34781 15.8627 7.36216 15.8976 7.38062 15.9325C7.4565 16.076 7.5775 16.1868 7.719 16.2401C7.78052 16.2626 7.85435 16.2811 7.94049 16.2811C8.30142 16.2811 8.8859 15.9899 9.66519 14.6528C9.78414 14.6138 9.90718 14.5728 10.0261 14.5318C10.5839 14.3431 11.1623 14.1462 11.6852 14.058C12.2635 14.3677 12.9218 14.5666 13.3689 14.5666C13.8119 14.5666 13.9862 14.3041 14.0518 14.1462C14.1667 13.8694 14.1113 13.5207 13.9247 13.3341C13.8713 13.2808 13.8016 13.2357 13.7175 13.1988C13.7155 13.1967 13.7114 13.1967 13.7093 13.1947C13.6991 13.1906 13.6868 13.1865 13.6765 13.1803C13.6683 13.1762 13.6601 13.1742 13.6519 13.1701C13.6478 13.168 13.6458 13.168 13.6417 13.166C13.3094 13.047 12.7865 13.0286 12.0769 13.1085L11.9682 13.1208C11.8657 13.0593 11.7713 12.9916 11.6832 12.9199C11.392 12.6881 11.1684 12.3908 10.99 12.0032ZM8.02867 15.6064C8.16607 15.3541 8.43472 15.0875 8.64595 14.8948C8.3609 15.309 8.14556 15.5162 8.02867 15.6064ZM10.3973 10.0242C10.4137 10.0262 10.4281 10.0385 10.4424 10.0652C10.5491 10.2477 10.5347 10.7994 10.4527 11.0783C10.3522 10.6702 10.3378 10.0918 10.3973 10.0242ZM10.0036 13.8981C9.91744 13.933 9.83336 13.9678 9.75133 14.0006C10.0241 13.5064 10.2517 12.9465 10.4096 12.5364C10.6291 12.9158 10.9059 13.2418 11.2115 13.4838C10.7685 13.5843 10.3645 13.7504 10.0036 13.8981ZM13.6006 13.8796C13.6027 13.8837 13.6047 13.8899 13.5924 13.8981H13.5883L13.5842 13.9042C13.5678 13.9145 13.3997 14.0129 12.6757 13.7279C13.5084 13.6889 13.5986 13.8776 13.6006 13.8796Z" fill="#40AB35" />
+                          </svg>
+                        asdasd</a>
+                </div>
+                {% if advantage_status and product_advantages %}
+                <div class="section-advantages {{ advantage_type }}">
+                {% for product_advantage in product_advantages %}
+                    <div class="item-advantage">
+                        {% if product_advantage.thumb_peace != '' %}
+                        <div class="ico-advantage"><img src="{{ product_advantage.thumb_peace }}"></div>
+                        {% endif %}
+                        {% if product_advantage.name != '' %}
+                        <div class="title-advantage">{{ product_advantage.name }}</div>
+                        {% endif %}
+                        {% if product_advantage.description != '' %}
+                        <div class="description-advantage">{{ product_advantage.description }}</div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+                </div>
+                {% if advantage_type == 'horizontally' %}
+                <style>
+                    .section-advantages.horizontally {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        margin-left: -11px;
+                    }
+                    .section-advantages.horizontally .item-advantage {
+                        border-radius: 10px;
+                        border: 1px solid #CFCFCF;
+                        margin-left: 11px;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        padding-top: 22px;
+                        padding-bottom: 16px;
+                        padding-left: 16px;
+                        padding-right: 16px;
+                        max-height: 143px;
+                    }
+                    .section-advantages.horizontally .item-advantage .ico-advantage{
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        height: 40px;
+                        width: 40px;
+                        margin-bottom: 23px;
+                    }
+                    .section-advantages.horizontally .item-advantage .ico-advantage.ico-advantage img {
+                        width: 100%;
+                    }
+                    .section-advantages.horizontally .item-advantage .description-advantage {
+                        text-align: center;
+                        color: #000;
+                        font-size: 12px;
+                        font-style: normal;
+                        font-weight: 300;
+                        line-height: 16px;
+                        min-height: 48px;
+                    }
+                    @media(min-width: 1440px){
+                        .section-advantages.horizontally .item-advantage .description-advantage {
+                            max-width: 172px;
+                        }
+                    }
+                </style>
+                {% endif %}
+                {% if advantage_type == 'vertically' %}
+                    <style>
+                        .section-advantages.vertically {
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+                            width: 100%;
+                        }
+                        .section-advantages.vertically .item-advantage {
+                            border-radius: 10px;
+                            border: 1px solid #CFCFCF;
+                            display: flex;
+                            align-items: center;
+                            padding-top: 22px;
+                            padding-bottom: 16px;
+                            padding-left: 16px;
+                            padding-right: 16px;
+                            margin-bottom: 15px;
+                            width: 100%;
+                        }
+                        .section-advantages.vertically .item-advantage .ico-advantage{
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            height: 40px;
+                            width: 40px;
+                            margin-right: 23px;
+                        }
+                        .section-advantages.vertically .item-advantage .ico-advantage.ico-advantage img {
+                            width: 100%;
+                        }
+                        .section-advantages.vertically .item-advantage .description-advantage {
+                            display: flex;
+                            align-items: center;
+                            text-align: center;
+                            color: #000;
+                            font-size: 12px;
+                            font-style: normal;
+                            font-weight: 300;
+                            line-height: 16px;
+                            min-height: 48px;
+                        }
+                    </style>
+                {% endif %}
+            {% endif %}
+                </div>
+                <div class="product__complects" id="product__complects"></div>
+            </div>
+        </div>
+
+
+
+
+
+
+          <section class="main-product d-flex">
+
+        {% if column_left or column_right %}
+        {% set class = 'col-sm-6' %}
+        {% else %}
+        {% set class = 'data-product' %}
+        {% endif %}
+        <div class="{{ class }}">
+
+        </div>
+        </section>
+      </div>
+        <div class="tab-content">
+            <div class="tab-pane active" id="tab-description">
+
+
+            </div>
+            {% if review_status %}
+                <div class="tab1-pane" id="tab-review">
+                    <form class="form-horizontal" id="form-review">
+                        <div id="review"></div>
+                        <h2>{{ text_write }}</h2>
+                        {% if review_guest %}
+                            <div class="form-group required">
+                                <div class="col-sm-12">
+                                    <label class="control-label" for="input-name">{{ entry_name }}</label>
+                                    <input type="text" name="name" value="{{ customer_name }}" id="input-name" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="form-group required">
+                                <div class="col-sm-12">
+                                    <label class="control-label" for="input-review">{{ entry_review }}</label>
+                                    <textarea name="text" rows="5" id="input-review" class="form-control"></textarea>
+                                    <div class="help-block">{{ text_note }}</div>
+                                </div>
+                            </div>
+                            <div class="form-group required">
+                                <div class="col-sm-12">
+                                    <label class="control-label">{{ entry_rating }}</label>
+                                    &nbsp;&nbsp;&nbsp; {{ entry_bad }}&nbsp;
+                                    <input type="radio" name="rating" value="1" />
+                                    &nbsp;
+                                    <input type="radio" name="rating" value="2" />
+                                    &nbsp;
+                                    <input type="radio" name="rating" value="3" />
+                                    &nbsp;
+                                    <input type="radio" name="rating" value="4" />
+                                    &nbsp;
+                                    <input type="radio" name="rating" value="5" />
+                                    &nbsp;{{ entry_good }}</div>
+                            </div>
+                            {{ captcha }}
+                            <div class="buttons clearfix">
+                                <div class="pull-right">
+                                    <button type="button" id="button-review" data-loading-text="{{ text_loading }}" class="btn btn-primary">{{ button_continue }}</button>
+                                </div>
+                            </div>
+                        {% else %}
+                            {{ text_login }}
+                        {% endif %}
+                    </form>
+                </div>
+            {% endif %}</div>
+        {% if tags %}
+        <p>{{ text_tags }}
+        {% for i in 0..tags|length %}
+        {% if i < (tags|length - 1) %} <a href="{{ tags[i].href }}">{{ tags[i].tag }}</a>,
+        {% else %} <a href="{{ tags[i].href }}">{{ tags[i].tag }}</a> {% endif %}
+        {% endfor %} </p>
+        {% endif %}
+      </div>
+    {{ column_right }}</div>
+</div>
+{% if products_to_category %}
+<div class="product__carousel">
+    <div class="container">
+        <div class="product__carousel-heading">
+            <h2 class="block__title">{{ text_related_product_category }}</h2>
+            <div class="product__carousel--buttons">
+                <div class="product__carousel--prev">
+                    <svg width="26" height="27" viewBox="0 0 26 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M18 13.5H8M8 13.5L12.375 9.125M8 13.5L12.375 17.875" stroke="black" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M13 26C6.0965 26 0.5 20.4035 0.5 13.5C0.5 6.59644 6.0965 1 13 1C19.9036 1 25.5 6.59644 25.5 13.5C25.5 20.4035 19.9036 26 13 26Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </div>
+                <div class="product__carousel--next">
+                    <svg width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M8.5 13.5H18.5M18.5 13.5L14.125 9.125M18.5 13.5L14.125 17.875" stroke="black" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M13.5 26C20.4035 26 26 20.4035 26 13.5C26 6.59644 20.4035 1 13.5 1C6.59644 1 1 6.59644 1 13.5C1 20.4035 6.59644 26 13.5 26Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </div>
+            </div>
+        </div>
+        <div class="product__carousel--body swiper-container">
+            <div class="swiper-wrapper">
+                {% for product in products_to_category %}
+                    {% if not (product.quantity <= 0 and hide_out_of_stock_products) %}
+                        {{ product }}
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% if products %}
+<h3 class="title-section">{{ text_related }}</h3>
+<div class="row"> {% set i = 0 %}
+{% for product in products %}
+{% if column_left and column_right %}
+{% set class = 'col-xs-8 col-sm-6' %}
+{% elseif column_left or column_right %}
+{% set class = 'col-xs-6 col-md-4' %}
+{% else %}
+{% set class = 'col-xs-6 col-sm-2' %}
+{% endif %}
+<div class="{{ class }}">
+    {{ product }}
+</div>
+{% if column_left and column_right and (i + 1) % 2 == 0 %}
+<div class="clearfix visible-md visible-sm"></div>
+{% elseif column_left or column_right and (i + 1) % 3 == 0 %}
+<div class="clearfix visible-md"></div>
+{% elseif (i + 1) % 4 == 0 %}
+<div class="clearfix visible-md"></div>
+{% endif %}
+{% set i = i + 1 %}
+{% endfor %} </div>
+{% endif %}
+{% if products_view %}
+    <h3 class="title-section">{{ text_view_product }}</h3>
+    <div class="row"> {% set i = 0 %}
+        {% for product in products_view %}
+            {% if column_left and column_right %}
+                {% set class = 'col-xs-8 col-sm-6' %}
+            {% elseif column_left or column_right %}
+                {% set class = 'col-xs-6 col-md-4' %}
+            {% else %}
+                {% set class = 'col-xs-6 col-sm-2' %}
+            {% endif %}
+            <div class="{{ class }}">
+                {{ product }}
+            </div>
+            {% if column_left and column_right and (i + 1) % 2 == 0 %}
+                <div class="clearfix visible-md visible-sm"></div>
+            {% elseif column_left or column_right and (i + 1) % 3 == 0 %}
+                <div class="clearfix visible-md"></div>
+            {% elseif (i + 1) % 4 == 0 %}
+                <div class="clearfix visible-md"></div>
+            {% endif %}
+            {% set i = i + 1 %}
+        {% endfor %} </div>
+{% endif %}
+{{ content_bottom }}
+{% if meta_description != '' %}
+<section class="read__more">
+    <div class="container">
+      <div class="read__more--content">
+        <div class="readmore__block">
+          <div class="read__more--text">{{ meta_description }}</div>
+          <div class="read__more--button">
+            <button>
+              <svg width="40" height="27" viewBox="0 0 40 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="38.8889" height="27" rx="4" transform="matrix(-1 0 0 1 39.4445 0)" fill="#40AB35" />
+                <mask id="path-2-inside-1_10_4918" fill="white">
+                  <path d="M19.4445 3L10.9591 11.4853L19.4445 19.9707L27.9298 11.4853L19.4445 3Z" />
+                </mask>
+                <path d="M19.4445 19.9707L20.8587 21.3849L19.4445 22.7991L18.0302 21.3849L19.4445 19.9707ZM12.3733 10.0711L20.8587 18.5564L18.0302 21.3849L9.54492 12.8995L12.3733 10.0711ZM18.0302 18.5564L26.5156 10.0711L29.344 12.8995L20.8587 21.3849L18.0302 18.5564Z" fill="white" mask="url(#path-2-inside-1_10_4918)" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  {% endif %}
+<script type="text/javascript"><!--
+$('select[name=\'recurring_id\'], input[name="quantity"]').change(function(){
+	$.ajax({
+		url: 'index.php?route=product/product/getRecurringDescription',
+		type: 'post',
+		data: $('input[name=\'product_id\'], input[name=\'quantity\'], select[name=\'recurring_id\']'),
+		dataType: 'json',
+		beforeSend: function() {
+			$('#recurring-description').html('');
+		},
+		success: function(json) {
+			$('.alert-dismissible, .text-danger').remove();
+
+			if (json['success']) {
+				$('#recurring-description').html(json['success']);
+			}
+		}
+	});
+});
+//--></script> 
+<script type="text/javascript"><!--
+$('#button-cart').on('click', function() {
+	$.ajax({
+		url: 'index.php?route=checkout/cart/add',
+		type: 'post',
+		data: $('#product input[type=\'text\'], #product input[type=\'hidden\'], #product input[type=\'radio\']:checked, #product input[type=\'checkbox\']:checked, #product select, #product textarea'),
+		dataType: 'json',
+		beforeSend: function() {
+			$('#button-cart').button('loading');
+		},
+		complete: function() {
+			$('#button-cart').button('reset');
+		},
+		success: function(json) {
+		    console.log(json);
+			$('.alert-dismissible, .text-danger').remove();
+			$('.form-group').removeClass('has-error');
+
+			if (json['error']) {
+				if (json['error']['option']) {
+					for (i in json['error']['option']) {
+						var element = $('#input-option' + i.replace('_', '-'));
+
+						if (element.parent().hasClass('input-group')) {
+							element.parent().after('<div class="text-danger">' + json['error']['option'][i] + '</div>');
+						} else {
+							element.after('<div class="text-danger">' + json['error']['option'][i] + '</div>');
+						}
+					}
+				}
+
+				if (json['error']['recurring']) {
+					$('select[name=\'recurring_id\']').after('<div class="text-danger">' + json['error']['recurring'] + '</div>');
+				}
+
+				// Highlight any found errors
+				$('.text-danger').parent().addClass('has-error');
+			}
+
+			if (json['success']) {
+				$('.breadcrumb').after('<div class="alert alert-success alert-dismissible">' + json['success'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+
+				$('#cart > button').html('<span id="cart-total"><i class="fa fa-shopping-cart"></i> ' + json['total'] + '</span>');
+
+				$('html, body').animate({ scrollTop: 0 }, 'slow');
+
+				$('#cart > ul').load('index.php?route=common/cart/info ul li');
+			}
+		},
+        /*error: function(xhr, ajaxOptions, thrownError) {
+            alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+        }*/
+        error: function(xhr, ajaxOptions, thrownError) {
+            alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+        }
+	});
+});
+//--></script> 
+<script type="text/javascript"><!--
+$('.date').datetimepicker({
+	language: '{{ datepicker }}',
+	pickTime: false
+});
+
+$('.datetime').datetimepicker({
+	language: '{{ datepicker }}',
+	pickDate: true,
+	pickTime: true
+});
+
+$('.time').datetimepicker({
+	language: '{{ datepicker }}',
+	pickDate: false
+});
+
+$('button[id^=\'button-upload\']').on('click', function() {
+	var node = this;
+
+	$('#form-upload').remove();
+
+	$('body').prepend('<form enctype="multipart/form-data" id="form-upload" style="display: none;"><input type="file" name="file" /></form>');
+
+	$('#form-upload input[name=\'file\']').trigger('click');
+
+	if (typeof timer != 'undefined') {
+    	clearInterval(timer);
+	}
+
+	timer = setInterval(function() {
+		if ($('#form-upload input[name=\'file\']').val() != '') {
+			clearInterval(timer);
+
+			$.ajax({
+				url: 'index.php?route=tool/upload',
+				type: 'post',
+				dataType: 'json',
+				data: new FormData($('#form-upload')[0]),
+				cache: false,
+				contentType: false,
+				processData: false,
+				beforeSend: function() {
+					$(node).button('loading');
+				},
+				complete: function() {
+					$(node).button('reset');
+				},
+				success: function(json) {
+					$('.text-danger').remove();
+
+					if (json['error']) {
+						$(node).parent().find('input').after('<div class="text-danger">' + json['error'] + '</div>');
+					}
+
+					if (json['success']) {
+						alert(json['success']);
+
+						$(node).parent().find('input').val(json['code']);
+					}
+				},
+				error: function(xhr, ajaxOptions, thrownError) {
+					alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+				}
+			});
+		}
+	}, 500);
+});
+//--></script> 
+<script type="text/javascript"><!--
+$('#review').delegate('.pagination a', 'click', function(e) {
+    e.preventDefault();
+
+    $('#review').fadeOut('slow');
+
+    $('#review').load(this.href);
+
+    $('#review').fadeIn('slow');
+});
+
+$('#review').load('index.php?route=product/product/review&product_id={{ product_id }}');
+
+$('#button-review').on('click', function() {
+	$.ajax({
+		url: 'index.php?route=product/product/write&product_id={{ product_id }}',
+		type: 'post',
+		dataType: 'json',
+		data: $("#form-review").serialize(),
+		beforeSend: function() {
+			$('#button-review').button('loading');
+		},
+		complete: function() {
+			$('#button-review').button('reset');
+		},
+		success: function(json) {
+			$('.alert-dismissible').remove();
+
+			if (json['error']) {
+				$('#review').after('<div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> ' + json['error'] + '</div>');
+			}
+
+			if (json['success']) {
+				$('#review').after('<div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> ' + json['success'] + '</div>');
+
+				$('input[name=\'name\']').val('');
+				$('textarea[name=\'text\']').val('');
+				$('input[name=\'rating\']:checked').prop('checked', false);
+			}
+		}
+	});
+});
+
+//--></script>
+<script type="text/javascript">
+    $(document).on('click', '.number-spinner button', function() {
+        var btn = $(this),
+            oldValue = btn.closest('.number-spinner').find('input').val().trim(),
+            newVal = 1;
+
+        if (btn.attr('data-dir') == 'up') {
+            newVal = parseInt(oldValue) + 1;
+        } else {
+            if (oldValue > 1) {
+                newVal = parseInt(oldValue) - 1;
+            } else {
+                newVal = 1;
+            }
+        }
+        btn.closest('.number-spinner').find('input').val(newVal);
+    });
+</script>
+
+<!--autocalc_price_option-->
+<script type="text/javascript">
+    function price_format(price) {
+        c={{ autocalc_currency.decimals }};d='{{ autocalc_currency.decimal_point }}';t='{{ autocalc_currency.thousand_point }}';sl='{{ autocalc_currency.symbol_left }}';sr='{{ autocalc_currency.symbol_right }}';n=price*{{ autocalc_currency.value }};i=parseInt(n=Math.abs(n).toFixed(c))+''; j=((j=i.length)>3)?j%3:0;price_text=sl+(j?i.substr(0,j)+t:'')+i.substr(j).replace(/(\d{3})(?=\d)/g,"$1"+t)+(c?d+Math.abs(n-i).toFixed(c).slice(2):'')+sr;{% if autocalc_currency2 %}c={{ autocalc_currency2.decimals }};d='{{ autocalc_currency2.decimal_point }}';t='{{ autocalc_currency2.thousand_point }}';sl='{{ autocalc_currency2.symbol_left }}';sr='{{ autocalc_currency2.symbol_right }}';n=price*{{ autocalc_currency2.value }};i=parseInt(n=Math.abs(n).toFixed(c))+''; j=((j=i.length)>3)?j%3:0; price_text+='  <span class="currency2">(' + sl+(j?i.substr(0,j)+t:'')+i.substr(j).replace(/(\d{3})(?=\d)/g,"$1"+t)+(c?d+Math.abs(n-i).toFixed(c).slice(2):'')+sr + ')</span>';{% endif %}return price_text;
+    }
+    function points_format(v) {
+        return v.toFixed(0);
+    }
+    function process_discounts(price, quantity) {
+        {% for discounts in discounts_raw %}if(quantity>={{ discounts.quantity }}){price={{ discounts.price }};}{% endfor %}return price;
+    }
+    function calculate_tax(price) {
+        var p=price;{% for tax_rate in tax_rates %}{% if tax_rate.type == 'F' %}p+={{ tax_rate.rate }};{% endif %}{% if tax_rate.type == 'P' %}p+=price*{{ tax_rate.rate / 100.0 }};{% endif %}{% endfor %}return p;
+    }
+    function autocalc_aap(s,p,ff){$(s).each(function(){var $t=$(this);$({value:$t.data('value')||0}).animate({value:p},{easing:'swing',duration:500,step:function(value){$t.html(ff(value));$t.data('value',value);}});});}
+    function recalculateprice() {
+
+        var main_price = {{ apo_price_value + 0.0 }};
+        var special = {{ apo_special_value + 0.0 }};
+        var input_quantity = Number($('#product input[name="quantity"]').val()) || 1;
+        var discount_coefficient = 1;
+        var option_price = 0;
+        var discount_quantity = 0;
+
+        console.log('input_quantity '+input_quantity);
+
+        $('#product .owq-option input[type="checkbox"]').each(function() {
+            $qty = $(this).closest('tr').find('.owq-input');
+            if ($(this).data('split')=='/') discount_quantity += Number($qty.val()) || 0;
+        });
+        if (discount_quantity == 0) discount_quantity = input_quantity;
+
+        {% if special %}
+        special_coefficient = {{ apo_price_value / apo_special_value }};
+        {% else %}
+        {% if autocalc_option_discount %}
+        if (main_price) discount_coefficient = process_discounts(main_price, discount_quantity) / main_price;
+        {% else %}
+        main_price = process_discounts(main_price, discount_quantity);
+        {% endif %}
+        {% endif %}
+
+        {% if points %}
+        var points = {{ apo_points_value }};
+        $('#product input:checked,#product option:selected').each(function() {
+            if ($(this).data('points')) points += Number($(this).data('points'));
+        });
+        autocalc_aap('.autocalc-product-points', points, points_format);
+        {% endif %}
+
+        $('#product input:checked,#product option:selected').each(function() {
+            if ($(this).data('prefix') == '=') {
+                option_price += Number($(this).data('price'));
+                main_price = 0;
+                special = 0;
+            }
+        });
+
+        $('#product input:checked,#product option:selected').each(function() {
+            if ($(this).data('prefix') == '+') {
+                option_price += Number($(this).data('price'));
+            }
+            if ($(this).data('prefix') == '-') {
+                option_price -= Number($(this).data('price'));
+            }
+            if ($(this).data('prefix') == '%') {
+                pcnt = 1.0 + (Number($(this).data('price')) / 100.0);
+                option_price *= pcnt;
+                main_price *= pcnt;
+                special *= pcnt;
+            }
+            if ($(this).data('prefix') == '*') {
+                option_price *= Number($(this).data('price'));
+                main_price *= Number($(this).data('price'));
+                special *= Number($(this).data('price'));
+            }
+            if ($(this).data('prefix') == '/') {
+                option_price /= Number($(this).data('price'));
+                main_price /= Number($(this).data('price'));
+                special /= Number($(this).data('price'));
+            }
+        });
+
+        special += option_price;
+        main_price += option_price;
+
+        {% if special %}
+        {% if autocalc_option_special %}
+        special = main_price / special_coefficient;
+        {% else %}
+        main_price = special * special_coefficient;
+        {% endif %}
+        tax = special;
+        {% else %}
+        {% if autocalc_option_discount %}
+        main_price *= discount_coefficient;
+        {% endif %}
+        tax = main_price;
+        {% endif %}
+
+        {% if tax %}
+        main_price = calculate_tax(main_price);
+        {% if special %}
+        special = calculate_tax(special);
+        {% endif %}
+        {% endif %}
+
+        {% if not autocalc_not_mul_qty %}
+        if (input_quantity > 0) {
+            main_price *= input_quantity;
+            special *= input_quantity;
+            {% if tax %}tax *= input_quantity;{% endif %}
+        }
+        {% endif %}
+
+        autocalc_aap('.autocalc-product-price', main_price, price_format);
+        {% if special %}autocalc_aap('.autocalc-product-special', special, price_format);{% endif %}
+        {% if tax %}autocalc_aap('.autocalc-product-tax', tax, price_format);{% endif %}
+    }
+
+    $(document).ready(function() {
+        $('#product input[type="checkbox"],#product input[type="radio"],#product select').each(function(){if($(this).data('autocalc'))return;$(this).data('autocalc',1).on('change',function(){recalculateprice();});});
+        $('#product input[name="quantity"]').each(function(){if($(this).data('autocalc'))return;var $q=$(this);$q.data('autocalc',1).data('val',$q.val());(function(){if($q.val()!=$q.data('val')){$q.data('val',$q.val());recalculateprice();}setTimeout(arguments.callee,250);})();});
+
+        {% if autocalc_select_first %}
+        $('#product select[name^="option"] option[value=""]').remove();
+        last_name='';$('#product input[type="radio"][name^="option"]').each(function(){if($(this).attr('name')!=last_name)$(this).prop('checked',true);last_name=$(this).attr('name');});
+        {% endif %}
+
+        recalculateprice();
+    });
+</script>
+<script>
+var galleryThumbs = new Swiper(".product__carousel--thumbs", {
+  centeredSlides: false,
+  centeredSlidesBounds: false,
+  slidesPerView: 4,
+  spaceBetween:10,
+  watchOverflow: true,
+  watchSlidesVisibility: true,
+  watchSlidesProgress: true,
+  direction: 'vertical',
+});
+
+var galleryMain = new Swiper(".product__carousel--slides", {
+  watchOverflow: true,
+  watchSlidesVisibility: true,
+  watchSlidesProgress: true,
+  preventInteractionOnTransition: true,
+  thumbs: {
+        swiper: galleryThumbs
+      },
+  navigation: {
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev',
+  },
+  breakpoints: {
+    0: {
+      thumbs: {
+        swiper: false
+      }
+    },
+    620: {
+      thumbs: {
+        swiper: galleryThumbs
+      }
+    }
+  }
+});
+
+galleryMain.on('slideChangeTransitionStart', function() {
+  galleryThumbs.slideTo(galleryMain.activeIndex);
+});
+
+galleryThumbs.on('transitionStart', function(){
+  galleryMain.slideTo(galleryThumbs.activeIndex);
+});
+
+var $page = $('html, body');
+$('.product__navigation a[href*="#"]').click(function() {
+    $page.animate({
+        scrollTop: $($.attr(this, 'href')).offset().top - 150
+    }, 1400);
+    return false;
+});
+</script>
+{{ footer }} 

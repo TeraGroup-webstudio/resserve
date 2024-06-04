@@ -1,0 +1,17 @@
+/*
+##=================================================##
+## @author    : OCdevWizard                        ##
+## @contact   : ocdevwizard@gmail.com              ##
+## @support   : http://help.ocdevwizard.com        ##
+## @copyright : (c) OCdevWizard. Price Alert, 2018 ##
+##=================================================##
+*/
+div[id^="ocdw_price_alert-block"]{direction:rtl}
+div[id^="ocdw_price_alert-block"] .inner-header .modal-close{left:15px!important;right:initial;padding-left:unset}
+div[id^="ocdw_price_alert-block"] .inner-header{text-align:right}
+div[id^="ocdw_price_alert-block"] .inner-center .inner-fields .inner-field img{right:5px;left:unset}
+div[id^="ocdw_price_alert-block"] .inner-center .with-icon input[type=text],div[id^="ocdw_price_alert-block"] .inner-center .with-icon input[type=email],div[id^="ocdw_price_alert-block"] .inner-center .with-icon input[type=tel],div[id^="ocdw_price_alert-block"] .inner-center .with-icon select{padding-right:33px;padding-left:10px}
+div[id^="ocdw_price_alert-block"] .inner-center .inner-fields .inner-field .field-checkbox label:before{margin-left:10px;margin-right:unset}
+div[id^="ocdw_price_alert-block"] .inner-center .inner-fields .inner-field .field-checkbox input:checked + label:after{right:3px;left:unset}
+div[id^="ocdw_price_alert-block"] .inner-center .inner-fields{text-align:right}
+div[id^="ocdw_price_alert-block"] .inner-center .additional-information{text-align:right}

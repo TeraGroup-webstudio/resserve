@@ -1,0 +1,561 @@
+{{ header }}{{ column_left }} 
+<div id="content">
+  <div class="page-header">
+    <div class="container-fluid">
+      <div class="pull-right">
+        <button type="submit" form="form-technics_news" data-toggle="tooltip" title="{{ button_save }}"
+          class="btn btn-primary"><i class="fa fa-save"></i></button>
+        <a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default"><i
+            class="fa fa-reply"></i></a></div>
+      <h1>{{ heading_title }}</h1>
+      <ul class="breadcrumb">
+        {% for _key,breadcrumb in breadcrumbs %} 
+        <li><a href="{{ breadcrumb['href'] }}">{{ breadcrumb['text'] }}</a></li>
+        {% endfor %} 
+      </ul>
+    </div>
+  </div>
+  <div class="container-fluid">
+    {% if (error_warning) %} 
+    <div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> {{ error_warning }} 
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+    {% endif %} 
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-pencil"></i> {{ text_edit }}</h3>
+      </div>
+      <div class="panel-body">
+        <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-technics_news"
+          class="form-horizontal">
+          <ul class="nav nav-tabs">
+            <li class="active"><a href="#main-settings" data-toggle="tab">{{ text_main_settings }}</a></li>
+            <li><a href="#thumb-settings" data-toggle="tab">{{ text_media_settings }}</a></li>
+            <li><a href="#carousel-settings" data-toggle="tab">{{ text_carousel_settings }}</a></li>
+            <li><a href="#css-settings" data-toggle="tab">{{ text_style_settings }}</a></li>
+            <li><a href="#compatibility-settings" data-toggle="tab">{{ text_compatibility_settings }}</a></li>
+            <li><a href="#plagin-settings" data-toggle="tab">{{ text_api_settings }}</a></li>
+          </ul>
+          <div class="tab-content">
+            <div class="tab-pane active" id="main-settings">
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-name">{{ entry_name }}</label>
+                <div class="col-sm-10">
+                  <input type="text" name="name" value="{{ name }}" placeholder="{{ entry_name }}" id="input-name"
+                    class="form-control" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-header">{{ text_carousel_title }}</label>
+                <div class="col-sm-10">
+                  {% for _key,language in languages %} 
+                  <div class="input-group"><span class="input-group-addon"><img
+                        src="language/{{ language['code'] }}/{{ language['code'] }}.png"
+                        title="{{ language['name'] }}" /></span>
+                    <input type="text" name="title[{{ language['language_id'] }}]"
+                      value="{{ title[language['language_id']] is defined ? title[language['language_id']] : '' }}"
+                      placeholder="{{ entry_title }}" id="input-header" class="form-control" />
+                  </div>
+                  {% endfor %} 
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-limit">{{ entry_limit }}</label>
+                <div class="col-sm-10">
+                  <input type="text" name="limit" value="{{ limit }}" placeholder="{{ entry_limit }}" id="input-limit"
+                    class="form-control" />
+                </div>
+              </div>
+
+                <div class="form-group">
+                  <label class="col-sm-2 control-label"><span data-toggle="tooltip"
+                    title="Если карусель отзывов расположена в макете категории, будут показаны только отзывы из той категории в которой находится пользователь.">Отзывы из категории</span></label>
+                  <div class="col-sm-10">
+                    <label class="fresh-check">
+                      <input type="checkbox" name="category" value="1"
+                        {{ category ? 'checked="checked"' : '' }} /><span></span>
+                    </label>
+                  </div>
+                </div>
+
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{ text_sort_type }}</label>
+                <div class="col-sm-10">
+                  <select name="type" class="form-control">
+                    {% for key,value in review_types %} 
+                    {% if (key == type) %} 
+                    <option value="{{ key }}" selected="selected">{{ value }}</option>
+                    {% else %} 
+                    <option value="{{ key }}">{{ value }}</option>
+                    {% endif %} 
+                    {% endfor %} 
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{ text_selection_type }}</label>
+                <div class="col-sm-10">
+                  <select name="media" class="form-control">
+                    {% for key,value in media_types %} 
+                    {% if (key == media) %} 
+                    <option value="{{ key }}" selected="selected">{{ value }}</option>
+                    {% else %} 
+                    <option value="{{ key }}">{{ value }}</option>
+                    {% endif %} 
+                    {% endfor %} 
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-status">{{ entry_status }}</label>
+                <div class="col-sm-10">
+                  <select name="status" id="input-status" class="form-control">
+                    {% if (status) %} 
+                    <option value="1" selected="selected">{{ text_enabled }}</option>
+                    <option value="0">{{ text_disabled }}</option>
+                    {% else %} 
+                    <option value="1">{{ text_enabled }}</option>
+                    <option value="0" selected="selected">{{ text_disabled }}</option>
+                    {% endif %} 
+                  </select>
+                </div>
+              </div>
+
+
+            </div>
+            <div class="tab-pane" id="thumb-settings">
+              <div class="settings-block">
+                <h2 class="text-center">{{ text_thumb_reviews }}</h2>
+                <br>
+                <h3>{{ text_thumb_product }}</h3>
+                <div class="form-group">
+                  <label class="col-sm-6 col-lg-4 control-label" for="all-thumb-width">{{ text_thumb_size }}</label>
+                  <div class="col-sm-6 col-lg-4 ">
+                    <div class="row">
+                      <div class="col-sm-6">
+                        <input type="text" name="thumb_settings[product_thumb_width]"
+                          value="{{ thumb_settings['product_thumb_width'] is defined ? thumb_settings['product_thumb_width'] : 300 }}"
+                          placeholder="{{ entry_width }}" id="all-thumb-width" class="form-control">
+                      </div>
+                      <div class="col-sm-6">
+                        <input type="text" name="thumb_settings[product_thumb_height]"
+                          value="{{ thumb_settings['product_thumb_height'] is defined ? thumb_settings['product_thumb_height'] : 300 }}"
+                          placeholder="{{ entry_height }}" class="form-control">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-6 col-lg-4 col-xs-8 control-label"
+                    for="all-border-radius-photo">{{ text_thumb_radius }}</label>
+                  <div class="col-sm-2 col-lg-1 col-xs-4">
+                    <input type="text" name="thumb_settings[border_radius_photo]"
+                      value="{{ thumb_settings['border_radius_photo'] is defined ? thumb_settings['border_radius_photo'] : 2 }}"
+                      id="all-border-radius-photo" class="form-control">
+                  </div>
+                </div>
+                <hr>
+                <br>
+                <h3>{{ text_thumb_photo }}</h3>
+                <div class="form-group">
+                  <label class="col-sm-6 col-lg-4 col-xs-8 control-label"
+                    for="input-limit">{{ text_photo_limit }}</label>
+                  <div class="col-sm-2 col-lg-1 col-xs-4">
+                    <input type="text" name="thumb_settings[thumb_limit]"
+                      value="{{ thumb_settings['thumb_limit'] is defined ? thumb_settings['thumb_limit'] : 4 }}" placeholder="{{ entry_limit }}" id="input-limit"
+                      class="form-control" />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-6 col-lg-4 control-label" for="all-thumb-width">{{ text_thumb_size }}</label>
+                  <div class="col-sm-6 col-lg-4 ">
+                    <div class="row">
+                      <div class="col-sm-6">
+                        <input type="text" name="thumb_settings[thumb_width]"
+                          value="{{ thumb_settings['thumb_width'] is defined ? thumb_settings['thumb_width'] : 50 }}"
+                          placeholder="{{ entry_width }}" id="all-thumb-width" class="form-control">
+                      </div>
+                      <div class="col-sm-6">
+                        <input type="text" name="thumb_settings[thumb_height]"
+                          value="{{ thumb_settings['thumb_height'] is defined ? thumb_settings['thumb_height'] : 50 }}"
+                          placeholder="{{ entry_height }}" class="form-control">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-6 col-lg-4 col-xs-8 control-label"
+                    for="all-border-radius-photo">{{ text_thumb_radius }}</label>
+                  <div class="col-sm-2 col-lg-1 col-xs-4">
+                    <input type="text" name="thumb_settings[border_radius_photo]"
+                      value="{{ thumb_settings['border_radius_photo'] is defined ? thumb_settings['border_radius_photo'] : 2 }}"
+                      id="all-border-radius-photo" class="form-control">
+                  </div>
+                </div>
+                <hr>
+                <br>
+                <h3>{{ text_thumb_video }}</h3>
+                <div class="form-group">
+                  <label class="col-sm-6 col-lg-4 col-xs-8 control-label"
+                    for="input-limit">{{ text_video_limit }}</label>
+                  <div class="col-sm-2 col-lg-1 col-xs-4">
+                    <input type="text" name="thumb_settings[video_thumb_limit]"
+                      value="{{ thumb_settings['video_thumb_limit'] is defined ? thumb_settings['video_thumb_limit'] : 2 }}" placeholder="{{ entry_limit }}"
+                      id="input-limit" class="form-control" />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-6 col-lg-4 control-label"
+                    for="all-video-thumb-width">{{ text_thumb_size }}</label>
+                  <div class="col-sm-6 col-lg-4">
+                    <div class="row">
+                      <div class="col-sm-6">
+                        <input type="text" name="thumb_settings[video_thumb_width]"
+                          value="{{ thumb_settings['video_thumb_width'] is defined ? thumb_settings['video_thumb_width'] : 90 }}"
+                          placeholder="{{ entry_width }}" id="all-video-thumb-width" class="form-control">
+                      </div>
+                      <div class="col-sm-6">
+                        <input type="text" name="thumb_settings[video_thumb_height]"
+                          value="{{ thumb_settings['video_thumb_height'] is defined ? thumb_settings['video_thumb_height'] : 50 }}"
+                          placeholder="{{ entry_height }}" class="form-control">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-6 col-lg-4 col-xs-8 control-label"
+                    for="border-radius-video">{{ text_thumb_radius }}</label>
+                  <div class="col-sm-2 col-lg-1 col-xs-4">
+                    <input type="text" name="thumb_settings[border_radius_video]"
+                      value="{{ thumb_settings['border_radius_video'] is defined ? thumb_settings['border_radius_video'] : 2 }}"
+                      id="all-border-radius-video" class="form-control">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane" id="carousel-settings">
+              <div class="settings-block">
+                <h4>{{ text_slide_count }}</h4>
+                <div class="row">
+                  <div class="form-group col-lg-4 col-md-6 col-xs-12">
+                    <label class="col-sm-6 control-label">1200px+</label>
+                    <div class="col-sm-6">
+                      <input type="text" name="carousel[count_1200]"
+                        value="{{ carousel['count_1200'] is defined ? carousel['count_1200'] : 4 }}"
+                        class="form-control">
+                    </div>
+                  </div>
+                  <div class="form-group col-lg-4 col-md-6 col-xs-12">
+                    <label class="col-sm-6 control-label">769px - 1199px</label>
+                    <div class="col-sm-6">
+                      <input type="text" name="carousel[count_769]"
+                        value="{{ carousel['count_769'] is defined ? carousel['count_769'] : 3 }}"
+                        class="form-control">
+                    </div>
+                  </div>
+                  <div class="form-group col-lg-4 col-md-6 col-xs-12">
+                    <label class="col-sm-6 control-label">481px - 768px</label>
+                    <div class="col-sm-6">
+                      <input type="text" name="carousel[count_481]"
+                        value="{{ carousel['count_481'] is defined ? carousel['count_481'] : 2 }}"
+                        class="form-control">
+                    </div>
+                  </div>
+                  <div class="form-group col-lg-4 col-md-6 col-xs-12">
+                    <label class="col-sm-6 control-label">480px-</label>
+                    <div class="col-sm-6">
+                      <input type="text" name="carousel[count_0]"
+                        value="{{ carousel['count_0'] is defined ? carousel['count_0'] : 1 }}" class="form-control">
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-6 control-label"><span data-toggle="tooltip"
+                    title="Добавляет бесконечную прокрутку карусели - после последнего слайда возвращает к первому. (При недостаточном количестве элементов карусели, будут создаваться дубли существующих)">Бесконечная прокрутка</span></label>
+                  <div class="col-sm-6">
+                    <label class="fresh-check">
+                      <input type="checkbox" name="carousel[loop]" value="1"
+                        {{ carousel['loop'] is defined ? 'checked="checked"' : '' }} /><span></span>
+                    </label>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-6 control-label">{{ text_navigation_arrows }}</label>
+                  <div class="col-sm-6">
+                    <label class="fresh-check">
+                      <input type="checkbox" name="carousel[arrows]" value="1"
+                        {{ carousel['arrows'] is defined ? 'checked="checked"' : '' }} /><span></span>
+                    </label>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-6 control-label">{{ text_carousel_pagination }}</label>
+                  <div class="col-sm-6">
+                    <label class="fresh-check">
+                      <input type="checkbox" name="carousel[pagination]" value="1"
+                        {{ carousel['pagination'] is defined ? 'checked="checked"' : '' }} /><span></span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <div class="tab-pane" id="css-settings">
+              <h2>{{ text_card_style }}</h2>
+
+              <div class="form-group">
+                <label class="col-sm-6 col-lg-4 control-label">{{ text_castom_style }}</label>
+                <div class="col-sm-6">
+                  <label class="fresh-check">
+                    <input type="checkbox" name="style[status]" value="1"
+                      {{ style['status'] is defined ? 'checked="checked"' : '' }} /><span></span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-6 col-lg-4 control-label">{{ text_card_shadow }}</label>
+                <div class="col-sm-6">
+                  <label class="fresh-check">
+                    <input type="checkbox" name="style[shadow]" value="1"
+                      {{ style['shadow'] is defined ? 'checked="checked"' : '' }} /><span></span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-6 col-lg-4 col-xs-8 control-label">{{ text_card_margin }}</label>
+                <div class="col-sm-2 col-lg-1 col-xs-4">
+                  <input type="text" name="style[box][margin]"
+                    value="{{ style['box']['margin'] is defined ? style['box']['margin'] : '10' }}"
+                    class="form-control">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-6 col-lg-4 col-xs-8 control-label"><span data-toggle="tooltip"
+                    title="{{ text_border_radius_help }}">{{ text_card_border_radius }}</span></label>
+                <div class="col-sm-2 col-lg-1 col-xs-4">
+                  <input type="text" name="style[box][border-radius]"
+                    value="{{ style['box']['border-radius'] is defined ? style['box']['border-radius'] : 4 }}"
+                    class="form-control">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-6 col-lg-4 col-xs-8 control-label">{{ text_card_border }}</label>
+                <div class="col-sm-2 col-lg-1 col-xs-4">
+                  <input type="text" name="style[box][border]"
+                    value="{{ style['box']['border'] is defined ? style['box']['border'] : 0 }}" class="form-control">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-6 col-lg-4 col-xs-8 control-label">{{ text_font_size }}</label>
+                <div class="col-sm-2 col-lg-1 col-xs-4">
+                  <input type="text" name="style[box][font-size]"
+                    value="{{ style['box']['font-size'] is defined ? style['box']['font-size'] : 12 }}" class="form-control">
+                </div>
+              </div>
+
+
+              <div class="form-group">
+                <div class="col-lg-3 col-sm-6 col-xs-12">
+                  <div class="input-group">
+                    <span class="input-group-addon">{{ text_text_color }}</span>
+                    <input class="form-control jscolor {required:false}" name="style[box][color]"
+                      value="{{ style['box']['color'] is defined ? style['box']['color'] : '#777777' }}">
+                  </div>
+                </div>
+
+                <div class="col-lg-3 col-sm-6 col-xs-12">
+                  <div class="input-group">
+                    <span class="input-group-addon">{{ text_link_color }}</span>
+                    <input class="form-control jscolor {required:false}" name="style[box][link-color]"
+                      value="{{ style['box']['link-color'] is defined ? style['box']['link-color'] : '#337ab7' }}">
+                  </div>
+                </div>
+
+                <div class="col-lg-3 col-sm-6 col-xs-12">
+                  <div class="input-group">
+                    <span class="input-group-addon">{{ text_link_hover_color }}</span>
+                    <input class="form-control jscolor {required:false}" name="style[box][link-hover-color]"
+                      value="{{ style['box']['link-hover-color'] is defined ? style['box']['link-hover-color'] : '#23527c' }}">
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="col-lg-3 col-sm-6 col-xs-12">
+                  <div class="input-group">
+                    <span class="input-group-addon">{{ text_background_color }}</span>
+                    <input class="form-control jscolor {required:false}" name="style[box][background]"
+                      value="{{ style['box']['background'] is defined ? style['box']['background'] : '#fbfbfb' }}">
+                  </div>
+                </div>
+
+                <div class="col-lg-3 col-sm-6 col-xs-12">
+                  <div class="input-group">
+                    <span class="input-group-addon">{{ text_border_color }}</span>
+                    <input class="form-control jscolor {required:false}" name="style[box][border-color]"
+                      value="{{ style['box']['border-color'] is defined ? style['box']['border-color'] : '#fbfbfb' }}">
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="col-lg-3 col-sm-6 col-xs-12">
+                  <div class="input-group">
+                    <span class="input-group-addon">{{ text_card_footer_background }}</span>
+                    <input class="form-control jscolor {required:false}" name="style[box_footer][background]"
+                      value="{{ style['box_footer']['background'] is defined ? style['box_footer']['background'] : '#f6f6f6' }}">
+                  </div>
+                </div>
+                <div class="col-lg-3 col-sm-6 col-xs-12">
+                  <div class="input-group">
+                    <span class="input-group-addon">{{ text_card_footer_text }}</span>
+                    <input class="form-control jscolor {required:false}" name="style[box_footer][color]"
+                      value="{{ style['box_footer']['color'] is defined ? style['box_footer']['color'] : '#777777' }}">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane" id="compatibility-settings">
+              {% set carousel_types = {'1' : 'Swiper', '2' : 'Owl-carousel', '3' : 'Owl-carousel 2', '4' : 'Slick', '0' : text_disabled} %} 
+              {% set gallery_types = {'1' : 'Magnific Popup', '2' : 'Fancybox', '0' : text_disabled} %} 
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{ text_carousel_type }}</label>
+                <div class="col-sm-10">
+                  <select name="carousel_type" class="form-control">
+                    {% for key,name in carousel_types %} 
+                    <option value="{{ key }}" {{ carousel_type == key ? 'selected' : '' }}>{{ name }}</option>
+                    {% endfor %} 
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{ text_gallery_type }}</label>
+                <div class="col-sm-10">
+                  <select name="gallery_type" class="form-control">
+                    {% for key,name in gallery_types %} 
+                    <option value="{{ key }}" {{ gallery_type == key ? 'selected' : '' }}>{{ name }}</option>
+                    {% endfor %} 
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-6 col-lg-4 col-xs-12 control-label"><span data-toggle="tooltip"
+                    title="{{ text_box_class_help }}">{{ text_box_class }}</span></label>
+                <div class="col-sm-6 col-lg-4 col-xs-12">
+                  <input type="text" name="box_classname" value="{{ box_classname }}" class="form-control">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-6 col-lg-4 col-xs-12 control-label"><span data-toggle="tooltip"
+                    title="{{ text_title_class_help }}">{{ text_title_class }}</span></label>
+                <div class="col-sm-6 col-lg-4 col-xs-12">
+                  <input type="text" name="title_classname" value="{{ title_classname }}" class="form-control">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-6 col-lg-4 col-xs-12 control-label"><span data-toggle="tooltip"
+                    title="{{ text_card_class_help }}">{{ text_card_class }}</span></label>
+                <div class="col-sm-6 col-lg-4 col-xs-12">
+                  <input type="text" name="card_classname" value="{{ card_classname }}" class="form-control">
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane" id="plagin-settings">
+
+              <div class="clarification-for-users">{{ api_notifications }}</div>
+
+              <div class="form-group">
+                <label class="col-sm-6 control-label">Ex_carousel.css</label>
+                <div class="col-sm-6">
+                  <label class="fresh-check">
+                    <input type="checkbox" name="plagin[ex_css]" value="1"
+                      {{ plagin['ex_css'] is defined ? 'checked="checked"' : '' }} /><span></span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-6 control-label">Ex_carousel.js</label>
+                <div class="col-sm-6">
+                  <label class="fresh-check">
+                    <input type="checkbox" name="plagin[ex_js]" value="1"
+                      {{ plagin['ex_js'] is defined ? 'checked="checked"' : '' }} /><span></span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-6 control-label">MagnificPopup</label>
+                <div class="col-sm-6">
+                  <label class="fresh-check">
+                    <input type="checkbox" name="plagin[magnific]" value="1"
+                      {{ plagin['magnific'] is defined ? 'checked="checked"' : '' }} /><span></span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-6 control-label">Fancybox</label>
+                <div class="col-sm-6">
+                  <label class="fresh-check">
+                    <input type="checkbox" name="plagin[fancybox]" value="1"
+                      {{ plagin['fancybox'] is defined ? 'checked="checked"' : '' }} /><span></span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-6 control-label">Owl-carousel</label>
+                <div class="col-sm-6">
+                  <label class="fresh-check">
+                    <input type="checkbox" name="plagin[carousel]" value="1"
+                      {{ plagin['carousel'] is defined ? 'checked="checked"' : '' }} /><span></span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-6 control-label">Owl-carousel 2</label>
+                <div class="col-sm-6">
+                  <label class="fresh-check">
+                    <input type="checkbox" name="plagin[carousel2]" value="1"
+                      {{ plagin['carousel2'] is defined ? 'checked="checked"' : '' }} /><span></span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-6 control-label">Slick carousel</label>
+                <div class="col-sm-6">
+                  <label class="fresh-check">
+                    <input type="checkbox" name="plagin[slick]" value="1"
+                      {{ plagin['slick'] is defined ? 'checked="checked"' : '' }} /><span></span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-6 control-label">Swiper carousel</label>
+                <div class="col-sm-6">
+                  <label class="fresh-check">
+                    <input type="checkbox" name="plagin[swiper]" value="1"
+                      {{ plagin['swiper'] is defined ? 'checked="checked"' : '' }} /><span></span>
+                  </label>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{{ footer }}

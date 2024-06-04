@@ -1,0 +1,12 @@
+<div class="section-hit">
+<h3>{{ heading_title }}</h3>
+  <div class="product__carousel--body swiper-container">
+    <div class="swiper-wrapper">
+      {% for product in products %}
+        {% if not (product.quantity <= 0 and hide_out_of_stock_products) %}
+          {{ product }}
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</div>

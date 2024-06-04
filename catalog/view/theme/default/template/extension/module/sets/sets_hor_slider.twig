@@ -1,0 +1,101 @@
+
+        {% for iset,set in sets %} 
+            <div class="swiper-slide set seth">
+                {% if set.name %}
+                    <h3>{{ set.name }}</h3>
+                {% endif %}
+                {% if set.enddate %}
+                    <div class='timer'></div>
+                    <input type='hidden' name='sp_timer' value="{{ set.enddate }}">
+                {% endif %}
+
+                <div class='set_table'>
+                    {% set i = 0 %}
+                    {% for key, product in set.products %}
+                        {% if i %}
+                            <div class='cell ao plus'><span>+</span></div>
+                        {% endif %}
+                        {% set i = i + 1 %}
+
+                        <div class="cell set-product {% if product.stock_quantity <= 0 %} out-stock {% endif %}" data-discount="{{ product.discount }}" data-price="{{ product.cprice }}" data-optiontype="{{ product.option_type }}" data-productid="{{ product.product_id }}">
+
+                            <input type='hidden' name='product_id' value="{{ product.product_id }}">
+                            <input type='hidden' name='quantity' value="{{ product.quantity }}">
+
+                            {% if product.discount  and  sets_show_disc_prec  and  product.discount != '0%' %}
+                                <div class='disc'>{{ product.discount_currency }}</div>
+                            {% endif %}
+                        
+                            {% if product.thumb %}
+                                <div class="image">
+                                    <a href="{{ product.href }}" {% if sets_product_link_newtab %} target="_blank" {% endif %}>
+                                        <img width="200" height="200" src="{{ product.thumb }}" alt="{{ product.product_name }}" title="{{ product.product_name }}" class="img-responsive"/>
+                                    </a>
+                                </div>
+                            {% endif %}
+                            
+                            <div class="caption">
+                                <h4>
+                                    <a href="{{ product.href }}" {% if sets_product_link_newtab %} target="_blank" {% endif %}>
+                                        {{ product.product_name }}{{ product.product_name }}{{ product.product_name }}
+                                            
+                                    </a>
+                                </h4>
+                                
+                                <p class="price">
+                                    {% if product.special %}
+                                    <span class='price-old'>{{ product.price }}</span>
+                                    <span class='price-new'>{{ product.special }}</span>
+                                    {% else %}
+                                        {{ product.price }}
+                                    {% endif %}
+                                </p>
+
+                                {% if product.quantity > 1 and sets_show_qty %}
+                                    <div class='quantity'>x{{ product.quantity }}</div>
+                                {% endif %}
+
+                                 {% if product.option_type == 'modal' %}
+                                    {{ product.html_options_button }}
+                                {% endif %}
+                            </div>
+                    
+                        </div>
+                    {% endfor %}
+                    <div class='cell ao'><span>=</span></div>
+                    
+                    <div class='cell set-total'>
+                        {% if set.ceconomy %}
+                        <div class='economy'>
+                            <span class='economy_text'>{{ text_economy }}</span>
+                            <span class='economy_val'>{{ set.economy }}</span>
+                        </div>
+                        {% endif %}
+
+                        <div class='new_summ'>
+                            {{ set.new_total }}
+                            <input type='hidden' name='sp_set_quantity' class="form-control " value="1">
+                            <button class='add-set-btn' data-success-text="<i class='fa fa-check'></i>" data-loading-text="<i class='fa fa-spinner fa-spin '></i>">
+                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <g clip-path="url(#clip0_34_25511)">
+                                      <mask id="mask0_34_25511" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="14" height="10">
+                                        <path d="M0 0.509033H13.9309V9.3333H0V0.509033Z" fill="white" />
+                                      </mask>
+                                      <g mask="url(#mask0_34_25511)">
+                                        <path d="M13.5035 2.03004C13.4087 2.02707 13.3135 2.02943 13.2187 2.02943C9.97894 2.02943 6.73881 2.02943 3.49901 2.02943C3.37512 2.02943 3.25117 2.02943 3.11971 2.02943C3.01 1.61489 2.90461 1.22917 2.80644 0.841429C2.76087 0.661433 2.67425 0.51776 2.47433 0.516072C1.75671 0.509186 1.03902 0.509186 0.32167 0.515735C0.126078 0.51776 0.00414513 0.636317 0.00151202 0.835825C-0.00118859 1.03365 0.11217 1.14822 0.310463 1.16672C0.404579 1.17563 0.500114 1.17198 0.595243 1.17198C1.12193 1.17232 1.64828 1.17232 2.1932 1.17232C2.22723 1.28068 2.252 1.35002 2.2705 1.42139C2.90623 3.88914 3.54162 6.35697 4.17572 8.82513C4.29664 9.29639 4.32608 9.32312 4.82333 9.32312C7.02892 9.32346 9.23479 9.3238 11.4404 9.32346C11.8254 9.32346 11.981 9.23069 11.9896 8.99945C11.9985 8.75673 11.8343 8.65236 11.4325 8.65202C9.554 8.65134 7.67552 8.65168 5.79677 8.65168C5.54331 8.65168 5.28959 8.66262 5.03742 8.64479C4.95154 8.63885 4.81739 8.57775 4.79659 8.51267C4.70106 8.21411 4.638 7.9053 4.55009 7.54693C4.83622 7.54693 5.08671 7.54693 5.33746 7.54693C7.47891 7.54693 9.6201 7.54726 11.7616 7.54659C12.17 7.54659 12.2155 7.51256 12.3484 7.11955C12.5308 6.58058 12.7115 6.04093 12.8932 5.50155C13.223 4.52264 13.5558 3.54468 13.8822 2.56476C13.9979 2.21537 13.8703 2.04192 13.5035 2.03004ZM12.6663 4.08703C12.3804 4.93516 12.0887 5.7816 11.8111 6.63243C11.752 6.81344 11.6644 6.87879 11.4734 6.8765C10.1881 6.86097 8.90241 6.85206 7.61705 6.84942C7.00941 6.84807 6.40177 6.86759 5.79413 6.87285C5.37385 6.8765 4.95289 6.87913 4.53288 6.86495C4.46286 6.86259 4.35153 6.78204 4.33465 6.71763C3.98371 5.39622 3.64404 4.0715 3.29417 2.71768C6.57292 2.71768 9.82332 2.71768 13.1242 2.71768C12.9653 3.19292 12.8166 3.64048 12.6663 4.08703Z" fill="#40AB35" />
+                                      </g>
+                                      <path d="M10.3577 10.0313C9.40806 10.0329 8.62859 10.8243 8.64277 11.7721C8.65668 12.7161 9.4275 13.4661 10.3739 13.4569C11.3229 13.4476 12.0762 12.6847 12.0689 11.7401C12.0617 10.7972 11.2931 10.0296 10.3577 10.0313ZM10.3435 12.7937C9.77021 12.7854 9.30793 12.3085 9.31617 11.7342C9.32447 11.1546 9.79033 10.703 10.3729 10.7096C10.9521 10.7166 11.4084 11.1846 11.4008 11.7636C11.3932 12.3362 10.9147 12.802 10.3435 12.7937Z" fill="#40AB35" />
+                                      <path d="M5.46206 10.0322C4.53528 10.0022 3.73927 10.7632 3.71449 11.7031C3.68937 12.651 4.42651 13.4314 5.37091 13.4562C6.33443 13.4816 7.11983 12.7362 7.13867 11.7784C7.15683 10.8431 6.40741 10.0626 5.46206 10.0322ZM5.40724 12.7933C4.83396 12.7827 4.37169 12.3052 4.38026 11.7325C4.38917 11.1568 4.8584 10.7047 5.44126 10.7103C6.01852 10.7159 6.47351 11.1846 6.46622 11.7665C6.4596 12.3386 5.9795 12.8039 5.40724 12.7933Z" fill="#40AB35" />
+                                    </g>
+                                    <defs>
+                                      <clipPath id="clip0_34_25511">
+                                        <rect width="14" height="14" fill="white" />
+                                      </clipPath>
+                                    </defs>
+                                  </svg>
+                                {{ text_buy_sets }}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}

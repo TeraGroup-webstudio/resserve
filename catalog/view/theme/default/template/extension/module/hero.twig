@@ -1,0 +1,64 @@
+<section class="hero">
+    <div class="container">
+        <div class="hero__slider--container" id="hero__slider--container">
+        <div class="hero__sliders">
+            <div class="hero__slider"style="max-width: {{width}}px;">
+                <div class="swiper-container">
+                    <div class="hero__slider--wrapper swiper-wrapper">
+                        {% for slide in banners %}
+                        <div class="hero__slider--slide swiper-slide">
+                            <div class="hero__slider--slide-wrapper">
+                                <div class="hero__slide--top">
+                                    <img src="{{slide.image}}" alt="{{slide.title}}">
+                                    <a href="{{slide.link}}"></a>
+                                </div>
+                                <div class="hero__slide--bottom">
+                                    <a class="slide__link" href="{{slide.link}}">{{slide.title}}</a>
+                                    <a class="slide__button" href="{{slide.link}}">{{slide.link_text}}</a>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <div class="hero__slider--pagination"></div>
+                </div>
+            </div>
+            <div class="hero__manufacturers" style="max-width: {{width}}px;">
+                <div class="hero__manufacturers--heading">
+                    <div class="hero__manufacturers--title">{{text_all_manufacturer}}</div>
+                    <div class="hero__manufacturers--link"><a href="{{link_manufacturer}}">{{text_manufacturer}}</a></div>
+                    <div class="product__carousel--buttons">
+                        <div class="product__carousel--prev">
+                            <svg width="26" height="27" viewBox="0 0 26 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M18 13.5H8M8 13.5L12.375 9.125M8 13.5L12.375 17.875" stroke="black" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M13 26C6.0965 26 0.5 20.4035 0.5 13.5C0.5 6.59644 6.0965 1 13 1C19.9036 1 25.5 6.59644 25.5 13.5C25.5 20.4035 19.9036 26 13 26Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                        <div class="product__carousel--next">
+                            <svg width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M8.5 13.5H18.5M18.5 13.5L14.125 9.125M18.5 13.5L14.125 17.875" stroke="black" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M13.5 26C20.4035 26 26 20.4035 26 13.5C26 6.59644 20.4035 1 13.5 1C6.59644 1 1 6.59644 1 13.5C1 20.4035 6.59644 26 13.5 26Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+               <div class="hero__manufacturers--slider">
+                    <div class="swiper-container">
+                        <div class="swiper-wrapper">
+                            {% for slide_manufactorer in manufacturers %}
+                                <div class="hero__manufacturers--slide swiper-slide">
+                                    <div class="hero__manufacturers--slide-wrapper">
+                                        <a href="{{slide_manufactorer.href}}">
+                                            <img src="{{slide_manufactorer.image}}" alt="{{slide_manufactorer.name}}" class="img-responsive">
+                                        </a>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</section>

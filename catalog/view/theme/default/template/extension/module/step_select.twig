@@ -1,0 +1,192 @@
+<section class="step__selection">
+  <div class="container">
+    <div class="step__selection--wrapper">
+<div class="select_step {{ class }}" id="select_step">
+  <div class="container-step" id="section-step">
+    <div class="step__selection--heading">
+      <div class="step__selection--heading-wrapper">
+  {% if heading_title %}
+    <div class="select_steptitle">{{ heading_title }}</div>
+  {% endif %}
+  {% if heading_note %}
+    <div class="select_stepsubtitle">{{ heading_note }}</div>
+  {% endif %}
+      </div>
+    <ul class="nav-tabs">
+      <li class="active">
+        <a href="#step_1" aria-controls="step_1" role="tab" data-toggle="tab">{{ text_step1 }}</a>
+      </li>
+      <li>
+        <a href="#step_2" aria-controls="step_2" role="tab" data-toggle="tab" class="disabled">{{ text_step2 }}</a>
+      </li>
+      <li>
+        <a href="#step_3" aria-controls="step_3" role="tab" data-toggle="tab" class="disabled">{{ text_step3 }}</a>
+      </li>
+    </ul>
+    </div>
+    <div class="tab-content">
+      <div role="tabpanel" class="tab-pane fade in active step_1" id="step_1">
+        {% if list_step_1 %}
+          <div class="step_1slider swiper-container">
+            <div class="swiper-wrapper">
+            {% for step1 in list_step_1 %}
+              <div class="item-step-1 swiper-slide" data-article-step1="{{ step1['step1_id'] }}">
+                <div class="item-step-1wraper">
+                  <div class="item-img-step-1"><img src="{{ step1['image'] }}" class="img-responsive"></div>
+                  <div class="item-title-step-1">{{ step1['title'] }}</div>
+                </div>
+              </div>
+            {% endfor %}
+            </div>
+          </div>
+            <div class="steps__buttons">
+                <div class="step__one--prev">
+                  <svg width="11" height="20" viewBox="0 0 11 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10 19L1 10L10 1" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </div>
+                <div class="step__one--next">
+                  <svg width="11" height="20" viewBox="0 0 11 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1 1L10 10L1 19" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </div>
+            </div>
+        {% endif %}
+      </div>
+      <div role="tabpanel" class="tab-pane fade step_2" id="step_2">
+
+      </div>
+      <div role="tabpanel" class="tab-pane fade step_3" id="step_3">
+
+      </div>
+    </div>
+  </div>
+
+</div>
+    </div>
+  </div>
+</section>
+
+<script>
+  $("#section-step a[data-toggle=tab]").on("click", function(e) {
+    if ($(this).hasClass("disabled")) {
+      e.preventDefault();
+      return false;
+    }
+  });
+
+$('#step_1 .item-step-1').on('click', function () {
+    let article_step_1 = $(this).data('article-step1');
+
+    if(article_step_1){
+        $.ajax({
+            url: 'index.php?route=extension/module/step_select/step2&article_step_1=' + article_step_1,
+            dataType: 'html',
+            success: function(data) {
+                console.log(data);
+                $('#step_2').html(data);
+                $('a[href=\'#step_2\']').tab('show');
+                
+                // Чекаємо на повне завантаження контенту у вкладці перед ініціалізацією слайдера
+                $(document).one('shown.bs.tab', 'a[href="#step_2"]', function () {
+                    initializeStepTwoCarousel();
+                });
+            },
+            error: function(data) {
+                console.log(data);
+            }
+        });
+    }
+});
+
+$('body').on('click','#step_2 .item-step-2', function () {
+    let article_step_2 = $(this).data('article-step2');
+
+    if(article_step_2){
+        $.ajax({
+            url: 'index.php?route=extension/module/step_select/step3&article_step_2=' + article_step_2,
+            dataType: 'html',
+            success: function(data) {
+                //console.log(data);
+                $('#step_3').html(data);
+                $('a[href=\'#step_2\']').removeClass('disabled');
+                $('a[href=\'#step_3\']').tab('show');
+
+                // Чекаємо на повне завантаження контенту у вкладці перед ініціалізацією слайдера
+                $(document).one('shown.bs.tab', 'a[href="#step_3"]', function () {
+                    initializeStepThreeCarousel();
+                });
+            },
+            error: function(data) {
+                console.log(data);
+            }
+        });
+    }
+});
+
+function initializeStepTwoCarousel() {
+    let stepTwoCarousel = document.querySelectorAll(".step_2");
+    if(stepTwoCarousel){
+        stepTwoCarousel.forEach((carouselStepTwo) => {
+            let swiperCarouselStepTwo = carouselStepTwo.getElementsByClassName("swiper-container")[0];
+            let nx = carouselStepTwo.getElementsByClassName("step__one--next")[0];
+            let pr = carouselStepTwo.getElementsByClassName("step__one--prev")[0];
+            let stepTwo = new Swiper(swiperCarouselStepTwo, {
+                navigation: {
+                    nextEl: nx,
+                    prevEl: pr
+                },
+                slidesPerView: 4,
+                observer: true,
+                observeParents: true,
+                observeSlideChildren: true,
+                spaceBetween: 15,
+                autoplay: {
+                    delay: 115000,
+                    disableOnInteraction: false
+                },
+                speed: 800
+            });
+        });
+    }
+}
+function initializeStepThreeCarousel() {
+    let stepThreeCarousel = document.querySelectorAll(".step_3");
+    if(stepThreeCarousel){
+        stepThreeCarousel.forEach((carouselStepThree) => {
+            let swiperCarouselStepThree = carouselStepThree.getElementsByClassName("swiper-container")[0];
+            let nx = carouselStepThree.getElementsByClassName("step__one--next")[0];
+            let pr = carouselStepThree.getElementsByClassName("step__one--prev")[0];
+            let stepThree = new Swiper(swiperCarouselStepThree, {
+                navigation: {
+                    nextEl: nx,
+                    prevEl: pr
+                },
+                slidesPerView: 4,
+                observer: true,
+                observeParents: true,
+                observeSlideChildren: true,
+                spaceBetween: 15,
+                autoplay: {
+                    delay: 115000,
+                    disableOnInteraction: false
+                },
+                speed: 800
+            });
+        });
+    }
+}
+let stepOneCarousel = document.querySelectorAll(".step_1");
+if(stepOneCarousel){
+stepOneCarousel.forEach((carouselStepOne) => {
+  let swiperCarouselStepOne = carouselStepOne.getElementsByClassName("swiper-container")[0];
+  let nx = carouselStepOne.getElementsByClassName("step__one--next")[0];
+  let pr = carouselStepOne.getElementsByClassName("step__one--prev")[0];
+  new Swiper(swiperCarouselStepOne, {navigation: {nextEl: nx, prevEl: pr}, slidesPerView: 4,spaceBetween: 15, autoplay: {delay: 115000, disableOnInteraction: false, }, speed: 800});
+});
+}
+
+$('a[href=\'#step_1\']').on('click', function () {
+  $('a[href=\'#step_2\']').addClass('disabled');
+});
+</script>

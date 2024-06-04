@@ -1,0 +1,81 @@
+        {% for iset, set in sets %}
+            <div class="swiper-slide set setv">
+                {% if set.name %}
+                    <h3>{{ set.name }}</h3>
+                {% endif %}
+                {% if set.enddate %}
+                    <div class='timer'></div>
+                    <input type='hidden' name='sp_timer' value="{{ set.enddate }}">
+                {% endif %}
+
+                <div class='set_table'>
+                    {% set i = 0 %}
+                    {% for key, product in set.products %}
+                        {% if i %}
+                            <div class='ao plus'><span>+</span></div>
+                        {% endif %}
+                        {% set i = i + 1 %}
+
+                        <div class="cell set-product {% if product.stock_quantity <= 0 %} out-stock {% endif %}" data-discount="{{ product.discount }}" data-price="{{ product.cprice }}" data-optiontype="{{ product.option_type }}" data-productid="{{ product.product_id }}">
+
+                            <input type='hidden' name='product_id' value="{{ product.product_id }}">
+                            <input type='hidden' name='quantity' value="{{ product.quantity }}">
+
+                            {% if product.discount  and  sets_show_disc_prec  and  product.discount!='0%' %}
+                            <div class='disc'>{{ product.discount_currency }}</div>
+                            {% endif %}
+                            
+                            {% if product.thumb %}
+                                <div class="image">
+                                    <a href="{{ product.href }}" {% if sets_product_link_newtab %} target="_blank" {% endif %}>
+                                        <img width="200" height="200" src="{{ product.thumb }}" alt="{{ product.product_name }}" title="{{ product.product_name }}" class="img-resp"/>
+                                    </a>
+                                </div>
+                            {% endif %}
+                        
+                            <div class="caption">
+                                <h4>
+                                    <a href="{{ product.href }}" {% if sets_product_link_newtab %} target="_blank" {% endif %}>
+                                        {{ product.product_name }}
+                                            
+                                    </a>
+                                </h4>
+                        
+                                <p class="price">
+                                    {% if product.special %}
+                                    <span class='price-old'>{{ product.price }}</span>
+                                    <span class='price-new'>{{ product.special }}</span>
+                                    {% else %}
+                                        {{ product.price }}
+                                    {% endif %}
+                                </p>
+
+                                {% if product.quantity > 1 and sets_show_qty %}
+                                    <div class='quantity'>x{{ product.quantity }}</div>
+                                {% endif %}
+
+                                 {% if product.option_type == 'popup' %}
+                                    {{ product.html_options_button }}
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class='clearfix'></div>
+                    {% endfor %}
+                
+                    <div class='ao'><span>=</span></div>
+                    <div class='set-total'>
+                        {% if set.ceconomy %}
+                        <div class='economy'>
+                            <span class='economy_text'>{{ text_economy }}</span>
+                            <span class='economy_val'>{{ set.economy }}</span>
+                        </div>
+                        {% endif %}
+
+                        <div class='new_summ'>{{ set.new_total }}</div>
+                        <div class='clearfix'></div>
+                        <input type='hidden' name='sp_set_quantity' class="form-control " value="1">    
+                        <button class='add-set-btn btn btn-primary' data-success-text="<i class='fa fa-check'></i>" data-loading-text="<i class='fa fa-spinner fa-spin '></i>">{{ text_buy_sets }}</button>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}

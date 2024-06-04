@@ -1,0 +1,411 @@
+.sets {
+  --color1: #f60;
+  --color2: #71be00;
+}
+
+.set .timer {
+    font-size: 20px;
+    background-color: #cc0000;
+    padding: 10px 20px;
+    color: white;
+    margin: 15px;
+    display: none;
+}
+
+#prd-sets {
+    background: transparent;
+    display: none;
+    margin: 0;
+    width: 100%;
+    padding: 0;
+}
+.sets .set-product .image {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+    width: 150px;
+    height: 150px;
+    flex-shrink: 0;
+}
+.sets .set-product .caption{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.sets .set-product, .sets .set-total
+{
+    background: white;
+    width: 150px;
+    height: 270px;
+    margin: 10px 0;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+}
+.sets .setv .set-product,
+.sets .setv .set-total
+{
+    max-width: 100%;
+    flex: 0 0 100%;
+}
+.sets .set-total {
+    border-radius: 5px;
+    background-image: url("data:image/svg+xml,%3Csvg width='150' height='258' viewBox='0 0 150 258' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='150' height='258' rx='5' fill='%2340AB35' /%3E%3Ccircle cx='75' cy='51' r='88' fill='%23322D2D' /%3E%3C/svg%3E");
+    background-position: center bottom;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.sets .set-total .economy {
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.sets .set-total .economy_text{
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 125%;
+    color: #fff;
+    margin-bottom: 13px;
+}
+.sets .set-total .economy_val {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 125%;
+    color: rgba(255, 255, 255, 0.52);
+}
+
+.sets .set-total .new_summ {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 1;
+    color: #fff;
+    height: 50%;
+}
+
+.sets .set-product .price-new
+{
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 1;
+    color: #40ab35;
+}
+
+.sets .set-product .price
+{
+    font-size: 15px;
+    margin: 0;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 1;
+    color: #40ab35;
+    display: flex;
+    flex-direction: column;
+}
+
+.sets .set-product .price-old 
+{
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 117%;
+    text-decoration: line-through;
+    color: #8e9192;
+    margin-bottom: 10px;
+}
+
+.sets .set .disc {
+    position: absolute;
+    left: 0;
+    top: 0;
+    padding: 4px 6px 4px 10px;
+    background-color: var(--color1);
+    border-radius: 5px 0 5px 0;
+    color: white;
+    z-index: 5;
+}
+.sets h2{
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 110%;
+    color: #0d0802;
+    margin-bottom: 30px;
+    margin-top: 40px;
+}
+.sets .set .quantity {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 4px 6px;
+    background-color: var(--color2);
+    border-radius: 0 5px 0 5px;
+    color: white;
+    z-index: 5;
+}
+.add-set-btn {
+    border-radius: 5px;
+    width: 122px;
+    height: 32px;
+    margin: 0;
+    margin-top: 35px;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    line-height: 129%;
+    color: #40ab35;
+    font-weight: 400;
+}
+.add-set-btn svg{
+    margin-right: 8px;
+}
+.sets .set_table {
+    margin: 0 auto;
+    display: flex;
+    align-items: flex-start;
+    flex-flow: wrap;
+}
+.sets .set-product h4{
+    margin: 10px 0;
+}
+.sets .set-product h4 a{
+    font-size: 14px;
+    color: #0d0802;
+    display: -webkit-box;           /* Веб-кит блоковий контейнер */
+    -webkit-line-clamp: 3;          /* Кількість рядків, після яких обрізається текст */
+    -webkit-box-orient: vertical;
+    max-height: 48px;
+    overflow: hidden;
+}
+.sets{
+    max-width: 700px;
+}
+@media screen and (max-width: 1439px) {
+    .sets{
+        max-width: 600;
+    }
+    .sets .set-product, .sets .set-total{
+        width: 125px;
+    }
+    .sets .set-product .image{
+        width: 130px;
+        height: 130px;
+    }
+    .add-set-btn{
+        width: 100px;
+    }
+    .add-set-btn svg{
+        display: none;
+    }
+}
+@media screen and (max-width: 1023px) {
+    .sets h2{
+        text-align: center;
+    }
+    .sets{
+        max-width: 100%;
+    }
+    .sets .set-product, .sets .set-total{
+        width: 150px;
+    }
+    .sets .set-product .image{
+        width: 150px;
+        height: 150px;
+    }
+    .sets .set_table{
+        justify-content: center;
+    }
+}
+.kjincluded {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0!important;
+    z-index: 9;
+}
+.sets .set-product .open-options {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    line-height: 30px;
+    padding: 0!important;
+}
+.sets .ao
+{
+    padding: 0 8px;
+    margin-top: 68px;
+}
+.sets .ao span {
+    font-weight: 800;
+    font-size: 20px;
+    color: #40ab35;
+}
+.mymargin {
+    margin-top: 30px;
+}
+.hidden {
+    display: none;
+}
+#prd-sets {
+    box-shadow: none;
+    border: none;
+}
+#prd-sets table td {
+    vertical-align: middle;
+}
+#prd-sets .owl-wrapper-outer
+{
+    border: none;
+    box-shadow: none;
+}
+
+.sets .out-stock
+{
+    filter: grayscale(100%);
+}
+
+#prd-sets .swiper-viewport
+{
+    box-shadow: none;
+}
+
+.series-options-modal .price
+{
+    font-size: 18px;
+    line-height: 38px;
+    float: left;
+    margin: 0;
+    font-weight: 500;
+}
+.series-options-modal .price-old
+{
+    text-decoration: line-through;
+    color: #b3b3b3;
+    font-size: 15px;
+    font-weight: 300;
+}
+
+.series-options-modal .price-new
+{
+    margin-left: 10px;
+    font-size: 19px;
+    color: #444;
+    white-space: nowrap;
+    font-weight: 700;
+}
+.series-options-modal .discounts, 
+.series-options-modal input[name="quantity"]
+{
+    display: none!important;
+}
+.series-options-modal input[name="quantity"]
+{
+    width:70px;
+    margin-left: 10px;
+    display: inline-block;
+}
+.series-options-modal .apply-options
+{
+    float: right;
+    font-size: 15px;
+}
+.series-options-modal .bs5-close
+{
+    display: none;
+}
+@media screen and (max-width: 767px) {
+    .sets .set_table{
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .sets .set-product, .sets .set-total{
+        width: 400px;
+        max-width: 100%;
+    }
+    .sets .set-total{
+        background-image: url("data:image/svg+xml,%3Csvg width='300' height='176' viewBox='0 0 300 176' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='300' height='178' rx='5' fill='%2340AB35' /%3E%3Ccircle cx='149.5' cy='-227.5' r='309.5' fill='%23322D2D' /%3E%3C/svg%3E");
+    }
+    .sets .set-product, .sets .set-total{
+        height: auto;
+    }
+    .sets h2{
+        text-align: left;
+    }
+    .sets .set-total .economy_text{
+        margin-top: 20px;
+    }
+    .sets .set-total .economy_val{
+        margin-bottom: 40px;
+    }
+    .add-set-btn{
+        width: 122px;
+        margin-bottom: 15px;
+    }
+    .add-set-btn svg{
+        display: block;
+    }
+    .sets .set-product .image{
+        width: 100px;
+        height: 100px;
+        margin-right: 10px;
+    }
+    .sets .set-product .caption{
+        height: auto;
+    }
+    .sets .set-product{
+        flex-direction: row;
+        height: auto;
+    }
+    .sets .set-product h4{
+        margin-top: 0;
+    }
+    .sets .set-product h4 a{
+        font-weight: 400;
+        font-size: 12px;
+        color: #0d0802;
+    }
+    .sets .set-product .price-new{
+        font-size: 20px;
+    }
+    .sets .ao{
+        margin: 16px 0;
+        padding: 0;
+        position: relative;
+        width: 100%;
+    }
+    .sets .ao::before{
+        content: '';
+        position: absolute;
+        top: 11.5px;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        background-color: #f8f8f8;
+    }
+
+    .sets .ao span{
+        margin: 0 auto;
+        position: relative;
+        z-index: 2;
+        width: 24px;
+        height: 24px;
+        font-size: 13px;
+        border-radius: 50%;
+        background-color: #f8f8f8;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}

@@ -1,0 +1,154 @@
+{#
+##=================================================##
+## @author    : OCdevWizard                        ##
+## @contact   : ocdevwizard@gmail.com              ##
+## @support   : http://help.ocdevwizard.com        ##
+## @copyright : (c) OCdevWizard. Price Alert, 2018 ##
+##=================================================##
+#}
+<div id="{{ _code }}-block">
+  <div class="inner-header">
+    {{ heading_title }}
+    {% if (popup_close_btn_inside) %}
+      <span class="modal-close" onclick="{{ _code }}_sidebar_close('{{ product_id }}');"><i class="fa fa-times" aria-hidden="true"></i></span>
+    {% endif %}
+  </div>
+  <div class="inner-center">
+    {% if (show_description == 1) %}
+      <div class="additional-information top">{{ description }}</div>
+    {% endif %}
+    <form id="{{ _code }}-form">
+      <input name="product_id" type="hidden" value="{{ product_id }}" />
+      <input name="product_option_id" type="hidden" value="{{ product_option_id }}" />
+      <input name="product_option_value_id" type="hidden" value="{{ product_option_value_id }}" />
+      <input name="record_type" type="hidden" value="{{ record_type }}" />
+      {% if (fields_data) %}
+        <div class="inner-fields">
+          {% for field in fields_data %}
+            <div
+              data-error-row="{{ field_row }}"
+              {% if (field['field_mask'] and field['field_type'] == 'telephone') %}data-mask="{{ field['field_mask'] }}"{% endif %}
+              {% if (field['css_id']) %}id="{{ field['css_id'] }}"{% endif %}
+              {% if (field['css_class']) %}class="{{ field['css_class'] }}"{% endif %}
+            >
+              {% if (field['title_status'] and field['field_type'] != 'title') %}
+                <label class="field-heading">{{ field['name'] }}{% if (field['required'] > '0') %} <span class="required-indicator">*</span>{% endif %}</label>
+              {% endif %}
+              <div class="inner-field{% if (field['icon']) %} with-icon{% endif %}">
+                {% if (field['icon'] and field['field_type'] != 'title') %}
+                  <img src="{{ field['icon'] }}" alt="" />
+                {% endif %}
+                {% if (field['field_type'] == 'email') %}
+                  <input name="field[{{ field_row }}][{{ field['field_id'] }}]" type="email" value="{{ field['value'] }}" {{ field['placeholder'] ? 'placeholder="'~field['placeholder']~'"' : "" }}/>
+                {% elseif (field['field_type'] == 'telephone') %}
+                  <input name="field[{{ field_row }}][{{ field['field_id'] }}]" type="tel" value="{{ field['value'] }}" {{ field['placeholder'] ? 'placeholder="'~field['placeholder']~'"' : "" }}/>
+                {% elseif (field['field_type'] == 'firstname') %}
+                  <input name="field[{{ field_row }}][{{ field['field_id'] }}]" type="text" value="{{ field['value'] }}" {{ field['placeholder'] ? 'placeholder="'~field['placeholder']~'"' : "" }}/>
+                {% elseif (field['field_type'] == 'lastname') %}
+                  <input name="field[{{ field_row }}][{{ field['field_id'] }}]" type="text" value="{{ field['value'] }}" {{ field['placeholder'] ? 'placeholder="'~field['placeholder']~'"' : "" }}/>
+                {% elseif (field['field_type'] == 'title') %}
+                  <div {{ field['css_id'] ? 'id="'~field['css_id']~'"' : "" }} class="block-title {{ field['css_class'] ? field['css_class'] : "" }}">{{ field['name'] }}</div>
+                {% endif %}
+              </div>
+              {% if (field['description']) %}
+                <div class="field-description">{{ field['description'] }}</div>
+              {% endif %}
+            </div>
+            {% set field_row = field_row + 1 %}
+          {% endfor %}
+          {% if (informations) %}
+            <div data-error-row="require_information" class="require-information">
+              <div class="inner-field">
+                <div class="field-checkbox">
+                  <input type="checkbox" name="require_information" value="{{ require_information ? 1 : 0 }}" id="require-information-{{ product_id }}"/>
+                  <label for="require-information-{{ product_id }}"><span>{{ informations }}</span></label>
+                </div>
+              </div>
+            </div>
+          {% endif %}
+          {% if (captcha_status) %}
+            <div data-error-row="recaptcha">
+              <div class="inner-field">
+                <script src="https://www.google.com/recaptcha/api.js"></script>
+                <div class="g-recaptcha" data-sitekey="{{ captcha_site_key }}" data-error-row="recaptcha"></div>
+              </div>
+            </div>
+          {% endif %}
+        </div>
+      {% endif %}
+    </form>
+    {% if (show_description == 2) %}
+      <div class="info-text-block bottom">{{ description }}</div>
+    {% endif %}
+  </div>
+  <div class="inner-footer">
+    <button type="button" onclick="{{ _code }}_sidebar_close('{{ product_id }}');" class="close-modal">{{ button_go_back }}</button>
+    <button type="button" onclick="{{ _code }}_submit_record({a:this});" class="save-form button-loading">{{ button_save }}</button>
+  </div>
+  <script>
+    {{ _code }}_prepare_form({a:'#{{ _code }}-form .inner-fields > div'});
+
+    function {{ _code }}_submit_record(options) {
+      var element = options.a || '';
+
+      {% if (captcha_status) %}
+      var url = 'index.php?route=extension/ocdevwizard/{{ _name }}/record_action&recaptcha='+grecaptcha.getResponse();
+      {% else %}
+      var url = 'index.php?route=extension/ocdevwizard/{{ _name }}/record_action';
+      {% endif %}
+
+      $.ajax({
+        url: url,
+        type: 'post',
+        dataType: 'json',
+        data: $('#{{ _code }}-form').serialize(),
+        beforeSend: function() {
+          $(element).prop('disabled', true);
+          $(element).html('<div class="spinner"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div>');
+        },
+        complete: function() {
+          $(element).prop('disabled', false);
+        },
+        success: function(json) {
+          $('#{{ _code }}-form .success-text, #{{ _code }}-form .error-text').remove();
+          $('#{{ _code }}-form').find('.error-style').removeClass('error-style');
+          $(element).html(json['button_save']);
+
+          if (json['error']) {
+            if (json['error']['field']) {
+              for (i in json['error']['field']) {
+                $('#{{ _code }}-form [data-error-row='+i+']').addClass('error-style');
+
+                if ($('#{{ _code }}-form [data-error-row='+i+'] .field-description').length) {
+                  $('#{{ _code }}-form [data-error-row='+i+'] .field-description').after('<div class="error-text">'+json['error']['field'][i]+'</div>');
+                } else {
+                  $('#{{ _code }}-form [data-error-row='+i+'] .inner-field').after('<div class="error-text">'+json['error']['field'][i]+'</div>');
+                }
+              }
+            }
+          } else {
+            if (json['output']) {
+              $(element).remove();
+              $('#{{ _code }}-block .inner-center').html(json['output']);
+              {% if (analytic_code) %}
+                {{ analytic_code }}
+              {% endif %}
+            }
+          }
+        }
+      });
+    }
+
+    $('body').click(function(e) {
+      if (!$(e.target).closest('#{{ _code }}-sidebar .{{ _code }}-sidebar-body').length) {
+        {{ _code }}_sidebar_close('{{ product_id }}');
+      }
+    });
+
+    $(document).on('keydown', function(e) {
+      if (e.keyCode === 27) {
+        {{ _code }}_sidebar_close('{{ product_id }}');
+      }
+    });
+  </script>
+</div>

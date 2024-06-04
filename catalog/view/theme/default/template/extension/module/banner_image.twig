@@ -1,0 +1,21 @@
+<section class="promo__block promo__image">
+  <div class="container__banner">
+    <div class="promo__block--wrapper">
+      <div class="promo__image--content">
+        {% if logo %}
+        <div class="promo__image--logo"><img src="{{logo}}" class="img-responsive" {{ heading_title ? 'alt="' ~ heading_title ~ '"' : 'alt="Image"' }}></div>
+        {% endif %}
+        {% if heading_title %}
+        <div class="promo__image--title">{{ heading_title }}</div>
+        {% endif %}
+        <div class="promo__image--content">{{ html }}</div>
+        {% if link %}
+        <div class="promo__image--link"><a href="{{link}}">{{text_link}}</a></div>
+        {% endif %}
+      </div>
+      {% if image %}
+      <div class="promo__image--image"><img src="{{image}}" class="img-responsive" {{ heading_title ? 'alt="' ~ heading_title ~ '"' : 'alt="Image"' }}></div>
+      {% endif %}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,29 @@
+{% if list_step_2 %}
+    <div class="step_2slider swiper-container">
+        <div class="swiper-wrapper">
+        {% for step2 in list_step_2 %}
+            <div class="item-step-2 swiper-slide" data-article-step2="{{ step2['step2_id'] }}">
+                <div class="item-step-2wraper">
+                    <div class="item-img-step-2"><img src="{{ step2['image'] }}" class="img-responsive"></div>
+                    <div class="item-title-step-2">{{ step2['title'] }}</div>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+            <div class="steps__buttons">
+                <div class="step__one--prev">
+                  <svg width="11" height="20" viewBox="0 0 11 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10 19L1 10L10 1" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </div>
+                <div class="step__one--next">
+                  <svg width="11" height="20" viewBox="0 0 11 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1 1L10 10L1 19" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </div>
+            </div>
+{% else %}
+    ---
+{% endif %}
+

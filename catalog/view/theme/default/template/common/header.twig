@@ -1,0 +1,350 @@
+<!DOCTYPE html prefix="og: http://ogp.me/ns#">
+<!--[if IE]><![endif]-->
+<!--[if IE 8 ]><html dir="{{ direction }}" lang="{{ lang }}" class="ie8"><![endif]-->
+<!--[if IE 9 ]><html dir="{{ direction }}" lang="{{ lang }}" class="ie9"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html dir="{{ direction }}" lang="{{ lang }}">
+<!--<![endif]-->
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% if(no_index == 1) %}
+    <meta name="robots" content="noindex, nofollow" />
+  {% endif %}
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>{{ title }}</title>
+  <base href="{{ base }}" />
+  {% if description %}
+    <meta name="description" content="{{ description }}" />
+  {% endif %}
+  {% if keywords %}
+    <meta name="keywords" content="{{ keywords }}" />
+  {% endif %}
+  <script src="catalog/view/javascript/jquery/jquery-2.1.1.min.js" type="text/javascript"></script>
+  {% if version_bootstrap == 1 %}
+    <link href="catalog/view/javascript/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen" />
+    <script src="catalog/view/javascript/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+  {% else  %}
+  <link href="catalog/view/javascript/bootstrap_4_5_0/css/bootstrap.min.css" rel="stylesheet" media="screen" />
+    <script src="catalog/view/javascript/bootstrap_4_5_0/js/bootstrap.min.js" type="text/javascript"></script>
+  {% endif %}
+  {#<link href="catalog/view/javascript/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />#}
+  <link href="catalog/view/theme/default/stylesheet/fonts/fonts.css" rel="stylesheet">
+  <link href="catalog/view/theme/default/stylesheet/stylesheet.css" rel="stylesheet">
+  {% for style in styles %}
+    <link href="{{ style.href }}" type="text/css" rel="{{ style.rel }}" media="{{ style.media }}" />
+  {% endfor %}
+  {% for script in scripts %}
+    <script src="{{ script }}" type="text/javascript"></script>
+  {% endfor %}
+  <link href="catalog/view/theme/default/stylesheet/main.css" rel="stylesheet">
+  <script src="catalog/view/javascript/main.js" type="text/javascript"></script>
+  <script src="catalog/view/javascript/common.js" type="text/javascript"></script>
+  {% if webfont and webfont_link %}
+    {{ webfont_link }}
+    {% if(webfont_style != '') %}
+      <style>
+        body {
+        {{ webfont_style }}
+        }
+      </style>
+    {% endif %}
+  {% endif %}
+  {% if lazy_load_status == 1 %}
+    <script src="catalog/view/javascript/lazyload/jquery.lazyload.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $('img.lazy-load').lazyload({
+          effect: "fadeIn",
+          effectspeed: 500,
+          threshold: 0,
+          skip_invisible  : false,
+          placeholder : "{{ lazy_image }}"
+        });
+      });
+    </script>
+  {% endif %}
+  {% for lang,href in alter_lang  %}
+    <link rel="alternate" hreflang="{{ lang }}" href="{{ href }}" />
+  {% endfor %}
+  {% for link in links %}
+    <link href="{{ link.href }}" rel="{{ link.rel }}" />
+  {% endfor %}
+  {% for analytic in analytics %}
+    {{ analytic }}
+  {% endfor %}
+  <meta property="og:title" content="{{ title }}" >
+  <meta property="og:description" content="{{ description ? description : '' }}" >
+  {% if class == 'common-home' %}
+    <meta property="og:url" content="{{ base }}" >
+  {% endif %}
+  {% if ('product-product' not in class) and ('product-category' not in class) and ('product-manufacturer-info' not in class) %}
+    <meta property="og:image" content="{{ logo_meta }}" >
+    <meta property="og:image:width" content="300" >
+    <meta property="og:image:height" content="300" >
+  {% endif %}
+  <meta property="og:site_name" content="{{ name }}" >
+  {% for meta_tag in ogmeta %}
+    <meta {{ meta_tag.meta_name}} content="{{ meta_tag.content }}" >
+  {% endfor %}
+  {{ tc_og }}
+  {{ microdata }}
+</head>
+<body>
+{% if header_box_info_status == 1 %}
+  <div class="section-information {% if header_box_info_image != '' %} bg-section {% endif %}">
+    <a {% if header_box_info_url != '' %} href="{{ header_box_info_url }}" {% endif %} >
+      <div class="box-info">
+        {% if header_box_info_text != '' %}
+          <div class="title-info">{{ header_box_info_text }}</div>
+        {% endif %}
+        {% if header_box_info_price != '' %}
+          <div class="price-info">
+            {% if header_box_info_price_ot != '' %}
+              <span class="text_ot">
+            {{ header_box_info_price_ot }}
+          </span>
+            {% endif %}
+            <span class="prices">
+        {{ header_box_info_price }}
+        </span>
+
+            {% if header_box_info_price_symbol != '' %}
+              <span class="symbol">{{ header_box_info_price_symbol }}</span>
+            {% endif %}
+          </div>
+        {% endif %}
+      </div>
+    </a>
+  </div>
+  <style>
+    .section-information{
+      height: 40px;
+      width: 100%;
+    }
+    .bg-section {
+      background: url('image/{{ header_box_info_image }}') no-repeat;
+      background-size: cover;
+      background-position: center;
+    }
+    .box-info {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 40px;
+      overflow: hidden;
+    }
+    .title-info {
+      color: #FFF;
+      font-size: 16px;
+      font-style: normal;
+      line-height: 16px;
+    }
+    .price-info {
+      background: #fff;
+      width: 105px;
+      height: 124px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 100%;
+    }
+    span.text_ot, span.symbol {
+      color: #000;
+      font-size: 10px;
+      font-style: normal;
+      line-height: 15px;
+    }
+    span.prices {
+      color: #000;
+      font-size: 14px;
+      font-style: normal;
+      line-height: 16px;
+      margin-left: 5px;
+      margin-right: 3px;
+    }
+    header{
+      box-shadow: 0px 3px 7px 0px rgba(0, 0, 0, 0.10), 0px 12px 12px 0px rgba(0, 0, 0, 0.09), 0px 27px 16px 0px rgba(0, 0, 0, 0.05), 0px 48px 19px 0px rgba(0, 0, 0, 0.01), 0px 76px 21px 0px rgba(0, 0, 0, 0.00);
+    }
+    @media(min-width:1400px){
+      .title-info {
+        margin-right: 60px;
+      }
+    }
+    @media(min-width:1200px){
+      .title-info {
+        margin-right: 60px;
+      }
+    }
+  </style>
+{% endif %}
+<header class="header">
+  <div class="container">
+    <div class="header__wrapper" id="header__wrapper">
+      <div class="header__menu">
+        <button class="header__menu--button">
+          <svg width="26" height="18" viewBox="0 0 26 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 1.8C0 2.79411 0.805887 3.6 1.8 3.6H23.8667C24.8608 3.6 25.6667 2.79411 25.6667 1.8C25.6667 0.805888 24.8608 0 23.8667 0H1.8C0.805886 0 0 0.805888 0 1.8ZM0 9C0 9.99411 0.805887 10.8 1.8 10.8H23.8667C24.8608 10.8 25.6667 9.99411 25.6667 9C25.6667 8.00589 24.8608 7.2 23.8667 7.2H1.8C0.805886 7.2 0 8.00589 0 9ZM0 16.2C0 17.1941 0.805887 18 1.8 18H23.8667C24.8608 18 25.6667 17.1941 25.6667 16.2C25.6667 15.2059 24.8608 14.4 23.8667 14.4H1.8C0.805886 14.4 0 15.2059 0 16.2Z" fill="#303030" />
+          </svg>
+        </button>
+      </div>
+      <div class="header__catalog">
+        <button class="header__catalog--button button__green">
+          <svg width="28" height="25" viewBox="0 0 28 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M22.86 4.63555C22.8597 4.29027 22.7103 3.95934 22.4448 3.7152C22.1795 3.47106 21.8194 3.33377 21.4441 3.33337H16.2287C15.8532 3.33379 15.4934 3.47107 15.2278 3.7152C14.9623 3.95933 14.813 4.29027 14.8126 4.63555V9.83127C14.8131 10.1764 14.9624 10.5075 15.2278 10.7515C15.4933 10.9956 15.8532 11.1331 16.2287 11.1333H21.4441C21.8194 11.133 22.1795 10.9956 22.4448 10.7515C22.7103 10.5075 22.8598 10.1764 22.86 9.83127V4.63555ZM21.7725 9.83127C21.7724 9.99798 21.6254 10.1332 21.4441 10.1333H16.2287C16.0473 10.1332 15.9004 9.99798 15.9001 9.83127V4.63555C15.9004 4.4687 16.0473 4.33352 16.2287 4.33338H21.4441C21.6254 4.33352 21.7724 4.4687 21.7725 4.63555V9.83127ZM19.5231 13.5664H16.2286C15.8531 13.5667 15.4932 13.7041 15.2277 13.9482C14.9622 14.1922 14.8129 14.5233 14.8125 14.8684V17.5311C14.813 17.8763 14.9622 18.2073 15.2277 18.4514C15.4932 18.6955 15.8531 18.8328 16.2286 18.8332H19.5231C19.8984 18.8328 20.2585 18.6955 20.5238 18.4514C20.7893 18.2073 20.9388 17.8763 20.9391 17.5311V14.8684C20.9388 14.5233 20.7893 14.1922 20.5238 13.9482C20.2585 13.7041 19.8984 13.5666 19.5231 13.5664ZM19.8517 17.5312C19.8516 17.698 19.7044 17.8331 19.5231 17.8332H16.2286C16.0472 17.8331 15.9003 17.6979 15.9 17.531V14.8684C15.9003 14.7017 16.0472 14.5665 16.2286 14.5663H19.5231C19.7044 14.5665 19.8514 14.7017 19.8516 14.8684L19.8517 17.5312Z" fill="white" />
+            <path d="M22.86 4.63555C22.8597 4.29027 22.7103 3.95934 22.4448 3.7152C22.1795 3.47106 21.8194 3.33377 21.4441 3.33337H16.2287C15.8532 3.33379 15.4934 3.47107 15.2278 3.7152C14.9623 3.95933 14.813 4.29027 14.8126 4.63555V9.83127C14.8131 10.1764 14.9624 10.5075 15.2278 10.7515C15.4933 10.9956 15.8532 11.1331 16.2287 11.1333H21.4441C21.8194 11.133 22.1795 10.9956 22.4448 10.7515C22.7103 10.5075 22.8598 10.1764 22.86 9.83127V4.63555ZM21.7725 9.83127C21.7724 9.99798 21.6254 10.1332 21.4441 10.1333H16.2287C16.0473 10.1332 15.9004 9.99798 15.9001 9.83127V4.63555C15.9004 4.4687 16.0473 4.33352 16.2287 4.33338H21.4441C21.6254 4.33352 21.7724 4.4687 21.7725 4.63555V9.83127ZM19.5231 13.5664H16.2286C15.8531 13.5667 15.4932 13.7041 15.2277 13.9482C14.9622 14.1922 14.8129 14.5233 14.8125 14.8684V17.5311C14.813 17.8763 14.9622 18.2073 15.2277 18.4514C15.4932 18.6955 15.8531 18.8328 16.2286 18.8332H19.5231C19.8984 18.8328 20.2585 18.6955 20.5238 18.4514C20.7893 18.2073 20.9388 17.8763 20.9391 17.5311V14.8684C20.9388 14.5233 20.7893 14.1922 20.5238 13.9482C20.2585 13.7041 19.8984 13.5666 19.5231 13.5664ZM19.8517 17.5312C19.8516 17.698 19.7044 17.8331 19.5231 17.8332H16.2286C16.0472 17.8331 15.9003 17.6979 15.9 17.531V14.8684C15.9003 14.7017 16.0472 14.5665 16.2286 14.5663H19.5231C19.7044 14.5665 19.8514 14.7017 19.8516 14.8684L19.8517 17.5312Z" fill="white" />
+            <path d="M11.985 4.63555C11.9847 4.29027 11.8353 3.95934 11.5698 3.7152C11.3045 3.47106 10.9444 3.33377 10.5691 3.33337H5.35374C4.97824 3.33379 4.61835 3.47107 4.35285 3.7152C4.08735 3.95933 3.93804 4.29027 3.93762 4.63555V9.83127C3.93807 10.1764 4.08736 10.5075 4.35285 10.7515C4.61835 10.9956 4.97824 11.1331 5.35374 11.1333H10.5691C10.9444 11.133 11.3045 10.9956 11.5698 10.7515C11.8353 10.5075 11.9848 10.1764 11.985 9.83127V4.63555ZM10.8975 9.83127C10.8974 9.99798 10.7504 10.1332 10.5691 10.1333H5.35374C5.17228 10.1332 5.02542 9.99798 5.02512 9.83127V4.63555C5.02542 4.4687 5.17229 4.33352 5.35374 4.33338H10.5691C10.7504 4.33352 10.8974 4.4687 10.8975 4.63555V9.83127ZM10.569 13.5333H5.35362C4.97812 13.5336 4.61824 13.671 4.35273 13.9151C4.08723 14.1591 3.93793 14.4902 3.9375 14.8353V20.031C3.93796 20.3763 4.08724 20.7073 4.35273 20.9514C4.61823 21.1955 4.97812 21.3328 5.35362 21.3332H10.569C10.9443 21.3328 11.3043 21.1955 11.5697 20.9514C11.8352 20.7073 11.9847 20.3763 11.9849 20.031V14.8353C11.9846 14.4902 11.8352 14.1591 11.5697 13.9151C11.3043 13.671 10.9443 13.5336 10.569 13.5333ZM10.8976 20.0312C10.8974 20.198 10.7503 20.3331 10.569 20.3332H5.35362C5.17217 20.3331 5.02531 20.1979 5.025 20.031V14.8353C5.02531 14.6686 5.17217 14.5334 5.35362 14.5333H10.569C10.7503 14.5334 10.8973 14.6686 10.8974 14.8353L10.8976 20.0312Z" fill="white" />
+            <path d="M11.985 4.63555C11.9847 4.29027 11.8353 3.95934 11.5698 3.7152C11.3045 3.47106 10.9444 3.33377 10.5691 3.33337H5.35374C4.97824 3.33379 4.61835 3.47107 4.35285 3.7152C4.08735 3.95933 3.93804 4.29027 3.93762 4.63555V9.83127C3.93807 10.1764 4.08736 10.5075 4.35285 10.7515C4.61835 10.9956 4.97824 11.1331 5.35374 11.1333H10.5691C10.9444 11.133 11.3045 10.9956 11.5698 10.7515C11.8353 10.5075 11.9848 10.1764 11.985 9.83127V4.63555ZM10.8975 9.83127C10.8974 9.99798 10.7504 10.1332 10.5691 10.1333H5.35374C5.17228 10.1332 5.02542 9.99798 5.02512 9.83127V4.63555C5.02542 4.4687 5.17229 4.33352 5.35374 4.33338H10.5691C10.7504 4.33352 10.8974 4.4687 10.8975 4.63555V9.83127ZM10.569 13.5333H5.35362C4.97812 13.5336 4.61824 13.671 4.35273 13.9151C4.08723 14.1591 3.93793 14.4902 3.9375 14.8353V20.031C3.93796 20.3763 4.08724 20.7073 4.35273 20.9514C4.61823 21.1955 4.97812 21.3328 5.35362 21.3332H10.569C10.9443 21.3328 11.3043 21.1955 11.5697 20.9514C11.8352 20.7073 11.9847 20.3763 11.9849 20.031V14.8353C11.9846 14.4902 11.8352 14.1591 11.5697 13.9151C11.3043 13.671 10.9443 13.5336 10.569 13.5333ZM10.8976 20.0312C10.8974 20.198 10.7503 20.3331 10.569 20.3332H5.35362C5.17217 20.3331 5.02531 20.1979 5.025 20.031V14.8353C5.02531 14.6686 5.17217 14.5334 5.35362 14.5333H10.569C10.7503 14.5334 10.8973 14.6686 10.8974 14.8353L10.8976 20.0312Z" fill="white" />
+          </svg>
+          <span>{{text_catalog}}</span>
+          <svg class="header__catalog--button-arrow" width="11" height="7" viewBox="0 0 11 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10.3529 0.133734L5.5 5.47416L0.647059 0.133734L0 0.822522L5.5 7L11 0.822522L10.3529 0.133734Z" fill="white" />
+          </svg>
+        </button>
+        {{ menu }}
+      </div>
+      <div class="header__logo">
+        {% if logo %}
+          <a href="{{ home }}"><img src="{{ logo }}" title="{{ name }}" alt="{{ name }}" class="img-responsive" /></a>
+        {% else %}
+            <h1><a href="{{ home }}">{{ name }}</a></h1>
+        {% endif %}
+      </div>
+      <div class="header__search">
+        {{search}}
+      </div>
+      <!-- <div data-da=".main__menu--buttons,1366,1" class="header__language"> -->
+        <div data-da=".main__menu--block,1279,first" class="header__language">
+        {{language}}
+      </div>
+      <div class="header__telephones">
+                    <a href="tel:{{telephone}}">{{telephone}}</a>
+                    <div class="header__telephones--list">
+                        <ul class="list-unstyled">
+                            {% for phone in list_phones %}
+                            {% set i = i + 1 %}
+                                {% if phone.title %}
+                                <li>
+                                    <a {% if phone.href %}href="tel:{{ phone.href }}"{% endif %}>{% if phone.image %}<img class="d-block" src="{{ phone.image }}" alt="{{ phone.title }}" />{% endif %}<span>{{ phone.title }}</span></a>
+                                </li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+      </div>
+      <div class="header__buttons">
+        <div data-da=".header__nav,1080,0" class="header__wishlist">
+          <a href="{{wishlist}}" title="{{text_wishlist}}">
+          <svg width="29" height="26" viewBox="0 0 29 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M21.0249 2.31683e-05C18.5019 2.31683e-05 16.0804 1.14771 14.4999 2.96133C12.9194 1.14771 10.4979 2.31683e-05 7.97489 2.31683e-05C3.5089 2.31683e-05 -0.000113247 3.42891 -0.000113247 7.79294C-0.000113247 13.1488 4.9299 17.5128 12.3974 24.1439L14.4999 26L16.6024 24.1297C24.0699 17.5128 28.9999 13.1488 28.9999 7.79294C28.9999 3.42891 25.4909 2.31683e-05 21.0249 2.31683e-05ZM14.6828 24.0233L14.5378 24.1313L14.3928 24.0233C2.14408 13.8531 1.48776 11.4073 1.48776 7.31252C1.48776 4.47873 4.34989 1.23908 7.24989 1.23908C10.9677 1.23908 12.7647 2.56825 13.5332 4.5094L14.5378 5.91096L15.4666 4.5094C16.2206 2.56825 18.7919 1.45865 21.0249 1.45865C23.9249 1.45865 27.5878 4.47873 27.5878 7.31252C27.5878 11.4073 26.6211 14.184 14.6828 24.0233Z" fill="#0D0802" />
+          </svg>  
+            <span id="wishlist-total">{{text_wishlist}}</span>
+          </a>
+        </div>
+        <div data-da=".header__nav,1080,2" class="header__compare">
+          <a href="{{compare}}" title="{{text_compare}}">
+            <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <mask id="mask0_25_23691" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="30" height="30">
+                <path d="M0 0.327271H30V29.9939H0V0.327271Z" fill="white" />
+              </mask>
+              <g mask="url(#mask0_25_23691)">
+                <path d="M30.0291 17.9229C30.0287 17.9208 30.0285 17.9186 30.0281 17.9166C30.0276 17.9142 30.0268 17.9119 30.0262 17.9095C30.0195 17.8792 30.0101 17.8499 29.9981 17.8219L24.6674 5.4536C24.6432 5.39761 24.6085 5.34871 24.5673 5.30676C24.4782 5.18725 24.336 5.10942 24.1754 5.10942H16.4999C16.0172 5.10783 16.4894 5.10942 16.4999 5.10942V2.00003C16.4999 1.07801 16.4226 0.5 15.5002 0.5C14.5779 0.5 14.5398 1.07801 14.5398 2.00003L14.6159 5.10942H5.94503C5.9297 5.10942 5.91451 5.11043 5.8996 5.11173C5.89411 5.1113 5.8889 5.11 5.88326 5.10985C5.67984 5.10233 5.49451 5.21908 5.41436 5.40514L0.0836317 17.7733C0.0716236 17.8013 0.062075 17.8308 0.0554199 17.861C0.0549859 17.8635 0.0541178 17.8658 0.0536838 17.8681C0.0531051 17.8701 0.0531051 17.8723 0.0526711 17.8745C0.0467394 17.9051 0.0437012 17.936 0.0437012 17.9666C0.0437012 19.3509 0.594193 20.6265 1.59376 21.5585C2.57076 22.4694 3.8847 22.971 5.29399 22.971C6.70328 22.971 8.01723 22.4694 8.99422 21.5585C9.99379 20.6266 10.5444 19.3512 10.5444 17.9669L10.5441 17.9627C10.5441 17.952 10.5433 17.9412 10.5425 17.9303C10.5421 17.9244 10.5418 17.9184 10.5412 17.9125C10.5402 17.904 10.5386 17.8954 10.5372 17.8869C10.5359 17.8788 10.5346 17.8706 10.533 17.8626C10.5315 17.8564 10.5298 17.8503 10.5282 17.8442C10.5256 17.8341 10.523 17.824 10.5197 17.8141L10.5185 17.8098L6.50024 6.5H14.6159V26.8992H6.28372C5.78835 26.8992 5.38543 27.3195 5.38543 27.8358V29.0594C5.38543 29.5757 5.78835 29.9958 6.28372 29.9958H24.3361C24.8313 29.9958 25.2344 29.5757 25.2344 29.0594V27.8358C25.2344 27.3195 24.8313 26.8992 24.3361 26.8992H16.4999V6.5H23.5002L19.5634 17.8584L19.5622 17.8625C19.5589 17.8726 19.5561 17.8829 19.5534 17.8933C19.5519 17.8992 19.5502 17.9051 19.5489 17.9111C19.5472 17.9192 19.5459 17.9276 19.5446 17.9358C19.5431 17.9443 19.5417 17.9526 19.5407 17.961C19.5401 17.9669 19.5398 17.973 19.5394 17.9789C19.5385 17.9898 19.5378 18.0006 19.5376 18.0113L19.5375 18.0154C19.5375 19.3996 20.088 20.6751 21.0875 21.6071C22.0645 22.518 23.3786 23.0196 24.7879 23.0196C26.1971 23.0196 27.5112 22.518 28.4881 21.6071C29.4877 20.6752 30.0382 19.3996 30.0382 18.0154C30.0381 17.9847 30.035 17.9537 30.0291 17.9229ZM5.80889 6.96185L9.37255 17.4776H1.27663L5.80889 6.96185ZM8.32683 20.8429C7.53169 21.5842 6.45458 21.9925 5.29399 21.9925C4.1334 21.9925 3.05629 21.5842 2.26115 20.8429C1.58117 20.209 1.16132 19.3748 1.05137 18.4561H9.53676C9.42666 19.3748 9.00681 20.209 8.32683 20.8429ZM24.2557 29.0175H6.36416V27.8778H24.2557V29.0175ZM14.6159 26.8992V1.99961C14.6159 1.61709 14.9272 1.30574 15.3099 1.30574C15.6926 1.30574 16.0039 1.61709 16.0039 1.99961V26.8992H14.6159ZM28.8051 17.5262H20.7092L24.2729 7.01046L28.8051 17.5262ZM27.8206 20.8914C27.0255 21.6327 25.9484 22.041 24.7878 22.041C23.6272 22.041 22.5501 21.6327 21.7549 20.8914C21.075 20.2574 20.6551 19.4232 20.545 18.5047H29.0305C28.9204 19.4234 28.5006 20.2576 27.8206 20.8914Z" fill="#0D0802" />
+                <path d="M14.6159 26.8992V1.99961C14.6159 1.61709 14.9272 1.30574 15.3099 1.30574C15.6926 1.30574 16.0039 1.61709 16.0039 1.99961V26.8992H14.6159Z" fill="#0D0802" />
+              </g>
+            </svg>
+            <span id="compare-total" >{{text_compare}}</span>
+          </a>
+        </div>
+        <div data-da=".header__nav,1080,4" class="header__cart">
+          {{ cart }}
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<div class="main__menu--wrapper">
+  <div class="main__menu--close">
+<svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M11.6066 1.19678L6.3033 6.50008M6.3033 6.50008L1 11.8034M6.3033 6.50008L1 1.19678M6.3033 6.50008L11.6066 11.8034" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" />
+</svg>
+  </div>
+  <div class="main__menu--body">
+    <div class="main__menu--header">
+      <div class="main__menu--logo">
+        <img src="{{ menu_logo }}" alt="{{ name }}" class="img-responsive">
+      </div>
+      <div class="main__menu--block">
+        <ul class="main__menu--account">
+          {% if logged %}
+            <li><a href="{{ account }}">{{ text_account }}</a></li>
+            <li><a href="{{ logout }}">{{ text_logout }}</a></li>
+          {% else %}
+            <li><a href="{{ login }}">{{ text_login }}</a></li>
+            <li><a href="{{ register }}">{{ text_register }}</a></li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+    <ul class="main__menu">
+      <li class="main__menu--item"><a href="{{special}}">{{text_special}}</a></li>
+      <li><a href="{{ manufacturers }}">{{ text_manufacturers }}</a></li>
+      {% if informations %}
+      {% for information in informations %}
+      <li><a href="{{ information.href }}">{{ information.title }}</a></li>
+      {% endfor %}
+      {% endif %}
+      <li><a href="{{ news }}">{{ text_blog }}</a></li>
+      <li><a href="{{ contact }}">{{ text_contact }}</a></li>
+    </ul>
+    <div class="header__block--text header__block--email">
+        <span>Email:</span>
+        <a href="mailto:{{config_email}}">{{config_email}}</a>
+    </div>
+    {% if open != '' %}
+    <div class="header__block--text header__block--open">
+        <span>{{text_open}}</span>
+        <div class="header__block--text-open">{{ open }}</div>
+    </div>
+    {% endif %}
+    {% if address != '' %}
+    <div class="header__block--text header__block--address">
+        <span>{{text_address}}</span>
+        <div class="header__block--text-open">{{ address }}</div>
+    </div>
+    {% endif %}
+    <div class="header__block--telephone">
+        <span>{{text_telephone}}</span>
+        <a href="tel:{{telephone}}">{{telephone}}</a>
+        <div class="header__block--telephones">
+            <ul class="list-unstyled">
+                {% for phone in list_phones %}
+                {% set i = i + 1 %}
+    {% if phone.title %}
+    <li>
+        <a {% if phone.href %}href="tel:{{ phone.href }}"{% endif %}>{% if phone.image %}<img class="d-block" src="{{ phone.image }}" alt="{{ phone.title }}" />{% endif %}<span>{{ phone.title }}</span></a>
+    </li>
+    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    {% if links_icons %}
+    <div class="header__bottom--icons">
+        {% for links_icon in links_icons %}
+            <div class="links_icon">
+    <img src="{{ links_icon.image_peace }}" alt="links_icon.sort">
+            </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    </div>
+  </div>
+</div>
+<div class="header__nav">
+<div class="header__account">
+<svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M12.4975 0C9.81195 0.000562491 7.19815 0.865985 5.04294 2.46806C2.88759 4.07014 1.30554 6.32363 0.531211 8.89494C-0.243402 11.4663 -0.169138 14.2184 0.742721 16.7448C1.65457 19.2705 3.35565 21.4356 5.59395 22.919C7.83225 24.4027 10.489 25.1261 13.1709 24.9821C15.8524 24.8378 18.4162 23.834 20.4828 22.1191C22.5492 20.4043 24.0085 18.0692 24.6444 15.4602C25.2803 12.8512 25.0593 10.1069 24.0138 7.63344C23.057 5.37009 21.4543 3.43895 19.4062 2.08162C17.358 0.723994 14.9552 0.000287697 12.4978 0.000575711L12.4975 0ZM6.44917 20.5642C7.2325 19.0955 8.52323 17.9622 10.0809 17.3752C11.6385 16.7885 13.3565 16.7885 14.9141 17.3752C16.4718 17.9622 17.7625 19.0955 18.5458 20.5642C16.8023 21.876 14.6796 22.5853 12.4975 22.5853C10.3155 22.5853 8.19281 21.876 6.44924 20.5642H6.44917ZM9.675 11.6934C9.675 10.9447 9.97229 10.2269 10.5016 9.69749C11.0309 9.16815 11.7487 8.87089 12.4975 8.87089C13.2462 8.87089 13.964 9.16819 14.4933 9.69749C15.0227 10.2268 15.3199 10.9446 15.3199 11.6934C15.3199 12.4418 15.0226 13.1599 14.4933 13.6892C13.964 14.2186 13.2462 14.5158 12.4975 14.5158C11.7487 14.5158 11.031 14.2185 10.5016 13.6892C9.97225 13.1599 9.675 12.4418 9.675 11.6934ZM20.3322 18.8304C19.3515 17.2868 17.9378 16.0667 16.2677 15.3222C17.2248 14.3293 17.7519 12.9992 17.7351 11.6202C17.7182 10.2412 17.1585 8.92454 16.1774 7.95537C15.1964 6.98613 13.8727 6.44272 12.4937 6.44272C11.1144 6.44272 9.79107 6.98612 8.81002 7.95537C7.82868 8.92461 7.269 10.2412 7.25208 11.6202C7.23521 12.9992 7.76229 14.3293 8.71944 15.3222C7.04903 16.0627 5.63683 17.284 4.66305 18.8304C3.05731 16.8472 2.26361 14.3288 2.4416 11.7834C2.61993 9.23789 3.75682 6.8548 5.623 5.11462C7.48919 3.37444 9.94602 2.40664 12.4977 2.40664C15.0493 2.40664 17.5062 3.37444 19.3723 5.11462C21.2385 6.8548 22.3754 9.23797 22.5537 11.7834C22.7318 14.3288 21.9381 16.8472 20.3323 18.8304H20.3322Z" fill="#fff" />
+</svg>
+</div>
+</div>

@@ -1,0 +1,234 @@
+$(function() {
+  {_code}_action();
+});
+
+function {_code}_action() {
+  let products = [],
+      product_id_on_page = $("{main_product_id_selector}").val(),
+      add_function_selector = {add_function_selector};
+  
+  $.each(add_function_selector, function (i, selector) {
+    $('[onclick^="' + selector + '("]').each(function () {
+      let product = $(this).attr('onclick').match(/[0-9]{1,}/);
+      if (product[0].length) {
+        products.push(product[0]);
+      }
+    });
+  });
+  
+  if (typeof(product_id_on_page) != 'undefined') {
+    products.push(product_id_on_page);
+  }
+  
+  $.ajax({
+    type: 'post',
+    url: 'index.php?route=extension/ocdevwizard/{_name}/get_products',
+    data: {'products': products},
+    dataType: 'json',
+    success: function (json) {
+      let display_type = {display_type},
+          sidebar_type = {sidebar_type},
+          button_location = {button_location},
+          button_location_product_page = {button_location_product_page},
+          button_class_global = '{button_class_global}',
+          button_class_product_page = '{button_class_product_page}',
+          icon = '{icon}',
+          add_id_selector = {add_id_selector};
+        
+      $('button.{_code}-call-button').remove();
+      
+      $.each(json['products'], function(i,value) {
+        $.each(add_function_selector, function(i,selector) {
+          $('[onclick^="'+selector+'(\''+value+'\'"]').each(function() {
+            if ($('body').attr('class') == 'product-compare') {
+              if (button_location == 1) {
+                $(this).parent().before('<div class="compare-page {_code}-call-static-before"><button type="button" class="'+button_class_global+' {_code}-call-static-button" onclick="{_code}_open({a:this,b:\''+value+'\',c:\''+display_type+'\'})">'+(icon ? '<img src="'+icon+'" alt=""/>' : json['call_button'])+'</button></div>');
+              } else {
+                $(this).parent().after('<div class="compare-page {_code}-call-static-after"><button type="button" class="'+button_class_global+' {_code}-call-static-button" onclick="{_code}_open({a:this,b:\''+value+'\',c:\''+display_type+'\'})">'+(icon ? '<img src="'+icon+'" alt=""/>' : json['call_button'])+'</button></div>');
+              }
+            } else if ($('body').attr('class') == 'account-wishlist') {
+              if (button_location == 1) {
+                $(this).parent().before('<button type="button" class="'+button_class_global+' wishlist-page {_code}-call-static-button" onclick="{_code}_open({a:this,b:\''+value+'\',c:\''+display_type+'\'})">'+(icon ? '<img src="'+icon+'" alt=""/>' : json['call_button'])+'</button>');
+              } else {
+                $(this).parent().after('<button type="button" class="'+button_class_global+' wishlist-page {_code}-call-static-button" onclick="{_code}_open({a:this,b:\''+value+'\',c:\''+display_type+'\'})">'+(icon ? '<img src="'+icon+'" alt=""/>' : json['call_button'])+'</button>');
+              }
+            } else {
+              if (button_location == 1) {
+                $(this).parent().before('<div class="button-group {_code}-call-static-before"><button type="button" class="'+button_class_global+' {_code}-call-static-button" onclick="{_code}_open({a:this,b:\''+value+'\',c:\''+display_type+'\'})">'+(icon ? '<img src="'+icon+'" alt=""/>' : json['call_button'])+'</button></div>');
+              } else {
+                $(this).parent().after('<div class="button-group {_code}-call-static-after"><button type="button" class="'+button_class_global+' {_code}-call-static-button" onclick="{_code}_open({a:this,b:\''+value+'\',c:\''+display_type+'\'})">'+(icon ? '<img src="'+icon+'" alt=""/>' : json['call_button'])+'</button></div>');
+              }
+            }
+          });
+        });
+        
+        if (typeof(product_id_on_page) != 'undefined') {
+          $.each(add_id_selector, function(i,selector) {
+            if (product_id_on_page == value) {
+              if (button_location_product_page == 1) {
+                $(selector).before('<button type="button" class="'+button_class_product_page+' {_code}-call-static-button" onclick="{_code}_open({a:this,b:\''+product_id_on_page+'\',c:\''+display_type+'\'})">'+(icon ? '<img src="'+icon+'" alt=""/>' : json['call_button_product_page'])+'</button>');
+              } else {
+                $(selector).after('<button type="button" class="'+button_class_product_page+' {_code}-call-static-button" onclick="{_code}_open({a:this,b:\''+product_id_on_page+'\',c:\''+display_type+'\'})">'+(icon ? '<img src="'+icon+'" alt=""/>' : json['call_button_product_page'])+'</button>');
+              }
+            }
+          });
+        }
+      });
+      
+      if (display_type == 2) {
+        let sidebar_position = (sidebar_type == 1) ? 'left' : 'right';
+
+        $('body').prepend('<div id="{_code}-sidebar" class="{_code}-sidebar sidebar-'+sidebar_position+' no-active"><div class="{_code}-sidebar-bg"></div><div class="{_code}-sidebar-body"></div></div>');
+      }
+    }
+  });
+}
+
+function {_code}_sidebar_close() {
+  $('body, #{_code}-sidebar').removeClass('sidebar-active');
+}
+
+function {_code}_open(options) {
+  let element = options.a || '',
+      product_id = options.b || '',
+      display_type = options.c || '',
+      product_option_id = options.d || '',
+      product_option_value_id = options.e || '',
+      record_type = options.f || '1',
+      popup_background_type = {popup_background_type},
+      popup_animation_type = '{popup_animation_type}',
+      record_data = (record_type == '2') ? {'product_id':product_id,'display_type':display_type,'product_option_id':product_option_id,'product_option_value_id':product_option_value_id,'record_type':record_type} : {'product_id':product_id,'display_type':display_type,'record_type':record_type};
+    
+  if (display_type == 1) {
+    {_code}_load_css('catalog/view/javascript/ocdevwizard/helper/magnific-popup/magnific-popup.min.css', 'helper-magnific',function() {
+      {_code}_load_js('catalog/view/javascript/ocdevwizard/helper/magnific-popup/jquery.magnific-popup.min.js', 'helper-magnific',function() {
+        $.magnificPopup.open({
+          tLoading: '<div class="spinner"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div>',
+          items: {src:'index.php?route=extension/ocdevwizard/{_name}'},
+          type: 'ajax',
+          ajax: {
+            settings: {
+              type: 'post',
+              data: record_data
+            }
+          },
+          closeOnContentClick: {popup_close_on_content_click},
+          closeOnBgClick: {popup_close_on_bg_click},
+          closeBtnInside: {popup_close_btn_inside},
+          enableEscapeKey: {popup_close_on_escape_key},
+          alignTop: {popup_align_top},
+          showCloseBtn: 0,
+          removalDelay: (popup_animation_type) ? 300 : 0,
+          mainClass: popup_animation_type,
+          callbacks: {
+            beforeOpen: function() {
+              this.wrap.removeAttr('tabindex');
+            },
+            open: function() {
+              $('.mfp-content').addClass('mfp-with-anim');
+              $('.mfp-container').removeClass('mfp-ajax-holder').addClass('mfp-iframe-holder');
+            }
+          }
+        });
+    
+        $('.spinner > div').css({
+          'background-color': '{loader_color}'
+        });
+    
+        $('.mfp-bg').css({
+          'background': (popup_background_type == 1) ? 'url(image/catalog/ocdevwizard/{_name}/background/{style_background})' : '{style_color}',
+          'opacity': '{background_opacity}'
+        });
+      });
+    });
+  } else {
+    $.ajax({
+      type: 'post',
+      url: 'index.php?route=extension/ocdevwizard/{_name}',
+      data: record_data,
+      dataType: 'html',
+      beforeSend: function() {
+        $(element).prop('disabled', true);
+      },
+      complete: function() {
+        $(element).prop('disabled', false);
+      },
+      success: function(data) {
+        $('body').addClass('sidebar-active');
+
+        $('#{_code}-sidebar .{_code}-sidebar-bg').css({
+          'background': (popup_background_type == 1) ? 'url(image/catalog/ocdevwizard/{_name}/background/{style_background})' : '{style_color}'
+        });
+
+        $('#{_code}-sidebar .{_code}-sidebar-body').html(data);
+        $('#{_code}-sidebar').addClass('sidebar-active');
+      }
+    });
+  }
+}
+
+function {_code}_prepare_form(options) {
+  let block = options.a || '';
+
+  $(block).each(function () {
+    if (typeof $(this).data('mask') !== 'undefined') {
+      let that = this;
+      
+      {_code}_load_js('catalog/view/javascript/ocdevwizard/helper/inputmask/inputmask.min.js', 'helper-inputmask-1',function() {
+        {_code}_load_js('catalog/view/javascript/ocdevwizard/helper/inputmask/inputmask.extensions.min.js', 'helper-inputmask-2',function() {
+          {_code}_load_js('catalog/view/javascript/ocdevwizard/helper/inputmask/jquery.inputmask.min.js', 'helper-inputmask-3',function() {
+            $(that).find('input').inputmask($(that).data('mask'), {showMaskOnHover: false});
+          });
+        });
+      });
+    }
+  });
+}
+
+function {_code}_load_js(src, src_type, callback) {
+  var element = ((document.getElementById(src_type+'-js')) ? true:false);
+
+  if (!element) {
+    var s = document.createElement('script');
+    
+    s.src = src;
+    s.id = src_type+'-js';
+    s.onreadystatechange = s.onload = function () {
+      var state = s.readyState;
+      if (!callback.done && (!state || /loaded|complete/.test(state))) {
+        callback.done = true;
+        callback();
+      }
+    };
+    
+    document.getElementsByTagName('head')[0].appendChild(s);
+  } else {
+    callback.done = true;
+    callback();
+  }
+}
+
+function {_code}_load_css(src, src_type, callback) {
+  var element = ((document.getElementById(src_type+'-css')) ? true:false);
+
+  if (!element) {
+    var s = document.createElement('link');
+    
+    s.rel = 'stylesheet';
+    s.type = 'text/css';
+    s.href = src;
+    s.id = src_type+'-css';
+    s.onreadystatechange = s.onload = function () {
+      var state = s.readyState;
+      if (!callback.done && (!state || /loaded|complete/.test(state))) {
+        callback.done = true;
+        callback();
+      }
+    };
+    
+    document.getElementsByTagName('head')[0].appendChild(s);
+  } else {
+    callback.done = true;
+    callback();
+  }
+}

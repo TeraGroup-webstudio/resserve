@@ -1,0 +1,38 @@
+<section class="promo__block promo__video">
+  <div class="container__banner">
+    <div class="promo__block--wrapper">
+      {% if link_video != '' %}
+      <div class="promo__video--video">
+        <iframe
+          title="{{ heading_title ? 'alt="' ~ heading_title ~ '"' : 'alt="Image"' }}"
+          src="https://www.youtube-nocookie.com/embed/{{link_video}}"
+          frameborder="0"
+          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+          loading="lazy"
+          srcdoc="<style>*{padding:0;margin:0;overflow:hidden}img:first-child{position:absolute;top:calc(50% - 50px);left:calc(50% - 50px);width: 100px;height:100px}@media (max-width: 768px) {top:calc(50% - 25px);left:calc(50% - 25px);width: 50px;height:50px}img:nth-child(2){width:100%;height:auto}</style><a href='https://www.youtube-nocookie.com/embed/{{link_video}}?autoplay=1'><img src='image/playbtn.png' alt='Play'><img src='{{image}}' alt='Thumbnail'></a>">
+        </iframe>
+      </div>
+       {% endif %}
+      <div class="promo__video--content">
+        {% if heading_title %}
+        <div class="promo__video--subtitle">{{ subtitle }}</div>
+        {% endif %}
+        {% if heading_title %}
+        <div class="promo__video--title">{{ heading_title }}</div>
+        {% endif %}
+        <div class="promo__video--text">{{ html }}</div>
+        {% if link %}
+        <div class="promo__video--link">
+          <a href="{{link}}">
+            <span>{{text_link}}</span>
+            <svg width="27" height="26" viewBox="0 0 27 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M10.8484 8.22704L18.273 8.22704M18.273 8.22704L18.273 15.6517M18.273 8.22704L8.72703 17.773" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+        </a>
+      </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>

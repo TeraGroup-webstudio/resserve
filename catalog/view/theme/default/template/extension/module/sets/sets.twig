@@ -1,0 +1,79 @@
+{% if sets %} 
+    <div class='sets' id='prd-sets'>
+        <h2>{{text_sets}}</h2>
+        {% if sets_slider == 'swiper' %}
+            <div class='sets-slider swiper'>
+            <div class="swiper-wrapper">
+        {% elseif sets_slider == 'owl' %}
+            <div class='sets-slider owl-carousel'>
+        {% endif %}
+
+        {% if sets_orientation == 'hor' %} 
+            {% include 'default/template/extension/module/sets/sets_hor_slider.twig' %}
+        {% elseif sets_orientation == 'ver' %} 
+            {% include 'default/template/extension/module/sets/sets_ver_slider.twig' %}
+        {% endif %}
+
+        {% if sets_slider == 'swiper' %}
+            </div>
+            
+              <div class="swiper-pagination"></div>
+
+              <div class="swiper-button-prev">
+                <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M19.2 14H8.79995M8.79995 14L13.35 9.44995M8.79995 14L13.35 18.55" stroke="black" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <path d="M14 27C6.82036 27 1 21.1796 1 14C1 6.82029 6.82036 1 14 1C21.1797 1 27 6.82029 27 14C27 21.1796 21.1797 27 14 27Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+              </div>
+              <div class="swiper-button-next">
+                <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M8.80005 14H19.2M19.2 14L14.65 9.44995M19.2 14L14.65 18.55" stroke="black" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <path d="M14 27C21.1796 27 27 21.1796 27 14C27 6.82029 21.1796 1 14 1C6.82029 1 1 6.82029 1 14C1 21.1796 6.82029 27 14 27Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+              </div>
+
+            </div>
+        {% elseif sets_slider == 'owl' %}
+            </div>
+        {% endif %}
+    </div>
+    <script>
+        $( document ).ready(function() {
+            {% if sets_position %}
+                {% if sets_position == 'prepend' or sets_position == 'append' %}
+                    $('{{ sets_selector }}').{{ sets_position }}($('#prd-sets'));
+                {% else %} 
+                    $('#prd-sets').{{ sets_position }}('{{ sets_selector }}');
+                {% endif %}
+            {% endif %}
+            {% if sets_slider == 'swiper' %}
+                new Swiper('.sets-slider',
+                {
+                    direction: 'horizontal',
+                    slidesPerView: 1,
+                    navigation: {
+                        nextEl: '.swiper-button-next',
+                        prevEl: '.swiper-button-prev',
+                    },
+                });
+            {% elseif sets_slider == 'owl' %}
+                $(".sets-slider").owlCarousel({
+                    items: 1,
+                    singleItem: true,
+                    autoWidth: false,
+                    navigation: true,
+                    stopOnHover: true,
+                    navigationText: ['<i class="fa fa-chevron-left fa-2x"></i>', '<i class="fa fa-chevron-right fa-2x"></i>'],
+                    pagination: false
+                });
+            {% endif %}
+            helperv2.set_decimal_place({{ decimal_place }});
+        });
+        if (typeof successCartAddTemplateDefault === "undefined") { 
+            function successCartAddTemplateDefault(json) { 
+                {{ sets_js_cart_add }} 
+            }
+        }
+    </script>
+    <style>{{ sets_custom_css }}</style>
+{% endif %}

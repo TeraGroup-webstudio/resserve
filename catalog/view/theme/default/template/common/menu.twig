@@ -1,0 +1,60 @@
+{% if catalog_categories %}
+<nav class="catalog__menu" id="catalog__menu">
+  <ul class="categoriesList">
+    {% for category in catalog_categories %}
+      {% if category.children %}
+        <li class="main__category with__children">
+          <a a href="{{ category.href }}" class="{% if category.category_id == category_id  %} __opened {% endif %}">
+            {{ category.name }}
+            <span class="sub__categories--show">
+              <svg width="6" height="8" viewBox="0 0 6 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1 7.5L5 4L1 0.5" stroke="#8E9192" />
+              </svg>
+            </span>
+          </a>
+          <ul class="sub__categories {% if category.category_id == category_id  %} __opened {% endif %}">
+            {% for child in category.children %}
+              {% if child.children2 %}
+                <li class="categories_lvl2_item">
+                    <a class="{% if child.category_id == child_id  %} opened {% endif %}" href="{{ child.href  }}">{{ child.name  }}</a>
+                  <!-- <ul class="categories_lvl3 {% if child.category_id == child_id  %} opencat {% endif %}">
+                    {% for child2 in child.children2 %}
+                    {% if child2.children3 %}
+                    <li class="categories_lvl3_item">
+                      <div class="categoriesBox categories_lvl3Box">
+                        <a class="{% if child2.category_id == child_id2 %} openedlink {% endif %}" href="{{ child2.href }} ">{{ child2.name }}</a>
+                        <div class="open {% if child2.category_id == child_id2 %} opened {% endif %}">
+                          <svg width="6" height="8" viewBox="0 0 6 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1 7.5L5 4L1 0.5" stroke="#8E9192" />
+                          </svg>
+                        </div>
+                      </div>
+                      <ul class="categories_lvl4 {% if child2.category_id == child_id2 %} opencat {% endif %}">
+                        {% for child3 in child2.children3 %}
+                        <li class="categories_lvl4_item">
+                          <a class="{% if child3.category_id == child_id3 %} openedlink {% endif %}" href="{{ child3.href  }}">{{ child3.name }}</a>
+                        </li>
+                        {% endfor %}
+                      </ul>
+                    </li>
+                    {% else %}
+                    <li class="categories_lvl3_item"><a href="{{ child2.href }}">{{ child2.name }}</a></li>
+                    {% endif %}
+                    {% endfor %}
+                  </ul> -->
+                </li>
+              {% else %}
+                <li class="categories_lvl2_item">
+                    <a class="{% if child.category_id == child_id  %} opened {% endif %}" href="{{ child.href  }}">{{ child.name  }}</a>
+                </li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+        </li>
+      {% else %}
+        <li class="main__category"><a href="{{ category.href }}">{{ category.name }}</a></li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+</nav>
+{% endif %}
