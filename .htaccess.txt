@@ -4,6 +4,13 @@
 
 # For any support issues please visit: http://www.opencart.com
 
+# For any support issues please visit: http://www.opencart.com
+
+# For any support issues please visit: http://www.opencart.com
+
+# For any support issues please visit: http://www.opencart.com
+
+
 #Options +FollowSymlinks
 Options +SymLinksIfOwnerMatch
 
