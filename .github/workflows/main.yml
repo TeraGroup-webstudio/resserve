@@ -1,0 +1,21 @@
+name: DEPLOY
+on:
+  push:
+    branches:
+    - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: rsync deployments
+      uses: burnett01/rsync-deployments@7.0.1
+      with:
+        switches: -avzr --delete
+        path: /
+        remote_path: /home/sochinen/start-site.com.ua/resserve/
+        remote_host: sochinen.ftp.tools
+        remote_user: sochinen
+        remote_key: ${{ secrets.REMOTE_KEY }}
+        remote_key_pass: 111
